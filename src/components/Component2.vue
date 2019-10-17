@@ -1,10 +1,13 @@
 <template>
   <div>
     <div id="cards-display">
-      <div class="card" 
-      v-for="card in randomCards" 
-      v-bind:key="card.id" 
-      v-bind:style="[card.suit == '♥' || card.suit == '♦' ? {color:'red'} : {color:'black'}]">
+      <div
+        class="card"
+        v-for="card in randomCards"
+        v-bind:key="card.id"
+        v-bind:style="[card.suit == '♥' || card.suit == '♦' ? {color:'red'} : {color:'black'}]"
+        @click="toggle(card.id)"
+      >
         <div class="value">{{card.value}}</div>
         <div class="suit">{{card.suit}}</div>
         <div class="value2">{{card.value}}</div>
@@ -19,25 +22,28 @@
 export default {
   computed: {
     getCombination() {
-      return this.$store.state.combination
+      return this.$store.state.combination;
     },
 
     randomCards() {
-      return this.$store.state.fiveRandomCards
+      return this.$store.state.fiveRandomCards;
     },
 
     finalCards() {
-      return this.$store.state.finalCards
+      return this.$store.state.finalCards;
     }
   },
 
   methods: {
     shuffleCards() {
-      this.$store.commit("getFiveRandomCards")
-      this.$store.commit("calculateValue")
+      this.$store.commit("getFiveRandomCards");
+      this.$store.commit("calculateValue");
     },
-    calcValue(){
-      this.$store.commit("calculateValue")
+    calcValue() {
+      this.$store.commit("calculateValue");
+    },
+    toggle() {
+      this.$store.commit("toggleCards");
     }
   }
 };
@@ -48,31 +54,29 @@ export default {
   display: inline-flex;
 }
 
-.suit{
-    grid-area: suit;
-    min-height: 40%;
-    font-size: 40px;
+.suit {
+  grid-area: suit;
+  min-height: 40%;
+  font-size: 40px;
 }
 
-.value{
-    grid-area: value;
-    
-    min-height: 30%;
-    text-align: left;
-    margin-left: 5px;
-    margin-top: 2px;
+.value {
+  grid-area: value;
+
+  min-height: 30%;
+  text-align: left;
+  margin-left: 5px;
+  margin-top: 2px;
 }
 
-.value2{
-    grid-area: value2;
-    min-height: 30%;
-    text-align: right;
-    margin: 5px;
-
-
+.value2 {
+  grid-area: value2;
+  min-height: 30%;
+  text-align: right;
+  margin: 5px;
 }
 
-.card {  
+.card {
   border-radius: 5px;
   margin: 10px;
   width: 75px;
