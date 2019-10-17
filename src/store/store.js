@@ -55,8 +55,13 @@ export const store = new Vuex.Store({
             state.combination = ''
         },
 
-        toggleHold(id) {
-
+        toggleHold(state, id) {
+            for (let i = 0; i < 5; i++) {
+                if (state.fiveRandomCards[i].id == id) {
+                    state.fiveRandomCards[i].locked = !state.fiveRandomCards[i].locked
+                    console.log(state.fiveRandomCards[i].locked)
+                }
+            }
         },
 
 

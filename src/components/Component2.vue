@@ -6,7 +6,7 @@
         v-for="card in randomCards"
         v-bind:key="card.id"
         v-bind:style="[card.suit == '♥' || card.suit == '♦' ? {color:'red'} : {color:'black'}]"
-        @click="toggle(card.id)"
+        v-on:click="toggle(card.id)"
       >
         <div class="value">{{card.value}}</div>
         <div class="suit">{{card.suit}}</div>
@@ -42,8 +42,8 @@ export default {
     calcValue() {
       this.$store.commit("calculateValue");
     },
-    toggle() {
-      this.$store.commit("toggleCards");
+    toggle(id) {
+      this.$store.commit("toggleHold", id);
     }
   }
 };
