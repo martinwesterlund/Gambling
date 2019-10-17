@@ -42,67 +42,8 @@ export const store = new Vuex.Store({
             }
         },
 
-
-
-
         getFiveRandomCards(state) {
-            // state.cards = [
-            //     { suit: '♥', value: 'A' },
-            //     { suit: '♥', value: '2' },
-            //     { suit: '♥', value: '3' },
-            //     { suit: '♥', value: '4' },
-            //     { suit: '♥', value: '5' },
-            //     { suit: '♥', value: '6' },
-            //     { suit: '♥', value: '7' },
-            //     { suit: '♥', value: '8' },
-            //     { suit: '♥', value: '9' },
-            //     { suit: '♥', value: '10' },
-            //     { suit: '♥', value: 'J' },
-            //     { suit: '♥', value: 'Q' },
-            //     { suit: '♥', value: 'K' },
-
-            //     { suit: '♠', value: 'A' },
-            //     { suit: '♠', value: '2' },
-            //     { suit: '♠', value: '3' },
-            //     { suit: '♠', value: '4' },
-            //     { suit: '♠', value: '5' },
-            //     { suit: '♠', value: '6' },
-            //     { suit: '♠', value: '7' },
-            //     { suit: '♠', value: '8' },
-            //     { suit: '♠', value: '9' },
-            //     { suit: '♠', value: '10' },
-            //     { suit: '♠', value: 'J' },
-            //     { suit: '♠', value: 'Q' },
-            //     { suit: '♠', value: 'K' },
-
-            //     { suit: '♦', value: 'A' },
-            //     { suit: '♦', value: '2' },
-            //     { suit: '♦', value: '3' },
-            //     { suit: '♦', value: '4' },
-            //     { suit: '♦', value: '5' },
-            //     { suit: '♦', value: '6' },
-            //     { suit: '♦', value: '7' },
-            //     { suit: '♦', value: '8' },
-            //     { suit: '♦', value: '9' },
-            //     { suit: '♦', value: '10' },
-            //     { suit: '♦', value: 'J' },
-            //     { suit: '♦', value: 'Q' },
-            //     { suit: '♦', value: 'K' },
-
-            //     { suit: '♣', value: 'A' },
-            //     { suit: '♣', value: '2' },
-            //     { suit: '♣', value: '3' },
-            //     { suit: '♣', value: '4' },
-            //     { suit: '♣', value: '5' },
-            //     { suit: '♣', value: '6' },
-            //     { suit: '♣', value: '7' },
-            //     { suit: '♣', value: '8' },
-            //     { suit: '♣', value: '9' },
-            //     { suit: '♣', value: '10' },
-            //     { suit: '♣', value: 'J' },
-            //     { suit: '♣', value: 'Q' },
-            //     { suit: '♣', value: 'K' },
-            // ]
+            
             state.fiveRandomCards = []
             for (let i = 0; i < 5; i++) {
                 let newCard = state.cards.splice((Math.floor(Math.random() * state.cards.length)), 1)
@@ -136,13 +77,15 @@ export const store = new Vuex.Store({
                 }
 
             }
+
+            //Sort final cards array
             state.finalCards.sort(function(a, b) {
                 return b.value < a.value ? 1 :
                     b.value > a.value ? -1 :
                     0
             })
 
-            // jacks or better
+            // Check if jacks or better
             if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[0].value > 10) ||
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[1].value > 10) ||
                 (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[2].value > 10) ||
@@ -150,50 +93,52 @@ export const store = new Vuex.Store({
                 state.combination = 'Jacks or better'
             }
 
-            // Two pair
+            // Check Two pair
             if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[2].value == state.finalCards[3].value) ||
                 (state.finalCards[0].value == state.finalCards[1].value && state.finalCards[3].value == state.finalCards[4].value) ||
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[3].value == state.finalCards[4].value)) {
                 state.combination = 'tvåpar!'
             }
 
-            // Three of a kind
+            // Check Three of a kind
             if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value) ||
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
                 (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)) {
                 state.combination = 'Three of a kind'
             }
-            // straight
+
+            // Check straight
             if (state.finalCards[0].value == state.finalCards[1].value - 1 &&
                 state.finalCards[1].value == state.finalCards[2].value - 1 &&
                 state.finalCards[2].value == state.finalCards[3].value - 1 &&
                 state.finalCards[3].value == state.finalCards[4].value - 1) {
                 state.combination = 'Straight!'
             }
-            // Flush
+
+            // Check Flush
             if (state.finalCards[0].suit == state.finalCards[1].suit &&
                 state.finalCards[1].suit == state.finalCards[2].suit &&
                 state.finalCards[2].suit == state.finalCards[3].suit &&
                 state.finalCards[3].suit == state.finalCards[4].suit) {
                 state.combination = 'Flush'
             }
-            // Check full house
-            // if((state.finalCards[0].value == state.finalCards[1].value 
-            //     && state.finalCards[1].value == state.finalCards[2].value) 
-            //     && state.finalCards[3].value == state.finalCards[4].value)
-            //     || 
 
-            //         (state.finalCards[0].value == state.finalCards[1].value
-            //     && (state.finalCards[2].value == state.finalCards[3].value
-            //     && state.finalCards[3].value == state.finalCards[4].value)){
-            //         state.combination = "Full house!"
-            //     }
+            // Check full house
+            if((state.finalCards[0].value == state.finalCards[1].value && 
+                state.finalCards[1].value == state.finalCards[2].value && 
+                state.finalCards[3].value == state.finalCards[4].value)
+            || (state.finalCards[0].value == state.finalCards[1].value && 
+                state.finalCards[2].value == state.finalCards[3].value && 
+                state.finalCards[3].value == state.finalCards[4].value)){
+                state.combination = "Full house!"
+            }
 
             // Check four of a kind
             if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)) {
                 state.combination = "4 of a kind"
             }
+
             // Check Straight flush
             if (state.finalCards[0].value == state.finalCards[1].value - 1 &&
                 state.finalCards[1].value == state.finalCards[2].value - 1 &&
@@ -240,9 +185,9 @@ export const store = new Vuex.Store({
 
             // state.finalCards.sort(function(a, b){return a-b})
 
-            if (state.finalCards[0] == state.finalCards[1]) {
-                state.combination = 'Par!'
-            }
+            // if (state.finalCards[0] == state.finalCards[1]) {
+            //     state.combination = 'Par!'
+            // }
             // switch(state.finalCards){
             //     case state.finalCards[0] == state.finalCards[1] : 
             //         state.combination = 'Par!'
