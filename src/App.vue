@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <VideoPoker></VideoPoker> -->
-    <!-- <component2></component2> -->
+    <component2></component2>
   </div>
 </template>
 
