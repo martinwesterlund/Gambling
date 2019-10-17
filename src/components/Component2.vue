@@ -5,6 +5,7 @@
       v-for="card in randomCards" 
       v-bind:key="card.id" 
       v-on:click="lockCard(card.id)"
+      v-bind:class="{locked: card.locked}"
       v-bind:style="[card.suit == '♥' || card.suit == '♦' ? {color:'red'} : {color:'black'}]">
         <div class="value">{{card.value}}</div>
         <div class="suit">{{card.suit}}</div>
@@ -42,7 +43,7 @@ export default {
     getSomeCards(){
       this.$store.commit("getMoreCards")
     },
-    
+
     calcValue(){
       this.$store.commit("calculateValue")
     },
@@ -87,7 +88,14 @@ export default {
   margin: 10px;
   width: 75px;
   height: 120px;
-  border: 1px solid black;
+  border: 2px solid black;
   font-size: 24px;
+  box-shadow: 0px;
+  transition: box-shadow 1s;
+}
+
+.locked {
+  box-shadow: 10px 10px 5px #888888;
+  
 }
 </style>
