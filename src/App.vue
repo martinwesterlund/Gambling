@@ -16,7 +16,7 @@ export default {
   components: {
     // HelloWorld,
     // VideoPoker,
-    Component2,
+    Component2
     //DealCards
   },
   created() {
@@ -33,5 +33,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+body {
+  background-color: #333;
 }
 </style>

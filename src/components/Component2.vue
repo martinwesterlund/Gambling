@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div id="component-body">
     <div id="cards-display">
       <div
         class="card"
         v-for="card in randomCards"
         v-bind:key="card.id"
+        v-on:click="lockCard(card.id)"
         v-bind:style="[card.suit == '♥' || card.suit == '♦' ? {color:'red'} : {color:'black'}]"
-        v-on:click="toggle(card.id)"
       >
         <div class="value">{{card.value}}</div>
         <div class="suit">{{card.suit}}</div>
@@ -14,8 +14,10 @@
       </div>
     </div>
     <button @click="shuffleCards()">Ge mig 5 kort!</button>
-    <div>Kombination: {{getCombination}}</div>
-    <div>{{ finalCards }}</div>
+    <button @click="getSomeCards()">Ge mig några kort till</button>
+    <!-- <div>Kombination: {{getCombination}}</div>
+    <div>Osorterad lista: {{randomCards}}</div>
+    <div>Sorterad lista:{{ finalCards }}</div>-->
   </div>
 </template>
 <script>
@@ -39,17 +41,26 @@ export default {
       this.$store.commit("getFiveRandomCards");
       this.$store.commit("calculateValue");
     },
+    getSomeCards() {
+      this.$store.commit("getMoreCards");
+    },
+
     calcValue() {
       this.$store.commit("calculateValue");
     },
-    toggle(id) {
-      this.$store.commit("toggleHold", id);
+    lockCard(id) {
+      this.$store.commit("toggleLock", id);
     }
   }
 };
 </script>
 
 <style scoped>
+#component-body {
+  background-color: seashell;
+  width: 70vw;
+}
+
 #cards-display {
   display: inline-flex;
 }
