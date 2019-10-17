@@ -22,6 +22,8 @@ export const store = new Vuex.Store({
     },
 
     mutations: {
+
+        // Creates deck automatically from start
         createDeck(state) {
             const suits = ["♥", "♠", "♦", "♣"]
             const value = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
@@ -42,6 +44,7 @@ export const store = new Vuex.Store({
             }
         },
 
+        // Creates five random cards that are displayed in the game
         getFiveRandomCards(state) {
             
             state.fiveRandomCards = []
@@ -55,6 +58,7 @@ export const store = new Vuex.Store({
             state.combination = ''
         },
 
+        // Locks and unlocks a card that is clicked on
         toggleLock(state, id){
             for(let i = 0; i < state.fiveRandomCards.length; i++){
                 if(state.fiveRandomCards[i].id == id){
@@ -63,6 +67,7 @@ export const store = new Vuex.Store({
             }
         },
 
+        // Replaces the unlocked cards with new cards from the deck
         getMoreCards(state){
             for(let i = 0; i < 5; i++){
                 if(state.fiveRandomCards[i].locked == false){
@@ -74,6 +79,7 @@ export const store = new Vuex.Store({
             this.commit('calculateValue')
         },
 
+        // Calculates the final value of the final cards array, to see if you won or not
         calculateValue(state) {
             state.finalCards = []
 
@@ -186,33 +192,6 @@ export const store = new Vuex.Store({
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // state.finalCards.sort(function(a, b){return a-b})
-
-            // if (state.finalCards[0] == state.finalCards[1]) {
-            //     state.combination = 'Par!'
-            // }
-            // switch(state.finalCards){
-            //     case state.finalCards[0] == state.finalCards[1] : 
-            //         state.combination = 'Par!'
-            //         break
-
-            // }
 
 
         },
