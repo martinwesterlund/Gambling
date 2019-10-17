@@ -13,6 +13,8 @@ export const store = new Vuex.Store({
 
         cards: [],
         fiveRandomCards: [],
+        finalCards: [],
+        combination: '',
 
         credits: 100,
         dealtCards: [],
@@ -30,7 +32,8 @@ export const store = new Vuex.Store({
                     state.cards.push({
                         suit: suits[n],
                         value: value[m],
-                        id: UUID()
+                        id: UUID(),
+                        locked: false
 
                     })
                 }
@@ -108,13 +111,159 @@ export const store = new Vuex.Store({
                     this.commit('createDeck')
                 }
             }
-        }
+            state.combination = ''
+        },
+
+        calculateValue(state) {
+            state.finalCards = []
+
+            for (let i = 0; i < 5; i++) {
+                switch (state.fiveRandomCards[i].value) {
+                    case 'A':
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 14 })
+                        break
+                    case 'J':
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 11 })
+                        break
+                    case 'Q':
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 12 })
+                        break
+                    case 'K':
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 13 })
+                        break
+                    default:
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: Number(state.fiveRandomCards[i].value) })
+                }
+
+            }
+            state.finalCards.sort(function(a, b) {
+                return b.value < a.value ? 1 :
+                    b.value > a.value ? -1 :
+                    0
+            })
+
+            // jacks or better
+            if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[0].value > 10) ||
+                (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[1].value > 10) ||
+                (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[2].value > 10) ||
+                (state.finalCards[3].value == state.finalCards[4].value && state.finalCards[3].value > 10)) {
+                state.combination = 'Jacks or better'
+            }
+
+            // Two pair
+            if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[2].value == state.finalCards[3].value) ||
+                (state.finalCards[0].value == state.finalCards[1].value && state.finalCards[3].value == state.finalCards[4].value) ||
+                (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[3].value == state.finalCards[4].value)) {
+                state.combination = 'tvåpar!'
+            }
+
+            // Three of a kind
+            if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value) ||
+                (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
+                (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)) {
+                state.combination = 'Three of a kind'
+            }
+            // straight
+            if (state.finalCards[0].value == state.finalCards[1].value - 1 &&
+                state.finalCards[1].value == state.finalCards[2].value - 1 &&
+                state.finalCards[2].value == state.finalCards[3].value - 1 &&
+                state.finalCards[3].value == state.finalCards[4].value - 1) {
+                state.combination = 'Straight!'
+            }
+            // Flush
+            if (state.finalCards[0].suit == state.finalCards[1].suit &&
+                state.finalCards[1].suit == state.finalCards[2].suit &&
+                state.finalCards[2].suit == state.finalCards[3].suit &&
+                state.finalCards[3].suit == state.finalCards[4].suit) {
+                state.combination = 'Flush'
+            }
+            // Check full house
+            // if((state.finalCards[0].value == state.finalCards[1].value 
+            //     && state.finalCards[1].value == state.finalCards[2].value) 
+            //     && state.finalCards[3].value == state.finalCards[4].value)
+            //     || 
+
+            //         (state.finalCards[0].value == state.finalCards[1].value
+            //     && (state.finalCards[2].value == state.finalCards[3].value
+            //     && state.finalCards[3].value == state.finalCards[4].value)){
+            //         state.combination = "Full house!"
+            //     }
+
+            // Check four of a kind
+            if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
+                (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)) {
+                state.combination = "4 of a kind"
+            }
+            // Check Straight flush
+            if (state.finalCards[0].value == state.finalCards[1].value - 1 &&
+                state.finalCards[1].value == state.finalCards[2].value - 1 &&
+                state.finalCards[2].value == state.finalCards[3].value - 1 &&
+                state.finalCards[3].value == state.finalCards[4].value - 1 &&
+                state.finalCards[0].suit == state.finalCards[1].suit &&
+                state.finalCards[1].suit == state.finalCards[2].suit &&
+                state.finalCards[2].suit == state.finalCards[3].suit &&
+                state.finalCards[3].suit == state.finalCards[4].suit) {
+                state.combination = 'Straight flush!'
+            }
+
+            // Check Royal flush
+            else if (state.finalCards[0].value == 10 &&
+                state.finalCards[1].value == 11 &&
+                state.finalCards[2].value == 12 &&
+                state.finalCards[3].value == 13 &&
+                state.finalCards[4].value == 14 &&
+                state.finalCards[0].suit == state.finalCards[1].suit &&
+                state.finalCards[1].suit == state.finalCards[2].suit &&
+                state.finalCards[2].suit == state.finalCards[3].suit &&
+                state.finalCards[3].suit == state.finalCards[4].suit
+            ) { state.combination = 'Royal Straight Flush' }
 
 
 
 
 
 
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // state.finalCards.sort(function(a, b){return a-b})
+
+            if (state.finalCards[0] == state.finalCards[1]) {
+                state.combination = 'Par!'
+            }
+            // switch(state.finalCards){
+            //     case state.finalCards[0] == state.finalCards[1] : 
+            //         state.combination = 'Par!'
+            //         break
+
+            // }
+
+
+        },
+
+
+
+
+
+
+
+
+
+
+
+    },
+
 
 })

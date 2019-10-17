@@ -1,30 +1,43 @@
 <template>
   <div>
     <div id="cards-display">
-      <div class="card" v-for="card in randomCards" v-bind:key="card.id" v-bind:style="[card.suit == '♥' || card.suit == '♦' ? {color:'red'} : {color:'black'}]">
+      <div class="card" 
+      v-for="card in randomCards" 
+      v-bind:key="card.id" 
+      v-bind:style="[card.suit == '♥' || card.suit == '♦' ? {color:'red'} : {color:'black'}]">
         <div class="value">{{card.value}}</div>
         <div class="suit">{{card.suit}}</div>
         <div class="value2">{{card.value}}</div>
       </div>
     </div>
     <button @click="shuffleCards()">Ge mig 5 kort!</button>
+    <div>Kombination: {{getCombination}}</div>
+    <div>{{ finalCards }}</div>
   </div>
 </template>
 <script>
 export default {
   computed: {
-    getVariable() {
-      return this.$store.state.variable;
+    getCombination() {
+      return this.$store.state.combination
     },
 
     randomCards() {
-      return this.$store.state.fiveRandomCards;
+      return this.$store.state.fiveRandomCards
+    },
+
+    finalCards() {
+      return this.$store.state.finalCards
     }
   },
 
   methods: {
     shuffleCards() {
-      this.$store.commit("getFiveRandomCards");
+      this.$store.commit("getFiveRandomCards")
+      this.$store.commit("calculateValue")
+    },
+    calcValue(){
+      this.$store.commit("calculateValue")
     }
   }
 };

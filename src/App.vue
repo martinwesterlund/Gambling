@@ -1,24 +1,23 @@
 <template>
   <div id="app">
     <!-- <VideoPoker></VideoPoker> -->
-    <!-- <component2></component2> -->
-    <DealCards></DealCards>
+    <component2></component2>
   </div>
 </template>
 
 <script>
 // import HelloWorld from "./components/HelloWorld.vue";
 // import VideoPoker from "./components/VideoPoker.vue";
-// import Component2 from "./components/Component2.vue";
-import DealCards from "./components/DealCards.vue";
+import Component2 from "./components/Component2.vue";
+//import DealCards from "./components/DealCards.vue";
 
 export default {
   name: "app",
   components: {
     // HelloWorld,
     // VideoPoker,
-    // Component2,
-    DealCards
+    Component2,
+    //DealCards
   },
   created() {
     this.$store.commit("createDeck");
