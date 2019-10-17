@@ -55,25 +55,44 @@ export const store = new Vuex.Store({
             state.combination = ''
         },
 
+        toggleLock(state, id){
+            for(let i = 0; i < state.fiveRandomCards.length; i++){
+                if(state.fiveRandomCards[i].id == id){
+                    state.fiveRandomCards[i].locked = !state.fiveRandomCards[i].locked
+                }
+            }
+        },
+
+        getMoreCards(state){
+            for(let i = 0; i < 5; i++){
+                if(state.fiveRandomCards[i].locked == false){
+                    let newCard = state.cards.splice((Math.floor(Math.random() * state.cards.length)), 1)
+                    state.fiveRandomCards[i].value = newCard[0].value
+                    state.fiveRandomCards[i].suit = newCard[0].suit
+                }
+            }
+            this.commit('calculateValue')
+        },
+
         calculateValue(state) {
             state.finalCards = []
 
             for (let i = 0; i < 5; i++) {
                 switch (state.fiveRandomCards[i].value) {
                     case 'A':
-                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 14 })
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 14, locked : false })
                         break
                     case 'J':
-                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 11 })
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 11, locked : false })
                         break
                     case 'Q':
-                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 12 })
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 12, locked : false })
                         break
                     case 'K':
-                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 13 })
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 13, locked : false })
                         break
                     default:
-                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: Number(state.fiveRandomCards[i].value) })
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: Number(state.fiveRandomCards[i].value), locked : false })
                 }
 
             }
