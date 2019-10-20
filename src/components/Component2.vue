@@ -14,11 +14,16 @@
         <div class="value2">{{card.value}}</div>
       </div>
     </div>
-    <button @click="shuffleCards()">Ge mig 5 kort!</button>
-    <button @click="getSomeCards()">Ge mig några kort till</button>
-    <!-- <div>Kombination: {{getCombination}}</div>
-    <div>Osorterad lista: {{randomCards}}</div>
-    <div>Sorterad lista:{{ finalCards }}</div>-->
+    <div id="button-field">
+      <button @click="shuffleCards()">Ge mig 5 kort!</button>
+      <button @click="getSomeCards()">Ge mig några kort till</button>
+    </div>
+
+    <!-- <div id="status-log">
+      <div>Kombination: {{getCombination}}</div>
+      <div>Osorterad lista: {{randomCards}}</div>
+      <div>Sorterad lista:{{ finalCards }}</div>
+    </div>-->
   </div>
 </template>
 <script>
@@ -57,9 +62,14 @@ export default {
 </script>
 
 <style scoped>
+* {
+  box-sizing: border-box;
+}
+
 #component-body {
-  background-color: seashell;
-  width: 70vw;
+  margin: 0 auto;
+  background-color: gold;
+  display: block;
 }
 
 #cards-display {
@@ -97,6 +107,7 @@ export default {
   font-size: 24px;
   box-shadow: 0px;
   transition: box-shadow 1s;
+  background-color: white;
 }
 
 .locked {

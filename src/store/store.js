@@ -18,6 +18,17 @@ export const store = new Vuex.Store({
         credits: 100,
         dealtCards: [],
 
+        combinations: [
+            { type: 'Royal Flush', value: 800 },
+            { type: 'Straight Flush', value: 50 },
+            { type: 'Four of a Kind', value: 25 },
+            { type: 'Full House', value: 8 },
+            { type: 'Straight', value: 4 },
+            { type: 'Three of a Kind', value: 3 },
+            { type: 'Two Pair', value: 2 },
+            { type: 'Jacks or Better', value: 1 }
+        ]
+
     },
 
     mutations: {
