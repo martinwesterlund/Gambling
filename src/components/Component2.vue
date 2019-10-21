@@ -12,11 +12,21 @@
         <div class="value2">{{card.value}}</div>
       </div>
     </div>
-    <button @click="shuffleCards()">Ge mig 5 kort!</button>
-    <button @click="getSomeCards()">Ge mig några kort till</button>
+    
     <div>Kombination: {{getCombination}}</div>
-    <div>Osorterad lista: {{randomCards}}</div>
-    <div>Sorterad lista:{{ finalCards }}</div>
+    
+    <div id="betCoinBar">
+      <span>Credits = {{ credits }}</span>
+      <button v-if="round < 1" @click="shuffleCards()">Ge mig 5 kort!</button>
+      <button v-if="round > 0" @click="getSomeCards()">Ge mig några kort till</button>
+      <span @click="insertCoin()">⇧</span>
+      <span>{{ bet }}</span>
+      <span @click="removeCoin()">⇩</span>
+    </div>
+   
+    
+    <!-- <div>Osorterad lista: {{randomCards}}</div>
+    <div>Sorterad lista:{{ finalCards }}</div> -->
   </div>
 </template>
 <script>
@@ -32,6 +42,18 @@ export default {
 
     finalCards() {
       return this.$store.state.finalCards
+    },
+
+    credits(){
+      return this.$store.state.credits
+    },
+
+    bet(){
+      return this.$store.state.bet
+    },
+
+    round(){
+      return this.$store.state.round
     }
   },
 
@@ -49,6 +71,14 @@ export default {
     },
     lockCard(id){
       this.$store.commit("toggleLock", id)
+    },
+
+    insertCoin(){
+      this.$store.commit("insertCoin")
+    },
+
+    removeCoin(){
+      this.$store.commit("removeCoin")
     }
   }
 };
@@ -84,18 +114,34 @@ export default {
 }
 
 .card {  
+  cursor: pointer;
   border-radius: 5px;
   margin: 10px;
   width: 75px;
   height: 120px;
   border: 2px solid black;
   font-size: 24px;
-  box-shadow: 0px;
-  transition: box-shadow 1s;
+  box-shadow: 10px 10px 5px #888888;
+  transition: box-shadow 0.2s;
 }
 
 .locked {
-  box-shadow: 10px 10px 5px #888888;
+  box-shadow: 0px 0px 0px;
   
+  
+}
+
+#betCoinBar{
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  justify-content:space-around;
+  cursor: pointer;
+  font-size: 36px;
+}
+
+#betCoinBar span{
+  border: 1px solid black;
+  padding: 10px;
 }
 </style>
