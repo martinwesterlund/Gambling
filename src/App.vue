@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <!-- <VideoPoker></VideoPoker> -->
+    <scoretable></scoretable>
     <component2></component2>
   </div>
 </template>
@@ -9,6 +10,7 @@
 // import HelloWorld from "./components/HelloWorld.vue";
 // import VideoPoker from "./components/VideoPoker.vue";
 import Component2 from "./components/Component2.vue";
+import Scoretable from "./components/Scoretable.vue";
 //import DealCards from "./components/DealCards.vue";
 
 export default {
@@ -17,6 +19,7 @@ export default {
     // HelloWorld,
     // VideoPoker,
     Component2,
+    Scoretable
     //DealCards
   },
   created() {
@@ -31,7 +34,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #c0cedd;
+}
+
+body {
+  background-color: #333;
 }
 </style>

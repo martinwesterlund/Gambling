@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import UUID from 'uuid/v4'
 
-console.log(UUID())
 
 Vue.use(Vuex)
 
@@ -18,6 +17,17 @@ export const store = new Vuex.Store({
         bet: 1,
         credits: 100,
         dealtCards: [],
+
+        combinations: [
+            { type: 'Royal Flush', value: 800 },
+            { type: 'Straight Flush', value: 50 },
+            { type: 'Four of a Kind', value: 25 },
+            { type: 'Full House', value: 8 },
+            { type: 'Straight', value: 4 },
+            { type: 'Three of a Kind', value: 3 },
+            { type: 'Two Pair', value: 2 },
+            { type: 'Jacks or Better', value: 1 }
+        ]
 
     },
 
@@ -72,9 +82,9 @@ export const store = new Vuex.Store({
         },
 
         // Locks and unlocks a card that is clicked on
-        toggleLock(state, id){
-            for(let i = 0; i < state.fiveRandomCards.length; i++){
-                if(state.fiveRandomCards[i].id == id){
+        toggleLock(state, id) {
+            for (let i = 0; i < state.fiveRandomCards.length; i++) {
+                if (state.fiveRandomCards[i].id == id) {
                     state.fiveRandomCards[i].locked = !state.fiveRandomCards[i].locked
                 }
             }
@@ -101,19 +111,19 @@ export const store = new Vuex.Store({
             for (let i = 0; i < 5; i++) {
                 switch (state.fiveRandomCards[i].value) {
                     case 'A':
-                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 14, locked : false })
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 14, locked: false })
                         break
                     case 'J':
-                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 11, locked : false })
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 11, locked: false })
                         break
                     case 'Q':
-                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 12, locked : false })
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 12, locked: false })
                         break
                     case 'K':
-                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 13, locked : false })
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 13, locked: false })
                         break
                     default:
-                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: Number(state.fiveRandomCards[i].value), locked : false })
+                        state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: Number(state.fiveRandomCards[i].value), locked: false })
                 }
 
             }
@@ -177,12 +187,12 @@ export const store = new Vuex.Store({
             }
 
             // Check full house
-            if((state.finalCards[0].value == state.finalCards[1].value && 
-                state.finalCards[1].value == state.finalCards[2].value && 
-                state.finalCards[3].value == state.finalCards[4].value)
-            || (state.finalCards[0].value == state.finalCards[1].value && 
-                state.finalCards[2].value == state.finalCards[3].value && 
-                state.finalCards[3].value == state.finalCards[4].value)){
+            if ((state.finalCards[0].value == state.finalCards[1].value &&
+                    state.finalCards[1].value == state.finalCards[2].value &&
+                    state.finalCards[3].value == state.finalCards[4].value) ||
+                (state.finalCards[0].value == state.finalCards[1].value &&
+                    state.finalCards[2].value == state.finalCards[3].value &&
+                    state.finalCards[3].value == state.finalCards[4].value)) {
                 state.combination = "Full house!"
                 state.credits += 12 * state.bet
             }
