@@ -14,16 +14,18 @@
         <div class="value2">{{card.value}}</div>
       </div>
     </div>
-    <div id="button-field">
-      <button @click="shuffleCards()">Ge mig 5 kort!</button>
-      <button @click="getSomeCards()">Ge mig några kort till</button>
-    </div>
 
-    <!-- <div id="status-log">
-      <div>Kombination: {{getCombination}}</div>
-      <div>Osorterad lista: {{randomCards}}</div>
-      <div>Sorterad lista:{{ finalCards }}</div>
-    </div>-->
+    <div>Kombination: {{getCombination}}</div>
+
+    <div id="betCoinBar">
+      <span id="settings">⚙</span>
+      <span id="credits">Credits = {{ credits }}</span>
+      <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
+      <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DRAW</button>
+      <span class="coin" @click="insertCoin()">⇧</span>
+      <span class="coin">{{ bet }}</span>
+      <span class="coin" @click="removeCoin()">⇩</span>
+    </div>
   </div>
 </template>
 <script>
@@ -41,6 +43,18 @@ export default {
 
     finalCards() {
       return this.$store.state.finalCards;
+    },
+
+    credits() {
+      return this.$store.state.credits;
+    },
+
+    bet() {
+      return this.$store.state.bet;
+    },
+
+    round() {
+      return this.$store.state.round;
     }
   },
 
@@ -58,6 +72,14 @@ export default {
     },
     lockCard(id) {
       this.$store.commit("toggleLock", id);
+    },
+
+    insertCoin() {
+      this.$store.commit("insertCoin");
+    },
+
+    removeCoin() {
+      this.$store.commit("removeCoin");
     }
   }
 };
@@ -86,7 +108,6 @@ export default {
 
 .value {
   grid-area: value;
-
   min-height: 30%;
   text-align: left;
   margin-left: 5px;
@@ -101,18 +122,72 @@ export default {
 }
 
 .card {
+  cursor: pointer;
+  background-color: #fff;
   border-radius: 5px;
   margin: 10px;
   width: 10vw;
   height: 120px;
   border: 2px solid black;
+  border-color: transparent;
   font-size: 24px;
-  box-shadow: 0px;
-  transition: box-shadow 0.2s;
-  background-color: white;
+  transition: all 0.3s;
 }
 
 .locked {
-  box-shadow: 10px 10px 5px #000;
+  border-color: black;
+}
+
+#betCoinBar {
+  color: #000;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+#settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  font-size: 50px;
+}
+
+#credits {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #fff;
+  border: 1px solid black;
+  width: 200px;
+  height: 100px;
+}
+
+.draw-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid black;
+  width: 250px;
+  height: 100px;
+  font-size: 50px;
+}
+
+.coin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  font-size: 50px;
 }
 </style>
