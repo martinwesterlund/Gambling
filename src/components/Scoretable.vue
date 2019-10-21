@@ -32,10 +32,15 @@ export default {
   box-sizing: border-box;
 }
 
+table {
+  border-collapse: collapse;
+}
+
 /* Slänger in lite bakgrundsfärg för att se vad jag håller på med */
 #body {
   background-color: green;
   padding: 0.5 rem;
+  font-size: 0.9rem;
 }
 
 th {
@@ -58,6 +63,6 @@ td:nth-child(3) {
 /* Gör varje kolumn jämnbred */
 th,
 td {
-  padding: 0.2rem 0.5rem;
+  padding: 0.3rem 0.5rem;
 }
 </style>

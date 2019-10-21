@@ -19,11 +19,11 @@
 
     <div id="betCoinBar">
       <span id="settings">⚙</span>
-      <span id="credits">Credits = {{ credits }}</span>
+      <span id="credits">Credits: {{ credits }}</span>
       <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
       <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DRAW</button>
       <span class="coin" @click="insertCoin()">⇧</span>
-      <span class="coin">{{ bet }}</span>
+      <span id="bet" class="coin">{{ bet }}</span>
       <span class="coin" @click="removeCoin()">⇩</span>
     </div>
   </div>
@@ -126,16 +126,19 @@ export default {
   background-color: #fff;
   border-radius: 5px;
   margin: 10px;
-  width: 10vw;
-  height: 120px;
+  width: 15vw;
+  min-height: 24vh;
   border: 2px solid black;
   border-color: transparent;
   font-size: 24px;
+  padding: 0.3rem 0.1rem 0.1rem;
   transition: all 0.3s;
+  font-family: PressStart2P;
+  border: solid blue 5px;
 }
 
 .locked {
-  border-color: black;
+  border-color: transparent;
 }
 
 #betCoinBar {
@@ -189,5 +192,25 @@ export default {
   width: 100px;
   height: 100px;
   font-size: 50px;
+}
+
+.coin,
+.draw-button,
+#credits,
+#settings {
+  font-family: PressStart2P;
+  background: none;
+  border: none;
+  color: #ccc;
+}
+
+.draw-button {
+  border: solid yellow 5px;
+  background-color: gold;
+  color: seashell;
+}
+
+#credits {
+  color: greenyellow;
 }
 </style>
