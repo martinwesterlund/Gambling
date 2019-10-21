@@ -4,11 +4,11 @@
       <thead>
         <tr v-for="combo in combinations">
           <th>{{combo.type}}</th>
-          <td>{{combo.value}}</td>
-          <td>{{combo.value * 2}}</td>
-          <td>{{combo.value * 3}}</td>
-          <td>{{combo.value * 4}}</td>
-          <td>{{combo.value * 5}}</td>
+          <td v-bind:style="[bet == 1 ? {backgroundColor:'red'} : {backgroundColor:'#15294f'}]">{{combo.value}}</td>
+          <td v-bind:style="[bet == 2 ? {backgroundColor:'red'} : {backgroundColor:'#15294f'}]">{{combo.value * 2}}</td>
+          <td v-bind:style="[bet == 3 ? {backgroundColor:'red'} : {backgroundColor:'#15294f'}]">{{combo.value * 3}}</td>
+          <td v-bind:style="[bet == 4 ? {backgroundColor:'red'} : {backgroundColor:'#15294f'}]">{{combo.value * 4}}</td>
+          <td v-bind:style="[bet == 5 ? {backgroundColor:'red'} : {backgroundColor:'#15294f'}]">{{combo.value * 5}}</td>
           <!-- Format ovan verkar fungera bra för att visa tabellen  -->
         </tr>
       </thead>
@@ -21,6 +21,9 @@ export default {
   computed: {
     combinations() {
       return this.$store.state.combinations;
+    },
+    bet(){
+      return this.$store.state.bet
     }
   }
 };
@@ -38,13 +41,13 @@ table {
 
 /* Slänger in lite bakgrundsfärg för att se vad jag håller på med */
 #body {
-  background-color: green;
+  /* background-color: green; */
   padding: 0.5 rem;
   font-size: 0.9rem;
 }
 
 th {
-  background-color: brown;
+  /* background-color: brown; */
   width: 40vw;
   font-family: PressStart2P;
   color: gold;
@@ -57,7 +60,7 @@ td {
 
 /* Såhär kan vi skriva för att göra en särskild kolumn färgsatt */
 td:nth-child(3) {
-  background-color: greenyellow;
+  /* background-color: greenyellow; */
 }
 
 /* Gör varje kolumn jämnbred */
