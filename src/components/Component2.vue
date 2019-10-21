@@ -14,34 +14,20 @@
         <div class="value2">{{card.value}}</div>
       </div>
     </div>
-<<<<<<< HEAD
+
     
     <div>Kombination: {{getCombination}}</div>
     
     <div id="betCoinBar">
-      <span>Credits = {{ credits }}</span>
-      <button v-if="round < 1" @click="shuffleCards()">Ge mig 5 kort!</button>
-      <button v-if="round > 0" @click="getSomeCards()">Ge mig några kort till</button>
-      <span @click="insertCoin()">⇧</span>
-      <span>{{ bet }}</span>
-      <span @click="removeCoin()">⇩</span>
-    </div>
-   
-    
-    <!-- <div>Osorterad lista: {{randomCards}}</div>
-    <div>Sorterad lista:{{ finalCards }}</div> -->
-=======
-    <div id="button-field">
-      <button @click="shuffleCards()">Ge mig 5 kort!</button>
-      <button @click="getSomeCards()">Ge mig några kort till</button>
+      <span id="settings">⚙</span>
+      <span id="credits">Credits = {{ credits }}</span>
+      <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
+      <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DRAW</button>
+      <span class="coin" @click="insertCoin()">⇧</span>
+      <span class="coin">{{ bet }}</span>
+      <span class="coin" @click="removeCoin()">⇩</span>
     </div>
 
-    <!-- <div id="status-log">
-      <div>Kombination: {{getCombination}}</div>
-      <div>Osorterad lista: {{randomCards}}</div>
-      <div>Sorterad lista:{{ finalCards }}</div>
-    </div>-->
->>>>>>> 2985b06767765bff6eacbe8b6fa5f4dd22e88c63
   </div>
 </template>
 <script>
@@ -56,7 +42,6 @@ export default {
     },
 
     finalCards() {
-<<<<<<< HEAD
       return this.$store.state.finalCards
     },
 
@@ -70,9 +55,6 @@ export default {
 
     round(){
       return this.$store.state.round
-=======
-      return this.$store.state.finalCards;
->>>>>>> 2985b06767765bff6eacbe8b6fa5f4dd22e88c63
     }
   },
 
@@ -88,7 +70,6 @@ export default {
     calcValue() {
       this.$store.commit("calculateValue");
     },
-<<<<<<< HEAD
     lockCard(id){
       this.$store.commit("toggleLock", id)
     },
@@ -99,10 +80,6 @@ export default {
 
     removeCoin(){
       this.$store.commit("removeCoin")
-=======
-    lockCard(id) {
-      this.$store.commit("toggleLock", id);
->>>>>>> 2985b06767765bff6eacbe8b6fa5f4dd22e88c63
     }
   }
 };
@@ -131,7 +108,6 @@ export default {
 
 .value {
   grid-area: value;
-
   min-height: 30%;
   text-align: left;
   margin-left: 5px;
@@ -145,49 +121,77 @@ export default {
   margin: 5px;
 }
 
-<<<<<<< HEAD
-.card {  
-  cursor: pointer;
-=======
 .card {
->>>>>>> 2985b06767765bff6eacbe8b6fa5f4dd22e88c63
+  cursor: pointer;
+  background-color: #fff;
   border-radius: 5px;
   margin: 10px;
   width: 75px;
   height: 120px;
   border: 2px solid black;
+  border-color: transparent;
   font-size: 24px;
-<<<<<<< HEAD
-  box-shadow: 10px 10px 5px #888888;
-  transition: box-shadow 0.2s;
+  transition: all 0.3s;
 }
 
 .locked {
-  box-shadow: 0px 0px 0px;
-  
+  border-color: black;
   
 }
 
 #betCoinBar{
-  width: 60%;
+  color: #000;
   margin: 0 auto;
   display: flex;
-  justify-content:space-around;
+  justify-content:center;
   cursor: pointer;
-  font-size: 36px;
+  font-size: 24px;
 }
 
-#betCoinBar span{
+#settings{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
   border: 1px solid black;
-  padding: 10px;
-=======
-  box-shadow: 0px;
-  transition: box-shadow 1s;
-  background-color: white;
+  width: 100px;
+  height: 100px;
+  font-size: 50px;
 }
 
-.locked {
-  box-shadow: 10px 10px 5px #888888;
->>>>>>> 2985b06767765bff6eacbe8b6fa5f4dd22e88c63
+#credits{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  background-color: #fff;
+  border: 1px solid black;
+  width: 200px;
+  height: 100px;
 }
+
+.draw-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid black;
+  width: 250px;
+  height: 100px;
+  font-size: 50px;
+}
+
+.coin{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  font-size: 50px;
+}
+
+
+
 </style>
