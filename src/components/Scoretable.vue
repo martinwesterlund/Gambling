@@ -37,6 +37,8 @@ export default {
 
 table {
   border-collapse: collapse;
+  background-color: #15294f;
+  text-align: right;
 }
 
 /* Slänger in lite bakgrundsfärg för att se vad jag håller på med */
@@ -51,6 +53,9 @@ th {
   width: 40vw;
   font-family: PressStart2P;
   color: gold;
+  text-align: left;
+  
+  
 }
 
 td {
@@ -68,4 +73,9 @@ th,
 td {
   padding: 0.3rem 0.5rem;
 }
+
+col{
+border: 2px solid #fffc3b;
+}
+;
 </style>

@@ -13,21 +13,21 @@ export const store = new Vuex.Store({
         cards: [],
         fiveRandomCards: [],
         finalCards: [],
-        combination: '',
+        combination: 'COMBINATION',
         bet: 1,
         credits: 100,
         dealtCards: [],
 
         combinations: [
-            { type: 'Royal Flush', value: 800 },
-            { type: 'Straight Flush', value: 50 },
-            { type: 'Four of a Kind', value: 25 },
-            { type: 'Full House', value: 8 },
-            { type: 'Flush', value: 6 },
-            { type: 'Straight', value: 4 },
-            { type: 'Three of a Kind', value: 3 },
-            { type: 'Two Pair', value: 2 },
-            { type: 'Jacks or Better', value: 1 }
+            { type: 'ROYAL STRAIGHT FLUSH', value: 800 },
+            { type: 'STRAIGHT FLUSH', value: 50 },
+            { type: 'FOUR OF A KIND', value: 25 },
+            { type: 'FULL HOUSE', value: 8 },
+            { type: 'FLUSH', value: 6 },
+            { type: 'STRAIGHT', value: 4 },
+            { type: 'THREE OF A KIND', value: 3 },
+            { type: 'TWO PAIR', value: 2 },
+            { type: 'JACKS OR BETTER', value: 1 }
         ]
 
     },
@@ -67,7 +67,7 @@ export const store = new Vuex.Store({
                     this.commit('createDeck')
                 }
             }
-            state.combination = ''
+            state.combination = 'COMBINATION'
         },
 
         insertCoin(state){
@@ -94,7 +94,7 @@ export const store = new Vuex.Store({
         // Replaces the unlocked cards with new cards from the deck
         getMoreCards(state){
             state.round = 0
-            state.combination = ''
+            state.combination = 'COMBINATION'
             for(let i = 0; i < 5; i++){
                 if(state.fiveRandomCards[i].locked == false){
                     let newCard = state.cards.splice((Math.floor(Math.random() * state.cards.length)), 1)
@@ -143,15 +143,15 @@ export const store = new Vuex.Store({
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[1].value > 10) ||
                 (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[2].value > 10) ||
                 (state.finalCards[3].value == state.finalCards[4].value && state.finalCards[3].value > 10)) {
-                state.combination = 'Jacks or better'
-                state.credits += 1 * state.bet
+                state.combination = state.combinations[8].type
+                state.credits += state.combinations[8].value * state.bet
             }
 
             // Check Two pair
             if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[2].value == state.finalCards[3].value) ||
                 (state.finalCards[0].value == state.finalCards[1].value && state.finalCards[3].value == state.finalCards[4].value) ||
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[3].value == state.finalCards[4].value)) {
-                state.combination = 'tvåpar!'
+                    state.combination = state.combinations[7].type
                 state.credits += 2 * state.bet
             }
 
@@ -159,7 +159,7 @@ export const store = new Vuex.Store({
             if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value) ||
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
                 (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)) {
-                state.combination = 'Three of a kind'
+                    state.combination = state.combinations[6].type
                 state.credits += 3 * state.bet
             }
 
@@ -174,7 +174,7 @@ export const store = new Vuex.Store({
                 state.finalCards[0].value == 4 &&
                 state.finalCards[0].value == 5 &&
                 state.finalCards[0].value == 14)) {
-                state.combination = 'Straight!'
+                    state.combination = state.combinations[5].type
                 state.credits += 4 * state.bet
             }
 
@@ -183,7 +183,7 @@ export const store = new Vuex.Store({
                 state.finalCards[1].suit == state.finalCards[2].suit &&
                 state.finalCards[2].suit == state.finalCards[3].suit &&
                 state.finalCards[3].suit == state.finalCards[4].suit) {
-                state.combination = 'Flush'
+                state.combination = state.combinations[4].type
                 state.credits += 8 * state.bet
             }
 
@@ -194,14 +194,14 @@ export const store = new Vuex.Store({
                 (state.finalCards[0].value == state.finalCards[1].value &&
                     state.finalCards[2].value == state.finalCards[3].value &&
                     state.finalCards[3].value == state.finalCards[4].value)) {
-                state.combination = "Full house!"
+                state.combination = state.combinations[3].type
                 state.credits += 12 * state.bet
             }
 
             // Check four of a kind
             if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)) {
-                state.combination = "4 of a kind"
+                state.combination = state.combinations[2].type
                 state.credits += 25 * state.bet
             }
 
@@ -214,7 +214,7 @@ export const store = new Vuex.Store({
                 state.finalCards[1].suit == state.finalCards[2].suit &&
                 state.finalCards[2].suit == state.finalCards[3].suit &&
                 state.finalCards[3].suit == state.finalCards[4].suit) {
-                state.combination = 'Straight flush!'
+                state.combination = state.combinations[1].type
                 state.credits += 50 * state.bet
             }
 
@@ -228,7 +228,7 @@ export const store = new Vuex.Store({
                 state.finalCards[1].suit == state.finalCards[2].suit &&
                 state.finalCards[2].suit == state.finalCards[3].suit &&
                 state.finalCards[3].suit == state.finalCards[4].suit){ 
-                state.combination = 'Royal Straight Flush'
+                state.combination = state.combinations[0].type
                 state.credits += 800 * state.bet 
             }
 

@@ -1,5 +1,6 @@
 <template>
   <div id="component-body">
+    <div id="combination" v-bind:style="[getCombination == 'COMBINATION' ? {visibility:'hidden'} : {visibility:'visible'}]">{{getCombination}}</div>
     <div id="cards-display">
       <div
         class="card"
@@ -15,7 +16,7 @@
       </div>
     </div>
 
-    <div>Kombination: {{getCombination}}</div>
+    
 
     <div id="betCoinBar">
       <span id="settings">⚙</span>
@@ -92,12 +93,13 @@ export default {
 
 #component-body {
   margin: 0 auto;
-  background-color: #333;
+  background-color: #0738b1;
   display: block;
 }
 
 #cards-display {
-  display: inline-flex;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .suit {
@@ -126,22 +128,30 @@ export default {
   background-color: #fff;
   border-radius: 5px;
   margin: 10px;
-  width: 15vw;
+  width: 20%;
   min-height: 24vh;
-  border: 2px solid black;
+  border: 4px solid black;
   border-color: transparent;
   font-size: 24px;
   padding: 0.3rem 0.1rem 0.1rem;
   transition: all 0.3s;
   font-family: PressStart2P;
-  border: solid blue 5px;
 }
 
 .locked {
-  border-color: transparent;
+  border: 4px solid #fa2a26;
+}
+
+#combination{
+  padding-top: 20px;
+  font-family: PressStart2P;
+  font-size: 24px;
+  color: #fa2a26;
+  text-shadow: -2px 0 #ffff37, 0 2px #ffff37, 2px 0 #ffff37, 0 -2px #ffff37;
 }
 
 #betCoinBar {
+  cursor: pointer;
   color: #000;
   margin: 0 auto;
   display: flex;
@@ -173,6 +183,7 @@ export default {
 }
 
 .draw-button {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
