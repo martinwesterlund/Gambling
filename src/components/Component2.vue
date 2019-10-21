@@ -23,9 +23,9 @@
       <span id="credits">Credits: {{ credits }}</span>
       <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
       <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DRAW</button>
-      <span class="coin" @click="insertCoin()">⇧</span>
+      <span v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]" class="coin" @click="insertCoin()">⇧</span>
       <span id="bet" class="coin">{{ bet }}</span>
-      <span class="coin" @click="removeCoin()">⇩</span>
+      <span v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]" class="coin" @click="removeCoin()">⇩</span>
     </div>
   </div>
 </template>
@@ -130,7 +130,7 @@ export default {
   margin: 10px;
   width: 20%;
   min-height: 24vh;
-  border: 4px solid black;
+  border: 8px solid black;
   border-color: transparent;
   font-size: 24px;
   padding: 0.3rem 0.1rem 0.1rem;
@@ -139,7 +139,7 @@ export default {
 }
 
 .locked {
-  border: 4px solid #fa2a26;
+  border: 8px solid #fa2a26;
 }
 
 #combination{
