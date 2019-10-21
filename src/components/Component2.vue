@@ -27,6 +27,8 @@
   </div>
 </template>
 <script>
+// import myImage from '~/assets/my-image.png'
+// <img :src="myImage">
 export default {
   computed: {
     getCombination() {
@@ -68,7 +70,7 @@ export default {
 
 #component-body {
   margin: 0 auto;
-  background-color: gold;
+  background-color: #333;
   display: block;
 }
 
@@ -101,16 +103,16 @@ export default {
 .card {
   border-radius: 5px;
   margin: 10px;
-  width: 75px;
+  width: 10vw;
   height: 120px;
   border: 2px solid black;
   font-size: 24px;
   box-shadow: 0px;
-  transition: box-shadow 1s;
+  transition: box-shadow 0.2s;
   background-color: white;
 }
 
 .locked {
-  box-shadow: 10px 10px 5px #888888;
+  box-shadow: 10px 10px 5px #000;
 }
 </style>

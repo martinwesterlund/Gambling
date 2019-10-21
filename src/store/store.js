@@ -23,6 +23,7 @@ export const store = new Vuex.Store({
             { type: 'Straight Flush', value: 50 },
             { type: 'Four of a Kind', value: 25 },
             { type: 'Full House', value: 8 },
+            { type: 'Flush', value: 6 },
             { type: 'Straight', value: 4 },
             { type: 'Three of a Kind', value: 3 },
             { type: 'Two Pair', value: 2 },

@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import "./assets/css/fonts.css";
+
 // import HelloWorld from "./components/HelloWorld.vue";
 // import VideoPoker from "./components/VideoPoker.vue";
 import Component2 from "./components/Component2.vue";

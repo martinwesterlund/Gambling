@@ -1,6 +1,6 @@
 <template>
   <div id="body">
-    <table>
+    <table id="table">
       <thead>
         <tr v-for="combo in combinations">
           <th>{{combo.type}}</th>
@@ -8,6 +8,7 @@
           <td>{{combo.value * 2}}</td>
           <td>{{combo.value * 3}}</td>
           <td>{{combo.value * 4}}</td>
+          <td>{{combo.value * 5}}</td>
           <!-- Format ovan verkar fungera bra för att visa tabellen  -->
         </tr>
       </thead>
@@ -34,20 +35,29 @@ export default {
 /* Slänger in lite bakgrundsfärg för att se vad jag håller på med */
 #body {
   background-color: green;
+  padding: 0.5 rem;
 }
 
 th {
   background-color: brown;
+  width: 40vw;
+  font-family: PressStart2P;
+  color: gold;
+}
+
+td {
+  width: 15vw;
+  font-family: PressStart2P;
 }
 
 /* Såhär kan vi skriva för att göra en särskild kolumn färgsatt */
 td:nth-child(3) {
-  background-color: blue;
+  background-color: greenyellow;
 }
 
 /* Gör varje kolumn jämnbred */
 th,
 td {
-  width: 20vw;
+  padding: 0.2rem 0.5rem;
 }
 </style>

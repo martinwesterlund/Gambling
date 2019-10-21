@@ -1,0 +1,14 @@
+@font-face {
+    font-family: Lovelo-Black;
+    src: url('/fonts/Lovelo/Lovelo-Black.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: Lovelo-LineLight;
+    src: url('/fonts/Lovelo/Lovelo-LineLight.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: PressStart2P;
+    src: url('/fonts/PressStart2P/PressStart2P-Regular.ttf') format('truetype')
+}
