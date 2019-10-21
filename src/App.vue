@@ -41,7 +41,7 @@ export default {
   color: #c0cedd;
 }
 
-body {
-  background-color: #333;
+.classic {
+  background-color: blue;
 }
 </style>

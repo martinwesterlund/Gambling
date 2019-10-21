@@ -15,8 +15,9 @@ export const store = new Vuex.Store({
         finalCards: [],
         combination: '',
         bet: 1,
-        credits: 100,
+        credits: 10,
         dealtCards: [],
+        modern: false,
 
         combinations: [
             { type: 'Royal Flush', value: 800 },
@@ -70,14 +71,14 @@ export const store = new Vuex.Store({
             state.combination = ''
         },
 
-        insertCoin(state){
-            if(state.bet < 5){
+        insertCoin(state) {
+            if (state.bet < 5) {
                 state.bet++
             }
         },
 
-        removeCoin(state){
-            if(state.bet > 1){
+        removeCoin(state) {
+            if (state.bet > 1) {
                 state.bet--
             }
         },
@@ -91,12 +92,19 @@ export const store = new Vuex.Store({
             }
         },
 
+
+        toggleTheme(state) {
+            state.modern = !state.modern
+
+        },
+
+
         // Replaces the unlocked cards with new cards from the deck
-        getMoreCards(state){
+        getMoreCards(state) {
             state.round = 0
             state.combination = ''
-            for(let i = 0; i < 5; i++){
-                if(state.fiveRandomCards[i].locked == false){
+            for (let i = 0; i < 5; i++) {
+                if (state.fiveRandomCards[i].locked == false) {
                     let newCard = state.cards.splice((Math.floor(Math.random() * state.cards.length)), 1)
                     state.fiveRandomCards[i].value = newCard[0].value
                     state.fiveRandomCards[i].suit = newCard[0].suit
@@ -129,7 +137,7 @@ export const store = new Vuex.Store({
 
             }
 
-            
+
 
             //Sort final cards array
             state.finalCards.sort(function(a, b) {
@@ -165,15 +173,14 @@ export const store = new Vuex.Store({
 
             // Check straight
             if ((state.finalCards[0].value == state.finalCards[1].value - 1 &&
-                state.finalCards[1].value == state.finalCards[2].value - 1 &&
-                state.finalCards[2].value == state.finalCards[3].value - 1 &&
-                state.finalCards[3].value == state.finalCards[4].value - 1)
-                || 
+                    state.finalCards[1].value == state.finalCards[2].value - 1 &&
+                    state.finalCards[2].value == state.finalCards[3].value - 1 &&
+                    state.finalCards[3].value == state.finalCards[4].value - 1) ||
                 (state.finalCards[0].value == 2 &&
-                state.finalCards[0].value == 3 &&
-                state.finalCards[0].value == 4 &&
-                state.finalCards[0].value == 5 &&
-                state.finalCards[0].value == 14)) {
+                    state.finalCards[0].value == 3 &&
+                    state.finalCards[0].value == 4 &&
+                    state.finalCards[0].value == 5 &&
+                    state.finalCards[0].value == 14)) {
                 state.combination = 'Straight!'
                 state.credits += 4 * state.bet
             }
@@ -227,9 +234,9 @@ export const store = new Vuex.Store({
                 state.finalCards[0].suit == state.finalCards[1].suit &&
                 state.finalCards[1].suit == state.finalCards[2].suit &&
                 state.finalCards[2].suit == state.finalCards[3].suit &&
-                state.finalCards[3].suit == state.finalCards[4].suit){ 
+                state.finalCards[3].suit == state.finalCards[4].suit) {
                 state.combination = 'Royal Straight Flush'
-                state.credits += 800 * state.bet 
+                state.credits += 800 * state.bet
             }
 
 

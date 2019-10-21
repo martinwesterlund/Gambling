@@ -1,6 +1,6 @@
 <template>
-  <div id="component-body">
-    <div id="cards-display">
+  <div id="component-body" class="modern" v-bind:class="{ modern: modern, classic: !modern }">
+    <div id="cards-display" class="modern" v-bind:class="{ modern: modern, classic: !modern }">
       <div
         class="card"
         v-for="card in randomCards"
@@ -15,10 +15,10 @@
       </div>
     </div>
 
-    <div>Kombination: {{getCombination}}</div>
+    <div id="resultText">Kombination: {{getCombination}}</div>
 
     <div id="betCoinBar">
-      <span id="settings">⚙</span>
+      <span id="settings" @click="toggleTheme">⚙</span>
       <span id="credits">Credits: {{ credits }}</span>
       <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
       <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DRAW</button>
@@ -80,6 +80,10 @@ export default {
 
     removeCoin() {
       this.$store.commit("removeCoin");
+    },
+
+    toggleTheme() {
+      this.$store.commit("toggleTheme");
     }
   }
 };
@@ -91,13 +95,17 @@ export default {
 }
 
 #component-body {
-  margin: 0 auto;
-  background-color: #333;
   display: block;
+  margin: 0 auto;
+}
+
+.classic {
+  background-color: blue;
 }
 
 #cards-display {
   display: inline-flex;
+  max-width: 900px;
 }
 
 .suit {
@@ -123,18 +131,21 @@ export default {
 
 .card {
   cursor: pointer;
-  background-color: #fff;
   border-radius: 5px;
   margin: 10px;
   width: 15vw;
   min-height: 24vh;
-  border: 2px solid black;
   border-color: transparent;
   font-size: 24px;
   padding: 0.3rem 0.1rem 0.1rem;
   transition: all 0.3s;
+}
+
+.classic .card {
+  background-color: #fff;
+  border: 2px solid black;
   font-family: PressStart2P;
-  border: solid blue 5px;
+  border: solid orangered 5px;
 }
 
 .locked {
@@ -142,7 +153,6 @@ export default {
 }
 
 #betCoinBar {
-  color: #000;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -154,8 +164,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  border: 1px solid black;
   width: 100px;
   height: 100px;
   font-size: 50px;
@@ -165,9 +173,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background-color: #fff;
-  border: 1px solid black;
   width: 200px;
   height: 100px;
 }
@@ -176,8 +181,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  border: 1px solid black;
   width: 250px;
   height: 100px;
   font-size: 50px;
@@ -187,30 +190,32 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  border: 1px solid black;
   width: 100px;
   height: 100px;
   font-size: 50px;
 }
 
-.coin,
-.draw-button,
-#credits,
-#settings {
+.classic .coin,
+.classic .draw-button,
+.classic #credits,
+.classic #settings {
   font-family: PressStart2P;
   background: none;
   border: none;
   color: #ccc;
 }
 
-.draw-button {
+.classic .draw-button {
   border: solid yellow 5px;
   background-color: gold;
   color: seashell;
 }
 
-#credits {
+.classic #credits {
   color: greenyellow;
+}
+
+.classic #resultText {
+  font-family: PressStart2P;
 }
 </style>

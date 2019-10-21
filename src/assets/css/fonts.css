@@ -12,3 +12,8 @@
     font-family: PressStart2P;
     src: url('/fonts/PressStart2P/PressStart2P-Regular.ttf') format('truetype')
 }
+
+@font-face {
+    font-family: FjallaOne;
+    src: url('/fonts/FjallaOne/FjallaOne-Regular.ttf') format('truetype')
+}
