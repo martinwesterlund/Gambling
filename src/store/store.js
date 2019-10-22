@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-
+        win: 0,
         variable: 'Testing testing',
         round: 0,
         cards: [],
@@ -145,10 +145,10 @@ export const store = new Vuex.Store({
 
 
             //Sort final cards array
-            state.finalCards.sort(function(a, b) {
+            state.finalCards.sort(function (a, b) {
                 return b.value < a.value ? 1 :
                     b.value > a.value ? -1 :
-                    0
+                        0
             })
 
             // Check if jacks or better
@@ -156,8 +156,7 @@ export const store = new Vuex.Store({
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[1].value > 10) ||
                 (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[2].value > 10) ||
                 (state.finalCards[3].value == state.finalCards[4].value && state.finalCards[3].value > 10)) {
-                state.combination = state.combinations[8].type
-                state.credits += state.combinations[8].value * state.bet
+                this.commit('updateResult', 8)
             }
 
             // Check Two pair
@@ -178,9 +177,9 @@ export const store = new Vuex.Store({
 
             // Check straight
             if ((state.finalCards[0].value == state.finalCards[1].value - 1 &&
-                    state.finalCards[1].value == state.finalCards[2].value - 1 &&
-                    state.finalCards[2].value == state.finalCards[3].value - 1 &&
-                    state.finalCards[3].value == state.finalCards[4].value - 1) ||
+                state.finalCards[1].value == state.finalCards[2].value - 1 &&
+                state.finalCards[2].value == state.finalCards[3].value - 1 &&
+                state.finalCards[3].value == state.finalCards[4].value - 1) ||
                 (state.finalCards[0].value == 2 &&
                     state.finalCards[0].value == 3 &&
                     state.finalCards[0].value == 4 &&
@@ -201,8 +200,8 @@ export const store = new Vuex.Store({
 
             // Check full house
             if ((state.finalCards[0].value == state.finalCards[1].value &&
-                    state.finalCards[1].value == state.finalCards[2].value &&
-                    state.finalCards[3].value == state.finalCards[4].value) ||
+                state.finalCards[1].value == state.finalCards[2].value &&
+                state.finalCards[3].value == state.finalCards[4].value) ||
                 (state.finalCards[0].value == state.finalCards[1].value &&
                     state.finalCards[2].value == state.finalCards[3].value &&
                     state.finalCards[3].value == state.finalCards[4].value)) {
@@ -243,14 +242,15 @@ export const store = new Vuex.Store({
                 state.combination = state.combinations[0].type
                 state.credits += 800 * state.bet
             }
-
-
-
-
-
-
-
+  
         },
+
+        updateResult(state, value){
+            console.log(value)
+            state.combination = state.combinations[value].type
+            state.credits += state.combinations[value].value * state.bet
+            state.win = state.combinations[value].value * state.bet
+        }
 
 
 

@@ -18,7 +18,10 @@
         <div class="value2">{{card.value}}</div>
       </div>
     </div>
-
+    <div id="infoBar">
+      <span>WIN {{ win }}</span>
+      <span>CREDITS {{ credits }}</span>
+    </div>
     <div id="betCoinBar">
       <span id="settings" @click="toggleTheme">⚙</span>
       <span id="credits">Credits: {{ credits }}</span>
@@ -64,6 +67,10 @@ export default {
     },
 
     round() {
+      return this.$store.state.round;
+    },
+
+    win(){
       return this.$store.state.round;
     },
 
@@ -205,6 +212,16 @@ export default {
   font-family: Lovelo-LineBold;
   font-size: 38px;
   color: lightcyan;
+}
+
+#infoBar {
+  display: flex;
+  justify-content: space-around;
+  font-family: PressStart2P;
+  font-size: 24px;
+  color: #fa2a26;
+  text-shadow: -2px 0 #ffff37, 0 2px #ffff37, 2px 0 #ffff37, 0 -2px #ffff37;
+  padding: 10px;
 }
 
 #betCoinBar {
