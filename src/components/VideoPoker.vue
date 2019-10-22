@@ -71,7 +71,7 @@ export default {
     },
 
     win(){
-      return this.$store.state.round;
+      return this.$store.state.win;
     },
 
     on() {
@@ -82,7 +82,7 @@ export default {
   methods: {
     shuffleCards() {
       this.$store.commit("getFiveRandomCards");
-      this.$store.commit("calculateValue");
+      // this.$store.commit("calculateValue");
     },
     getSomeCards() {
       this.$store.commit("getMoreCards");
