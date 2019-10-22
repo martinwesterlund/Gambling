@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
         credits: 10,
         dealtCards: [],
         modern: false,
-        gameInfo: '',
+        gameInfo: 'BET AND DEAL!',
 
         combinations: [
             { type: 'ROYAL STRAIGHT FLUSH', value: 800 },
@@ -71,7 +71,7 @@ export const store = new Vuex.Store({
                         this.commit('createDeck')
                     }
                 }
-                this.commit('calculateValue')
+                // this.commit('calculateValue')
                 state.combination = 'COMBINATION'
             }else{
                 state.gameInfo = 'INSERT COIN'
@@ -82,10 +82,10 @@ export const store = new Vuex.Store({
         // Increases the bet
         insertCoin(state) {
             if (state.bet < 5 && state.bet <= state.credits ) {
-                state.bet++
-            }else if(state.bet > state.credits){
-                state.gameInfo = 'INSERT COIN'
-            }
+                state.bet++}
+            // }else if(state.bet  = state.credits){
+            //     state.gameInfo = 'INSERT COIN'
+            // }
         },
 
         // Decreases the bet

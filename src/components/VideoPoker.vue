@@ -25,9 +25,6 @@
     </div>
     <div id="betCoinBar">
       <span id="settings" @click="toggleTheme">⚙</span>
-      <span id="credits">Credits: {{ credits }}</span>
-      <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
-      <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DRAW</button>
       <span
         v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
         class="coin"
@@ -39,6 +36,11 @@
         class="coin"
         @click="removeCoin()"
       >⇩</span>
+      <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
+      <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DRAW</button>
+      
+      
+      
     </div>
   </div>
 </template>
@@ -134,6 +136,7 @@ export default {
 #cards-display {
   display: flex;
   justify-content: space-evenly;
+  height: 30vh;
 }
 
 .suit {
@@ -175,7 +178,7 @@ export default {
   font-family: PressStart2P;
   color: #fa2a26;
   text-shadow: -4px 0 #ffff37, 0 4px #ffff37, 4px 0 #ffff37, 0 -4px #ffff37;
-  font-size: 5vw;
+  font-size: 4vw;
 }
 
 .classic .card {
@@ -248,6 +251,7 @@ export default {
   cursor: pointer;
   font-size: 24px;
   margin-bottom: 2rem;
+  padding: 10px;
 }
 
 #settings {
@@ -291,10 +295,24 @@ export default {
 .classic #credits,
 .classic #settings,
 .classic #resultText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
   font-family: PressStart2P;
+  font-size: 40px;
   background: none;
   border: none;
-  color: #ccc;
+  color: #000;
+  border: solid yellow 5px;
+  background-color: gold;
+  border-radius: 5px;
+}
+
+.classic .draw-button{
+  width: 200px;
 }
 
 .modern .coin,
@@ -304,11 +322,11 @@ export default {
   font-family: FjallaOne;
 }
 
-.classic .draw-button {
+/* .classic .draw-button {
   border: solid yellow 5px;
   background-color: gold;
   color: seashell;
-}
+} */
 
 .modern .draw-button {
   background-color: #666;
