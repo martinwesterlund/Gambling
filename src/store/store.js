@@ -60,6 +60,7 @@ export const store = new Vuex.Store({
         getFiveRandomCards(state) {
             if(state.bet <= state.credits){
                 state.gameInfo = ''
+                state.win = 0
                 state.credits -= state.bet
                 state.round = 1
                 state.fiveRandomCards = []
@@ -127,6 +128,7 @@ export const store = new Vuex.Store({
                 }
             }
             this.commit('calculateValue')
+            state.gameInfo= 'GAME OVER'
         },
 
         // Calculates the final value of the final cards array, to see if you won or not
