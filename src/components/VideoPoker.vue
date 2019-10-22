@@ -18,6 +18,7 @@
         <div class="value2">{{card.value}}</div>
       </div>
     </div>
+    <div id="game-info">{{gameInfo}}</div>
     <div id="infoBar">
       <span>WIN {{ win }}</span>
       <span>CREDITS {{ credits }}</span>
@@ -76,6 +77,10 @@ export default {
 
     on() {
       return this.$store.state.modern;
+    },
+
+    gameInfo(){
+      return this.$store.state.gameInfo
     }
   },
 
@@ -161,6 +166,16 @@ export default {
   font-size: 24px;
   padding: 0.5rem 0.3rem;
   margin-bottom: 2rem;
+}
+
+#game-info{
+  position: absolute;
+  top:40vh;
+  left: 25vw;
+  font-family: PressStart2P;
+  color: #fa2a26;
+  text-shadow: -4px 0 #ffff37, 0 4px #ffff37, 4px 0 #ffff37, 0 -4px #ffff37;
+  font-size: 5vw;
 }
 
 .classic .card {

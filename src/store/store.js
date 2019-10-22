@@ -18,6 +18,7 @@ export const store = new Vuex.Store({
         credits: 10,
         dealtCards: [],
         modern: false,
+        gameInfo: '',
 
         combinations: [
             { type: 'ROYAL STRAIGHT FLUSH', value: 800 },
@@ -57,27 +58,36 @@ export const store = new Vuex.Store({
 
         // Creates five random cards that are displayed in the game
         getFiveRandomCards(state) {
-            // this.commit('createDeck')
-            state.credits -= state.bet
-            state.round = 1
-            state.fiveRandomCards = []
-            for (let i = 0; i < 5; i++) {
-                let newCard = state.cards.splice((Math.floor(Math.random() * state.cards.length)), 1)
-                state.fiveRandomCards.push(newCard[0])
-                if (state.cards.length === 0) {
-                    this.commit('createDeck')
+            if(state.bet <= state.credits){
+                state.gameInfo = ''
+                state.credits -= state.bet
+                state.round = 1
+                state.fiveRandomCards = []
+                for (let i = 0; i < 5; i++) {
+                    let newCard = state.cards.splice((Math.floor(Math.random() * state.cards.length)), 1)
+                    state.fiveRandomCards.push(newCard[0])
+                    if (state.cards.length < 5) {
+                        this.commit('createDeck')
+                    }
                 }
+                this.commit('calculateValue')
+                state.combination = 'COMBINATION'
+            }else{
+                state.gameInfo = 'INSERT COIN'
             }
-            this.commit('calculateValue')
-            state.combination = 'COMBINATION'
+            
         },
 
+        // Increases the bet
         insertCoin(state) {
-            if (state.bet < 5) {
+            if (state.bet < 5 && state.bet <= state.credits ) {
                 state.bet++
+            }else if(state.bet > state.credits){
+                state.gameInfo = 'INSERT COIN'
             }
         },
 
+        // Decreases the bet
         removeCoin(state) {
             if (state.bet > 1) {
                 state.bet--
@@ -239,7 +249,6 @@ export const store = new Vuex.Store({
         },
 
         updateResult(state, value){
-            console.log(value)
             state.combination = state.combinations[value].type
             state.credits += state.combinations[value].value * state.bet
             state.win = state.combinations[value].value * state.bet
