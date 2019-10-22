@@ -29,13 +29,13 @@
         v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
         class="coin-arrow"
         @click="insertCoin()"
-      >⇧</span>
+      >▲</span>
       <span id="bet" class="coin">{{ bet }}</span>
       <span
         v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
         class="coin-arrow"
         @click="removeCoin()"
-      >⇩</span>
+      >▼</span>
       <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
       <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DEAL</button>
       
