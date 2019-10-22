@@ -111,7 +111,6 @@ export default {
 #component-body {
   margin: 0 auto;
   display: block;
-  margin: 0 auto;
 }
 
 .classic {
@@ -215,7 +214,6 @@ export default {
   justify-content: center;
   cursor: pointer;
   font-size: 24px;
-  margin-bottom: 2rem;
 }
 
 #settings {

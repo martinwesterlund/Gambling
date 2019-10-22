@@ -18,6 +18,8 @@ export const store = new Vuex.Store({
         credits: 10,
         dealtCards: [],
         modern: false,
+        answers: [],
+        questionNumber: 0,
 
         combinations: [
             { type: 'ROYAL STRAIGHT FLUSH', value: 800 },
@@ -29,8 +31,29 @@ export const store = new Vuex.Store({
             { type: 'THREE OF A KIND', value: 3 },
             { type: 'TWO PAIR', value: 2 },
             { type: 'JACKS OR BETTER', value: 1 }
-        ]
+        ],
 
+        personalities: [
+            { type: 'Scorpio', symbol: 'scorpio.png', description: 'You are a scorpio! You are a very human being! You are interested in things! You also have opinions!"' },
+            { type: 'Aries', symbol: 'aries.png', description: 'text here' },
+
+        ],
+
+        questions: [{
+                question: 'Vad tycker du om måndagar?',
+                alternatives: [{ answer: 'Kul', value: 'C' },
+                    { answer: 'Trist', value: 'A' },
+                    { answer: 'Illa', value: 'B' }
+                ]
+            },
+            {
+                question: 'Har du någonsin varit i Skåne?',
+                alternatives: [{ answer: 'Ja', value: 'A' },
+                    { answer: 'Nej', value: 'B' }
+                ]
+            }
+
+        ]
     },
 
     mutations: {
@@ -101,6 +124,14 @@ export const store = new Vuex.Store({
 
         changeHighlight(state) {
             state.highlight = !state.highlight
+        },
+
+        submitAnswer(state, value) { //behöver nog skicka med något mer
+            state.answers.push(value)
+        },
+
+        questionCounter(state) {
+            state.questionNumber++
         },
 
 
