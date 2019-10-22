@@ -255,17 +255,6 @@ export const store = new Vuex.Store({
             state.credits += state.combinations[value].value * state.bet
             state.win = state.combinations[value].value * state.bet
         }
-
-
-
-
-
-
-
-
-
-
-
     },
 
 
