@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
         credits: 10,
         dealtCards: [],
         modern: false,
-        gameInfo: 'BET AND DEAL!',
+        gameInfo: 'JACKS OR BETTER',
 
         combinations: [
             { type: 'ROYAL STRAIGHT FLUSH', value: 800 },

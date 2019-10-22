@@ -60,6 +60,7 @@ table {
   /* background-color: green; */
   padding: 0.5 rem;
   font-size: 0.8rem;
+  border: 4px solid yellow;
 }
 
 .classic .selected {
@@ -75,6 +76,7 @@ table {
 .classic th {
   font-family: PressStart2P;
   color: gold;
+  border-right: 4px solid yellow;
 }
 
 th {
@@ -84,11 +86,12 @@ th {
 }
 
 td {
+  border-right: 4px solid yellow;
   width: 15vw;
 }
 
 .classic th {
-  background-color: brown;
+  background-color: #15294f;
   font-family: PressStart2P;
   color: gold;
 }
