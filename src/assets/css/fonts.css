@@ -9,6 +9,11 @@
 }
 
 @font-face {
+    font-family: Lovelo-LineBold;
+    src: url('/fonts/Lovelo/Lovelo-LineBold.ttf') format('truetype')
+}
+
+@font-face {
     font-family: PressStart2P;
     src: url('/fonts/PressStart2P/PressStart2P-Regular.ttf') format('truetype')
 }
@@ -16,4 +21,14 @@
 @font-face {
     font-family: FjallaOne;
     src: url('/fonts/FjallaOne/FjallaOne-Regular.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: NotoSans;
+    src: url('/fonts/NotoSans/NotoSans-Regular.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: NotoSans-Bold;
+    src: url('/fonts/NotoSans/NotoSans-Bold.ttf') format('truetype')
 }

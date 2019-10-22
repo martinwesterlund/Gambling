@@ -1,6 +1,10 @@
 <template>
-  <div id="component-body" class="modern" v-bind:class="{ modern: modern, classic: !modern }">
-    <div id="cards-display" class="modern" v-bind:class="{ modern: modern, classic: !modern }">
+  <div id="component-body" :class="{modern: on, classic: !on}">
+    <div
+      id="combination"
+      v-bind:style="[getCombination == 'COMBINATION' ? {visibility:'hidden'} : {visibility:'visible'}]"
+    >{{getCombination}}</div>
+    <div id="cards-display">
       <div
         class="card"
         v-for="card in randomCards"
@@ -15,16 +19,22 @@
       </div>
     </div>
 
-    <div id="resultText">Kombination: {{getCombination}}</div>
-
     <div id="betCoinBar">
       <span id="settings" @click="toggleTheme">⚙</span>
       <span id="credits">Credits: {{ credits }}</span>
       <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
       <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DRAW</button>
-      <span class="coin" @click="insertCoin()">⇧</span>
+      <span
+        v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
+        class="coin"
+        @click="insertCoin()"
+      >⇧</span>
       <span id="bet" class="coin">{{ bet }}</span>
-      <span class="coin" @click="removeCoin()">⇩</span>
+      <span
+        v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
+        class="coin"
+        @click="removeCoin()"
+      >⇩</span>
     </div>
   </div>
 </template>
@@ -55,6 +65,10 @@ export default {
 
     round() {
       return this.$store.state.round;
+    },
+
+    on() {
+      return this.$store.state.modern;
     }
   },
 
@@ -95,17 +109,19 @@ export default {
 }
 
 #component-body {
+  margin: 0 auto;
   display: block;
   margin: 0 auto;
 }
 
 .classic {
-  background-color: blue;
+  background-color: #0738b1;
+  transition: background-color 300ms linear;
 }
 
 #cards-display {
-  display: inline-flex;
-  max-width: 900px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .suit {
@@ -133,31 +149,73 @@ export default {
   cursor: pointer;
   border-radius: 5px;
   margin: 10px;
-  width: 15vw;
+  width: 20%;
   min-height: 24vh;
-  border-color: transparent;
   font-size: 24px;
-  padding: 0.3rem 0.1rem 0.1rem;
-  transition: all 0.3s;
+  padding: 0.5rem 0.3rem;
+  margin-bottom: 2rem;
 }
 
 .classic .card {
   background-color: #fff;
-  border: 2px solid black;
   font-family: PressStart2P;
-  border: solid orangered 5px;
+  transition: all 0.3s;
 }
 
-.locked {
-  border-color: transparent;
+.classic .card:not(.locked) {
+  border: 8px solid transparent;
+}
+
+.modern .card:not(.locked) {
+  border: 2px solid transparent;
+}
+
+.modern {
+  background-color: #aaa;
+}
+
+.modern .card {
+  background-color: #bbb;
+  border: 2px solid #eee;
+  font-family: Lovelo-Black;
+}
+
+.classic .locked {
+  border: solid 8px #fa2a26;
+}
+
+.modern .locked {
+  border: solid 2px lightcyan;
+}
+
+#combination {
+  padding-top: 20px;
+  margin-bottom: 0.3rem;
+  line-height: 2rem;
+}
+
+.classic #combination {
+  font-size: 28px;
+  font-family: PressStart2P;
+  color: #fa2a26;
+  text-shadow: -2px 0 #ffff37, 0 2px #ffff37, 2px 0 #ffff37, 0 -2px #ffff37;
+}
+
+.modern #combination {
+  font-family: Lovelo-LineBold;
+  font-size: 38px;
+  color: lightcyan;
 }
 
 #betCoinBar {
+  cursor: pointer;
+  color: #000;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   cursor: pointer;
   font-size: 24px;
+  margin-bottom: 2rem;
 }
 
 #settings {
@@ -178,6 +236,7 @@ export default {
 }
 
 .draw-button {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -198,11 +257,19 @@ export default {
 .classic .coin,
 .classic .draw-button,
 .classic #credits,
-.classic #settings {
+.classic #settings,
+.classic #resultText {
   font-family: PressStart2P;
   background: none;
   border: none;
   color: #ccc;
+}
+
+.modern .coin,
+.modern .draw-button,
+.modern #credits,
+.modern #settings {
+  font-family: FjallaOne;
 }
 
 .classic .draw-button {
@@ -211,11 +278,13 @@ export default {
   color: seashell;
 }
 
-.classic #credits {
-  color: greenyellow;
+.modern .draw-button {
+  background-color: #666;
+  color: seashell;
+  border: none;
 }
 
-.classic #resultText {
-  font-family: PressStart2P;
+.classic #credits {
+  color: greenyellow;
 }
 </style>
