@@ -59,6 +59,8 @@ export const store = new Vuex.Store({
         // Creates five random cards that are displayed in the game
         getFiveRandomCards(state) {
             if(state.bet <= state.credits){
+                // this.commit('playSound', 'button.mp3')
+                new Audio(require('../../public/sounds/button.mp3')).play()
                 state.gameInfo = ''
                 state.win = 0
                 state.credits -= state.bet
@@ -82,6 +84,7 @@ export const store = new Vuex.Store({
         // Increases the bet
         insertCoin(state) {
             if (state.bet < 5 && state.bet <= state.credits ) {
+                new Audio(require('../../public/sounds/button.mp3')).play()
                 state.bet++}
             // }else if(state.bet  = state.credits){
             //     state.gameInfo = 'INSERT COIN'
@@ -91,6 +94,7 @@ export const store = new Vuex.Store({
         // Decreases the bet
         removeCoin(state) {
             if (state.bet > 1) {
+                new Audio(require('../../public/sounds/button.mp3')).play()
                 state.bet--
             }
         },
@@ -99,6 +103,7 @@ export const store = new Vuex.Store({
         toggleLock(state, id) {
             for (let i = 0; i < state.fiveRandomCards.length; i++) {
                 if (state.fiveRandomCards[i].id == id) {
+                    new Audio(require('../../public/sounds/click.mp3')).play()
                     state.fiveRandomCards[i].locked = !state.fiveRandomCards[i].locked
                 }
             }
@@ -118,6 +123,7 @@ export const store = new Vuex.Store({
 
         // Replaces the unlocked cards with new cards from the deck
         getMoreCards(state) {
+            new Audio(require('../../public/sounds/button.mp3')).play()
             state.round = 0
             state.combination = 'COMBINATION'
             for (let i = 0; i < 5; i++) {
@@ -251,9 +257,16 @@ export const store = new Vuex.Store({
         },
 
         updateResult(state, value){
+            new Audio(require('../../public/sounds/win.mp3')).play()
             state.combination = state.combinations[value].type
             state.credits += state.combinations[value].value * state.bet
             state.win = state.combinations[value].value * state.bet
+            
+            
+        },
+
+        playSound(sound){
+            new Audio(require('../../public/sounds/'+ sound)).play()
         }
     },
 

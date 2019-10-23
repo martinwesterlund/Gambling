@@ -36,8 +36,8 @@
         class="coin-arrow"
         @click="removeCoin()"
       >▼</span>
-      <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
-      <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DEAL</button>
+      <button class="draw-button" v-if="round < 1" @click="getCards()">DRAW</button>
+      <button class="draw-button" v-if="round > 0" @click="getMoreCards()">DEAL</button>
       
       
       
@@ -87,11 +87,11 @@ export default {
   },
 
   methods: {
-    shuffleCards() {
+    getCards() {
       this.$store.commit("getFiveRandomCards");
       // this.$store.commit("calculateValue");
     },
-    getSomeCards() {
+    getMoreCards() {
       this.$store.commit("getMoreCards");
     },
 
