@@ -1,6 +1,6 @@
 <template>
   <div id="body">
-    <div id="question">{{questions[this.questionNumbers].question}}</div>
+    <div id="question">{{questions[this.questionNumber].question}}</div>
     <div>
       <div
         id="alternatives"
