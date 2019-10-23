@@ -18,12 +18,13 @@
         <div class="value2">{{card.value}}</div>
       </div>
     </div>
-
+    <div id="game-info">{{gameInfo}}</div>
+    <div id="infoBar">
+      <span>WIN {{ win }}</span>
+      <span>CREDITS {{ credits }}</span>
+    </div>
     <div id="betCoinBar">
       <span id="settings" @click="toggleTheme">⚙</span>
-      <span id="credits">Credits: {{ credits }}</span>
-      <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
-      <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DRAW</button>
       <span
         v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
         class="coin"
@@ -35,6 +36,8 @@
         class="coin"
         @click="removeCoin()"
       >⇩</span>
+      <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
+      <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DEAL</button>
     </div>
   </div>
 </template>
@@ -67,15 +70,23 @@ export default {
       return this.$store.state.round;
     },
 
+    win() {
+      return this.$store.state.win;
+    },
+
     on() {
       return this.$store.state.modern;
+    },
+
+    gameInfo() {
+      return this.$store.state.gameInfo;
     }
   },
 
   methods: {
     shuffleCards() {
       this.$store.commit("getFiveRandomCards");
-      this.$store.commit("calculateValue");
+      // this.$store.commit("calculateValue");
     },
     getSomeCards() {
       this.$store.commit("getMoreCards");
@@ -121,6 +132,7 @@ export default {
 #cards-display {
   display: flex;
   justify-content: space-evenly;
+  height: 30vh;
 }
 
 .suit {
@@ -153,6 +165,16 @@ export default {
   font-size: 24px;
   padding: 0.5rem 0.3rem;
   margin-bottom: 2rem;
+}
+
+#game-info {
+  position: absolute;
+  top: 40vh;
+  left: 25vw;
+  font-family: PressStart2P;
+  color: #fa2a26;
+  text-shadow: -4px 0 #ffff37, 0 4px #ffff37, 4px 0 #ffff37, 0 -4px #ffff37;
+  font-size: 4vw;
 }
 
 .classic .card {
@@ -206,6 +228,16 @@ export default {
   color: lightcyan;
 }
 
+#infoBar {
+  display: flex;
+  justify-content: space-around;
+  font-family: PressStart2P;
+  font-size: 24px;
+  color: #fa2a26;
+  text-shadow: -2px 0 #ffff37, 0 2px #ffff37, 2px 0 #ffff37, 0 -2px #ffff37;
+  padding: 10px;
+}
+
 #betCoinBar {
   cursor: pointer;
   color: #000;
@@ -214,6 +246,7 @@ export default {
   justify-content: center;
   cursor: pointer;
   font-size: 24px;
+  padding: 10px;
 }
 
 #settings {
@@ -257,10 +290,24 @@ export default {
 .classic #credits,
 .classic #settings,
 .classic #resultText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
   font-family: PressStart2P;
+  font-size: 40px;
   background: none;
   border: none;
-  color: #ccc;
+  color: #000;
+  border: solid yellow 5px;
+  background-color: gold;
+  border-radius: 5px;
+}
+
+.classic .draw-button {
+  width: 200px;
 }
 
 .modern .coin,
@@ -270,11 +317,11 @@ export default {
   font-family: FjallaOne;
 }
 
-.classic .draw-button {
+/* .classic .draw-button {
   border: solid yellow 5px;
   background-color: gold;
   color: seashell;
-}
+} */
 
 .modern .draw-button {
   background-color: #666;

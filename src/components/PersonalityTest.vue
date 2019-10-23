@@ -1,6 +1,6 @@
 <template>
   <div id="body">
-    <div id="question">{{questions[0].question}}</div>
+    <div id="question">{{questions[this.questionNumbers].question}}</div>
     <div>
       <div
         id="alternatives"
@@ -21,7 +21,7 @@ export default {
       return this.$store.state.questionNumber;
     },
     alternatives() {
-      return this.$store.state.questions[0].alternatives;
+      return this.$store.state.questions[this.questionNumber].alternatives;
     }
   },
 

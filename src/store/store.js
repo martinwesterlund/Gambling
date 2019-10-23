@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-
+        win: 0,
         variable: 'Testing testing',
         round: 0,
         cards: [],
@@ -20,6 +20,7 @@ export const store = new Vuex.Store({
         modern: false,
         answers: [],
         questionNumber: 0,
+        gameInfo: 'BET AND DEAL!',
 
         combinations: [
             { type: 'ROYAL STRAIGHT FLUSH', value: 800 },
@@ -60,6 +61,7 @@ export const store = new Vuex.Store({
 
         // Creates deck automatically from start
         createDeck(state) {
+            state.cards = []
             const suits = ["♥", "♠", "♦", "♣"]
             const value = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
 
@@ -74,32 +76,43 @@ export const store = new Vuex.Store({
 
                     })
                 }
-
-
             }
         },
 
         // Creates five random cards that are displayed in the game
         getFiveRandomCards(state) {
-            state.credits -= state.bet
-            state.round = 1
-            state.fiveRandomCards = []
-            for (let i = 0; i < 5; i++) {
-                let newCard = state.cards.splice((Math.floor(Math.random() * state.cards.length)), 1)
-                state.fiveRandomCards.push(newCard[0])
-                if (state.cards.length === 0) {
-                    this.commit('createDeck')
+            if (state.bet <= state.credits) {
+                state.gameInfo = ''
+                state.win = 0
+                state.credits -= state.bet
+                state.round = 1
+                state.fiveRandomCards = []
+                for (let i = 0; i < 5; i++) {
+                    let newCard = state.cards.splice((Math.floor(Math.random() * state.cards.length)), 1)
+                    state.fiveRandomCards.push(newCard[0])
+                    if (state.cards.length < 5) {
+                        this.commit('createDeck')
+                    }
                 }
+                // this.commit('calculateValue')
+                state.combination = 'COMBINATION'
+            } else {
+                state.gameInfo = 'INSERT COIN'
             }
-            state.combination = 'COMBINATION'
+
         },
 
+        // Increases the bet
         insertCoin(state) {
-            if (state.bet < 5) {
+            if (state.bet < 5 && state.bet <= state.credits) {
                 state.bet++
             }
+            // }else if(state.bet  = state.credits){
+            //     state.gameInfo = 'INSERT COIN'
+            // }
         },
 
+        // Decreases the bet
         removeCoin(state) {
             if (state.bet > 1) {
                 state.bet--
@@ -127,11 +140,13 @@ export const store = new Vuex.Store({
         },
 
         submitAnswer(state, value) { //behöver nog skicka med något mer
-            state.answers.push(value)
+            state.answers.push(String(value))
+            console.log(this.state.answers)
         },
 
         questionCounter(state) {
             state.questionNumber++
+            console.log(this.state.questionNumber)
         },
 
 
@@ -147,6 +162,7 @@ export const store = new Vuex.Store({
                 }
             }
             this.commit('calculateValue')
+            state.gameInfo = 'GAME OVER'
         },
 
         // Calculates the final value of the final cards array, to see if you won or not
@@ -187,24 +203,21 @@ export const store = new Vuex.Store({
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[1].value > 10) ||
                 (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[2].value > 10) ||
                 (state.finalCards[3].value == state.finalCards[4].value && state.finalCards[3].value > 10)) {
-                state.combination = state.combinations[8].type
-                state.credits += state.combinations[8].value * state.bet
+                this.commit('updateResult', 8)
             }
 
             // Check Two pair
             if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[2].value == state.finalCards[3].value) ||
                 (state.finalCards[0].value == state.finalCards[1].value && state.finalCards[3].value == state.finalCards[4].value) ||
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[3].value == state.finalCards[4].value)) {
-                state.combination = state.combinations[7].type
-                state.credits += 2 * state.bet
+                this.commit('updateResult', 7)
             }
 
             // Check Three of a kind
             if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value) ||
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
                 (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)) {
-                state.combination = state.combinations[6].type
-                state.credits += 3 * state.bet
+                this.commit('updateResult', 6)
             }
 
             // Check straight
@@ -217,8 +230,7 @@ export const store = new Vuex.Store({
                     state.finalCards[0].value == 4 &&
                     state.finalCards[0].value == 5 &&
                     state.finalCards[0].value == 14)) {
-                state.combination = state.combinations[5].type
-                state.credits += 4 * state.bet
+                this.commit('updateResult', 5)
             }
 
             // Check Flush
@@ -226,8 +238,7 @@ export const store = new Vuex.Store({
                 state.finalCards[1].suit == state.finalCards[2].suit &&
                 state.finalCards[2].suit == state.finalCards[3].suit &&
                 state.finalCards[3].suit == state.finalCards[4].suit) {
-                state.combination = state.combinations[4].type
-                state.credits += 8 * state.bet
+                this.commit('updateResult', 4)
             }
 
             // Check full house
@@ -237,15 +248,13 @@ export const store = new Vuex.Store({
                 (state.finalCards[0].value == state.finalCards[1].value &&
                     state.finalCards[2].value == state.finalCards[3].value &&
                     state.finalCards[3].value == state.finalCards[4].value)) {
-                state.combination = state.combinations[3].type
-                state.credits += 12 * state.bet
+                this.commit('updateResult', 3)
             }
 
             // Check four of a kind
             if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
                 (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)) {
-                state.combination = state.combinations[2].type
-                state.credits += 25 * state.bet
+                this.commit('updateResult', 2)
             }
 
             // Check Straight flush
@@ -257,8 +266,7 @@ export const store = new Vuex.Store({
                 state.finalCards[1].suit == state.finalCards[2].suit &&
                 state.finalCards[2].suit == state.finalCards[3].suit &&
                 state.finalCards[3].suit == state.finalCards[4].suit) {
-                state.combination = state.combinations[1].type
-                state.credits += 50 * state.bet
+                this.commit('updateResult', 1)
             }
 
             // Check Royal flush
@@ -271,28 +279,16 @@ export const store = new Vuex.Store({
                 state.finalCards[1].suit == state.finalCards[2].suit &&
                 state.finalCards[2].suit == state.finalCards[3].suit &&
                 state.finalCards[3].suit == state.finalCards[4].suit) {
-                state.combination = state.combinations[0].type
-                state.credits += 800 * state.bet
+                this.commit('updateResult', 0)
             }
-
-
-
-
-
-
 
         },
 
-
-
-
-
-
-
-
-
-
-
+        updateResult(state, value) {
+            state.combination = state.combinations[value].type
+            state.credits += state.combinations[value].value * state.bet
+            state.win = state.combinations[value].value * state.bet
+        }
     },
 
 
