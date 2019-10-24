@@ -19,7 +19,7 @@ export const store = new Vuex.Store({
         bet: 1,
         credits: 10,
         dealtCards: [],
-        modern: false,
+        modern: true,
         startDisplay: true,
         quizDisplay: false,
         answers: [],

@@ -131,7 +131,7 @@ export default {
 
 .classic {
   background-color: #0738b1;
-  transition: background-color 300ms linear;
+  transition: all 300ms linear;
 }
 
 #cards-display {
@@ -208,6 +208,7 @@ export default {
 
 .modern {
   background-color: #aaa;
+  transition: all 300ms linear;
 }
 
 .modern .card {
