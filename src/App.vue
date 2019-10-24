@@ -58,6 +58,10 @@ li {
   margin: 1.3rem 3rem;
 }
 
+a{
+  text-decoration: none;
+}
+
 #app {
   max-width: 900px;
   margin: 0 auto;

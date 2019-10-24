@@ -173,7 +173,7 @@ export default {
 
 #game-info {
   position: absolute;
-  top: 40%;
+  top: 45%;
   left: 50%;
   font-size: 3rem;
   transform: translate(-50%, -50%);
