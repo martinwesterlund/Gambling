@@ -74,7 +74,7 @@ export default {
 #body {
   padding: 3rem;
   background-color: #333;
-  height: 100vh;
+  height: 100%;
 }
 
 .headline {
