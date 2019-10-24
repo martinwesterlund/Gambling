@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <ul>
+    <ul id="navbar">
       <li>
         <router-link to="/">Hem</router-link>
       </li>
@@ -43,6 +43,19 @@ export default {
 * {
   box-sizing: border-box;
   margin: 0;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  list-style-type: none;
+  background-color: gray;
+}
+
+li {
+  align-content: center;
+  margin: 1.3rem 3rem;
 }
 
 #app {
