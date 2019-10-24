@@ -129,8 +129,6 @@ export const store = new Vuex.Store({
                     }
                 }
                 state.combination = 'COMBINATION'
-            } else if(state.credits === 0){
-                playSound('nocredits.mp3')
             } else {
                 playSound('error.mp3')
                 state.gameInfo = 'INSERT COIN'
@@ -347,6 +345,10 @@ export const store = new Vuex.Store({
                     (state.finalCards[3].value == state.finalCards[4].value && state.finalCards[3].value > 10)):
                     this.commit('updateResult', 8)
                     break
+
+                case (state.credits === 0):
+                    playSound('gameover.mp3')
+                
             }
 
 
@@ -359,12 +361,11 @@ export const store = new Vuex.Store({
             state.combination = state.combinations[value].type
             state.credits += state.combinations[value].value * state.bet
             state.win = state.combinations[value].value * state.bet
-
-
         },
 
         
     },
+
 
 
 })
