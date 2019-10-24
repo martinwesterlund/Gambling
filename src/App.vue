@@ -58,8 +58,13 @@ li {
   margin: 1.3rem 3rem;
 }
 
-a{
+a {
   text-decoration: none;
+  color: seashell;
+}
+
+a {
+  font-family: FjallaOne;
 }
 
 #app {

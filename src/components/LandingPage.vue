@@ -10,6 +10,11 @@ export default {};
 </script>
 
 <style scoped>
+#body {
+  background-color: #555;
+  height: 70vh;
+}
+
 h1 {
   font-family: FjallaOne;
   font-size: 3rem;
