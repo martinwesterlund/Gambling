@@ -3,7 +3,7 @@
     <Scoretable></Scoretable>
     <div
       id="combination"
-      v-bind:style="[getCombination == 'COMBINATION' ? {visibility:'hidden'} : {visibility:'visible'}]"
+      v-bind:style="{visibility: getCombination === 'COMBINATION' ? 'hidden' : 'visible'}"
     >{{getCombination}}</div>
     <div id="cards-display">
       <div id="game-info">{{gameInfo}}</div>
@@ -22,7 +22,7 @@
     </div>
     
     <div id="infoBar">
-      <span v-bind:style="[win == 0 ? {visibility:'hidden'} : {visibility:'visible'}]">WIN {{ win }}</span>
+      <span v-bind:style="{visibility: win === 0 ? 'hidden' : 'visible'}">WIN {{ win }}</span>
       <span>CREDITS {{ credits }}</span>
     </div>
     <div id="betCoinBar">
