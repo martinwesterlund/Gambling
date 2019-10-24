@@ -23,7 +23,7 @@ export const store = new Vuex.Store({
         quizDisplay: false,
         answers: [],
         questionNumber: 0,
-        gameInfo: 'BET AND DEAL!',
+        gameInfo: 'JACKS OR BETTER!',
 
         combinations: [
             { type: 'ROYAL STRAIGHT FLUSH', value: 800 },
