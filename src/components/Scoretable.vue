@@ -77,7 +77,7 @@ table {
 
 .modern .selected {
   background-color: cyan;
-  color: white;
+  color: #444;
 }
 
 .classic th {

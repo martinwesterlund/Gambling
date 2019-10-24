@@ -1,5 +1,6 @@
 <template>
   <div id="component-body" :class="{modern: on, classic: !on}">
+    <Scoretable></Scoretable>
     <div
       id="combination"
       v-bind:style="[getCombination == 'COMBINATION' ? {visibility:'hidden'} : {visibility:'visible'}]"
@@ -44,7 +45,11 @@
 <script>
 // import myImage from '~/assets/my-image.png'
 // <img :src="myImage">
+import Scoretable from "../components/Scoretable.vue";
 export default {
+  components: {
+    Scoretable
+  },
   computed: {
     componentOn() {
       return this.$store.state.pokerDisplay;
@@ -170,8 +175,8 @@ export default {
   position: absolute;
   top: 40%;
   left: 50%;
+  font-size: 3rem;
   transform: translate(-50%, -50%);
-  font-size: 4vw;
 }
 
 .classic #game-info {
@@ -182,7 +187,7 @@ export default {
 
 .modern #game-info {
   font-family: Lovelo-Black;
-  font-size: 4vw;
+  color: white;
 }
 
 .classic .card {
@@ -204,7 +209,7 @@ export default {
 }
 
 .modern .card {
-  background-color: #bbb;
+  background-color: #eee;
   border: 2px solid #eee;
   font-family: Lovelo-Black;
 }
@@ -231,9 +236,9 @@ export default {
 }
 
 .modern #combination {
-  font-family: Lovelo-LineBold;
+  font-family: FjallaOne;
   font-size: 38px;
-  color: lightcyan;
+  color: cyan;
 }
 
 #infoBar {
@@ -253,7 +258,7 @@ export default {
 .modern #infoBar {
   font-family: FjallaOne;
   font-size: 24px;
-  color: cyan;
+  color: lightskyblue;
 }
 
 #betCoinBar {

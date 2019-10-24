@@ -25,6 +25,7 @@ export const store = new Vuex.Store({
         questionNumber: 0,
         gameInfo: 'JACKS OR BETTER!',
 
+
         combinations: [
             { type: 'ROYAL STRAIGHT FLUSH', value: 800 },
             { type: 'STRAIGHT FLUSH', value: 50 },
@@ -48,7 +49,7 @@ export const store = new Vuex.Store({
                 alternatives: [{ answer: 'Kul', value: 'C' },
                     { answer: 'Trist', value: 'A' },
                     { answer: 'Illa', value: 'B' },
-                    { answer: 'Illa', value: 'D' }
+                    { answer: 'Bästa jag vet', value: 'D' }
                 ]
             }, {
 
@@ -56,8 +57,8 @@ export const store = new Vuex.Store({
                 alternatives: [
                     { answer: 'Ja', value: 'A' },
                     { answer: 'Nej', value: 'B' },
-                    { answer: 'Illa', value: 'D' },
-                    { answer: 'Illa', value: 'C' }
+                    { answer: 'Är där varje dag', value: 'D' },
+                    { answer: 'Vart?', value: 'C' }
                 ]
             }, {
                 question: 'Vem tycker du om i ABBA?',
@@ -65,7 +66,7 @@ export const store = new Vuex.Store({
                     { answer: 'Bengt', value: 'C' },
                     { answer: 'Minns ej namnen', value: 'A' },
                     { answer: 'Lotta?', value: 'B' },
-                    { answer: 'Illa', value: 'D' }
+                    { answer: 'A-teens är bättre', value: 'D' }
                 ]
             }, {
                 question: 'Vill du gå på bio imorgon?',
@@ -73,7 +74,7 @@ export const store = new Vuex.Store({
                     { answer: 'Vem är du?', value: 'B' },
                     { answer: 'Finns ingen bra film', value: 'C' },
                     { answer: 'Joker (2019) var bra', value: 'A' },
-                    { answer: 'Illa', value: 'D' }
+                    { answer: 'Jag väntar på CSN', value: 'D' }
                 ]
             }, {
                 question: 'Hur gammal är kungen?',
@@ -81,7 +82,7 @@ export const store = new Vuex.Store({
                     { answer: 'Gammal', value: 'A' },
                     { answer: 'Ja', value: 'B' },
                     { answer: 'Nej', value: 'C' },
-                    { answer: 'Illa', value: 'D' }
+                    { answer: 'Kanske', value: 'D' }
                 ]
             },
 
@@ -221,7 +222,7 @@ export const store = new Vuex.Store({
             }
             this.commit('calculateValue')
             state.gameInfo = 'GAME OVER'
-        },  
+        },
 
         // Calculates the final value of the final cards array, to see if you won or not
         calculateValue(state) {
@@ -356,8 +357,8 @@ export const store = new Vuex.Store({
 
         },
 
-        playSound(state, sound){
-            new Audio(require('../../public/sounds/'+ sound)).play()
+        playSound(state, sound) {
+            new Audio(require('../../public/sounds/' + sound)).play()
         }
     },
 
