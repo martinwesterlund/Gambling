@@ -1,0 +1,35 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended", "plugin:vue/recommended"],
+    "globals": {
+        "Vue": "readonly",
+        "VueRouter": "readonly",
+        "Vuex": "readonly"
+    },
+    "overrides": [{
+        "files": "*.vue",
+        "rules": {
+            "indent": "off"
+        }
+    }],
+    "plugins": ["html"],
+    "rules": {
+        "vue/require-v-for-key": "off",
+        // "indent": ["error", 2],
+        "no-console": "off",
+        // "quotes": ["error", "single", {
+        //   "allowTemplateLiterals": true
+        // }],
+        "semi": [2, "never"],
+        // "sort-keys": ["error", "asc"],
+        "vue/no-v-html": "off",
+        "vue/order-in-components": "off"
+    }
+}

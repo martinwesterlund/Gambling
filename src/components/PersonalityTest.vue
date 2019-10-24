@@ -15,11 +15,7 @@
         v-bind:key="a.answer + a.value"
       >{{a.answer}}</div>
       <div>
-        <button @click="reset">JAG VILL BÖRJA OM!</button>
-      </div>
-
-      <div>
-        <button>TILL VIDEOPOKER</button>
+        <button class="button" @click="reset">JAG VILL BÖRJA OM!</button>
       </div>
     </div>
     <!-- quiz -->

@@ -4,11 +4,11 @@
       <thead>
         <tr v-for="combo in combinations">
           <th>{{combo.type}}</th>
-          <td v-bind:class="{selected: bet === 1}">{{combo.value}}</td>
-          <td v-bind:class="{selected: bet === 2}">{{combo.value * 2}}</td>
-          <td v-bind:class="{selected: bet === 3}">{{combo.value * 3}}</td>
-          <td v-bind:class="{selected: bet === 4}">{{combo.value * 4}}</td>
-          <td v-bind:class="{selected: bet === 5}">{{combo.value * 5}}</td>
+          <td :class="{selected: bet === 1}">{{ combo.value }}</td>
+          <td :class="{selected: bet === 2}">{{combo.value * 2}}</td>
+          <td :class="{selected: bet === 3}">{{combo.value * 3}}</td>
+          <td :class="{selected: bet === 4}">{{combo.value * 4}}</td>
+          <td :class="{selected: bet === 5}">{{combo.value * 5}}</td>
           <!-- Format ovan verkar fungera bra för att visa tabellen  -->
         </tr>
       </thead>
@@ -76,7 +76,7 @@ table {
 }
 
 .modern .selected {
-  background-color: cyan;
+  background-color: #66c3ff;
   color: #444;
 }
 
@@ -117,11 +117,6 @@ td {
 .modern td {
   font-family: NotoSans-Bold;
   font-size: 0.9rem;
-}
-
-/* Såhär kan vi skriva för att göra en särskild kolumn färgsatt */
-td:nth-child(3) {
-  /* background-color: greenyellow; */
 }
 
 /* Gör varje kolumn jämnbred */

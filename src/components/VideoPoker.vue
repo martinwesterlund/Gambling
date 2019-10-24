@@ -3,24 +3,24 @@
     <Scoretable></Scoretable>
     <div
       id="combination"
-      v-bind:style="[getCombination == 'COMBINATION' ? {visibility:'hidden'} : {visibility:'visible'}]"
+      :style="[getCombination == 'COMBINATION' ? {visibility:'hidden'} : {visibility:'visible'}]"
     >{{getCombination}}</div>
     <div id="cards-display">
       <div id="game-info">{{gameInfo}}</div>
       <div
-        class="card"
         v-for="card in randomCards"
-        v-bind:key="card.id"
-        v-on:click="lockCard(card.id)"
-        v-bind:class="{locked: card.locked}"
-        v-bind:style="[card.suit == '♥' || card.suit == '♦' ? {color:'red'} : {color:'black'}]"
+        :key="card.id"
+        class="card"
+        :class="{locked: card.locked}"
+        :style="[card.suit == '♥' || card.suit == '♦' ? {color:'#fa2a26'} : {color:'black'}]"
+        @click="lockCard(card.id)"
       >
         <div class="value">{{card.value}}</div>
         <div class="suit">{{card.suit}}</div>
         <div class="value2">{{card.value}}</div>
       </div>
     </div>
-    
+
     <div id="infoBar">
       <span>WIN {{ win }}</span>
       <span>CREDITS {{ credits }}</span>
@@ -28,24 +28,22 @@
     <div id="betCoinBar">
       <span id="settings" @click="toggleTheme">⚙</span>
       <span
-        v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
+        :style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
         class="coin-arrow"
         @click="insertCoin()"
       >▲</span>
       <span id="bet" class="coin">{{ bet }}</span>
       <span
-        v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
+        style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
         class="coin-arrow"
         @click="removeCoin()"
       >▼</span>
-      <button class="draw-button" v-if="round < 1" @click="getCards()">DRAW</button>
-      <button class="draw-button" v-if="round > 0" @click="getMoreCards()">DEAL</button>
+      <button v-if="round < 1" class="draw-button" @click="getCards()">DRAW</button>
+      <button v-if="round > 0" class="draw-button" @click="getMoreCards()">DEAL</button>
     </div>
   </div>
 </template>
 <script>
-// import myImage from '~/assets/my-image.png'
-// <img :src="myImage">
 import Scoretable from "../components/Scoretable.vue";
 export default {
   components: {
@@ -188,8 +186,12 @@ export default {
 }
 
 .modern #game-info {
-  font-family: Lovelo-Black;
-  color: white;
+  font-family: FjallaOne;
+  color: deepskyblue;
+  font-size: 4rem;
+  letter-spacing: 0.9rem;
+  -webkit-text-stroke: 2px white;
+  line-height: 4.2rem;
 }
 
 .classic .card {
@@ -212,7 +214,7 @@ export default {
 
 .modern .card {
   background-color: #eee;
-  border: 2px solid #eee;
+  border: 4px solid transparent;
   font-family: Lovelo-Black;
 }
 
@@ -221,7 +223,7 @@ export default {
 }
 
 .modern .locked {
-  border: solid 2px lightcyan;
+  border: solid 4px #d3728c;
 }
 
 #combination {
@@ -240,13 +242,12 @@ export default {
 .modern #combination {
   font-family: FjallaOne;
   font-size: 38px;
-  color: cyan;
+  color: #dce1e9;
 }
 
 #infoBar {
   display: flex;
   justify-content: space-around;
-
   padding: 10px;
 }
 
@@ -260,7 +261,7 @@ export default {
 .modern #infoBar {
   font-family: FjallaOne;
   font-size: 24px;
-  color: lightskyblue;
+  color: #53d8fb;
 }
 
 #betCoinBar {
@@ -373,9 +374,17 @@ export default {
 }
 
 @keyframes blinker {
-      0% { opacity: 1; }
-     49% { opacity: 1; }
-     50% { opacity: 0; }
-    100% { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>
