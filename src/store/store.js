@@ -138,7 +138,7 @@ export const store = new Vuex.Store({
 
         // Increases the bet
         insertCoin(state) {
-            if (state.bet < 5 && state.bet <= state.credits) {
+            if (state.bet < 5 && state.bet < state.credits) {
                 playSound('button.mp3')
                 state.bet++
             } else{
