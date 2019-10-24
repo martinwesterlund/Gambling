@@ -27,17 +27,17 @@
       <span id="settings" @click="toggleTheme">⚙</span>
       <span
         v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
-        class="coin"
+        class="coin-arrow"
         @click="insertCoin()"
-      >⇧</span>
+      >▲</span>
       <span id="bet" class="coin">{{ bet }}</span>
       <span
         v-bind:style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
-        class="coin"
+        class="coin-arrow"
         @click="removeCoin()"
-      >⇩</span>
-      <button class="draw-button" v-if="round < 1" @click="shuffleCards()">DRAW</button>
-      <button class="draw-button" v-if="round > 0" @click="getSomeCards()">DEAL</button>
+      >▼</span>
+      <button class="draw-button" v-if="round < 1" @click="getCards()">DRAW</button>
+      <button class="draw-button" v-if="round > 0" @click="getMoreCards()">DEAL</button>
     </div>
   </div>
 </template>
@@ -46,6 +46,9 @@
 // <img :src="myImage">
 export default {
   computed: {
+    componentOn() {
+      return this.$store.state.pokerDisplay;
+    },
     getCombination() {
       return this.$store.state.combination;
     },
@@ -84,11 +87,11 @@ export default {
   },
 
   methods: {
-    shuffleCards() {
+    getCards() {
       this.$store.commit("getFiveRandomCards");
       // this.$store.commit("calculateValue");
     },
-    getSomeCards() {
+    getMoreCards() {
       this.$store.commit("getMoreCards");
     },
 
@@ -115,10 +118,6 @@ export default {
 </script>
 
 <style scoped>
-* {
-  box-sizing: border-box;
-}
-
 #component-body {
   margin: 0 auto;
   display: block;
@@ -161,7 +160,7 @@ export default {
   border-radius: 5px;
   margin: 10px;
   width: 20%;
-  min-height: 24vh;
+  height: 20vh;
   font-size: 24px;
   padding: 0.5rem 0.3rem;
   margin-bottom: 2rem;
@@ -169,11 +168,20 @@ export default {
 
 #game-info {
   position: absolute;
-  top: 40vh;
-  left: 25vw;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4vw;
+}
+
+.classic #game-info {
   font-family: PressStart2P;
   color: #fa2a26;
   text-shadow: -4px 0 #ffff37, 0 4px #ffff37, 4px 0 #ffff37, 0 -4px #ffff37;
+}
+
+.modern #game-info {
+  font-family: Lovelo-Black;
   font-size: 4vw;
 }
 
@@ -231,11 +239,21 @@ export default {
 #infoBar {
   display: flex;
   justify-content: space-around;
+
+  padding: 10px;
+}
+
+.classic #infoBar {
   font-family: PressStart2P;
   font-size: 24px;
   color: #fa2a26;
   text-shadow: -2px 0 #ffff37, 0 2px #ffff37, 2px 0 #ffff37, 0 -2px #ffff37;
-  padding: 10px;
+}
+
+.modern #infoBar {
+  font-family: FjallaOne;
+  font-size: 24px;
+  color: cyan;
 }
 
 #betCoinBar {
@@ -276,7 +294,8 @@ export default {
   font-size: 50px;
 }
 
-.coin {
+.coin,
+.coin-arrow {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -286,6 +305,7 @@ export default {
 }
 
 .classic .coin,
+.classic .coin-arrow,
 .classic .draw-button,
 .classic #credits,
 .classic #settings,
@@ -311,6 +331,7 @@ export default {
 }
 
 .modern .coin,
+.modern .coin-arrow,
 .modern .draw-button,
 .modern #credits,
 .modern #settings {
@@ -331,5 +352,12 @@ export default {
 
 .classic #credits {
   color: greenyellow;
+}
+
+.classic .draw-button:active,
+.coin-arrow:active,
+#settings:active {
+  border: solid gold 5px;
+  background-color: yellow;
 }
 </style>

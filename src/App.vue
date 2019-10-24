@@ -27,6 +27,11 @@ export default {
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 #app {
   max-width: 900px;
   margin: 0 auto;

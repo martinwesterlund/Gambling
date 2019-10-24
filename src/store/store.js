@@ -18,6 +18,9 @@ export const store = new Vuex.Store({
         credits: 10,
         dealtCards: [],
         modern: false,
+
+        startDisplay: true,
+        quizDisplay: false,
         answers: [],
         questionNumber: 0,
         gameInfo: 'BET AND DEAL!',
@@ -44,15 +47,43 @@ export const store = new Vuex.Store({
                 question: 'Vad tycker du om måndagar?',
                 alternatives: [{ answer: 'Kul', value: 'C' },
                     { answer: 'Trist', value: 'A' },
-                    { answer: 'Illa', value: 'B' }
+                    { answer: 'Illa', value: 'B' },
+                    { answer: 'Illa', value: 'D' }
+                ]
+            }, {
+
+                question: 'Har du någonsin varit i Skåne?',
+                alternatives: [
+                    { answer: 'Ja', value: 'A' },
+                    { answer: 'Nej', value: 'B' },
+                    { answer: 'Illa', value: 'D' },
+                    { answer: 'Illa', value: 'C' }
+                ]
+            }, {
+                question: 'Vem tycker du om i ABBA?',
+                alternatives: [
+                    { answer: 'Bengt', value: 'C' },
+                    { answer: 'Minns ej namnen', value: 'A' },
+                    { answer: 'Lotta?', value: 'B' },
+                    { answer: 'Illa', value: 'D' }
+                ]
+            }, {
+                question: 'Vill du gå på bio imorgon?',
+                alternatives: [
+                    { answer: 'Vem är du?', value: 'B' },
+                    { answer: 'Finns ingen bra film', value: 'C' },
+                    { answer: 'Joker (2019) var bra', value: 'A' },
+                    { answer: 'Illa', value: 'D' }
+                ]
+            }, {
+                question: 'Hur gammal är kungen?',
+                alternatives: [
+                    { answer: 'Gammal', value: 'A' },
+                    { answer: 'Ja', value: 'B' },
+                    { answer: 'Nej', value: 'C' },
+                    { answer: 'Illa', value: 'D' }
                 ]
             },
-            {
-                question: 'Har du någonsin varit i Skåne?',
-                alternatives: [{ answer: 'Ja', value: 'A' },
-                    { answer: 'Nej', value: 'B' }
-                ]
-            }
 
         ]
     },
@@ -82,6 +113,8 @@ export const store = new Vuex.Store({
         // Creates five random cards that are displayed in the game
         getFiveRandomCards(state) {
             if (state.bet <= state.credits) {
+                // this.commit('playSound', 'button.mp3')
+                new Audio(require('../../public/sounds/button.mp3')).play()
                 state.gameInfo = ''
                 state.win = 0
                 state.credits -= state.bet
@@ -105,6 +138,7 @@ export const store = new Vuex.Store({
         // Increases the bet
         insertCoin(state) {
             if (state.bet < 5 && state.bet <= state.credits) {
+                new Audio(require('../../public/sounds/button.mp3')).play()
                 state.bet++
             }
             // }else if(state.bet  = state.credits){
@@ -115,6 +149,7 @@ export const store = new Vuex.Store({
         // Decreases the bet
         removeCoin(state) {
             if (state.bet > 1) {
+                new Audio(require('../../public/sounds/button.mp3')).play()
                 state.bet--
             }
         },
@@ -123,6 +158,7 @@ export const store = new Vuex.Store({
         toggleLock(state, id) {
             for (let i = 0; i < state.fiveRandomCards.length; i++) {
                 if (state.fiveRandomCards[i].id == id) {
+                    new Audio(require('../../public/sounds/click.mp3')).play()
                     state.fiveRandomCards[i].locked = !state.fiveRandomCards[i].locked
                 }
             }
@@ -139,19 +175,44 @@ export const store = new Vuex.Store({
             state.highlight = !state.highlight
         },
 
-        submitAnswer(state, value) { //behöver nog skicka med något mer
-            state.answers.push(String(value))
-            console.log(this.state.answers)
+        submitAnswer(state, value) { //Returns the value associated with answer to each question
+            if ((this.state.questionNumber + 2) > state.questions.length) {
+                this.commit("resetQuiz")
+            } else {
+                console.log(this.state.questionNumber)
+                state.answers.push(value)
+            }
+            console.log(this.state.questions.length)
+
+
         },
 
+        //Moves on to next question and answers
         questionCounter(state) {
             state.questionNumber++
-            console.log(this.state.questionNumber)
+            // console.log(this.state.questionNumber)
         },
+
+        hideStart(state) {
+            state.startDisplay = !state.startDisplay
+        },
+
+        showQuiz(state) {
+            state.quizDisplay = !state.quizDisplay
+        },
+
+        resetQuiz(state) {
+            state.questionNumber = 0;
+            state.answers = [];
+            state.quizDisplay = false;
+            state.startDisplay = true;
+        },
+
 
 
         // Replaces the unlocked cards with new cards from the deck
         getMoreCards(state) {
+            new Audio(require('../../public/sounds/button.mp3')).play()
             state.round = 0
             state.combination = 'COMBINATION'
             for (let i = 0; i < 5; i++) {
@@ -285,9 +346,16 @@ export const store = new Vuex.Store({
         },
 
         updateResult(state, value) {
+            new Audio(require('../../public/sounds/win.mp3')).play()
             state.combination = state.combinations[value].type
             state.credits += state.combinations[value].value * state.bet
             state.win = state.combinations[value].value * state.bet
+
+
+        },
+
+        playSound(sound) {
+            new Audio(require('../../public/sounds/' + sound)).play()
         }
     },
 
