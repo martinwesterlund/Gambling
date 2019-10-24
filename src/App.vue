@@ -1,23 +1,36 @@
 <template>
   <div id="app">
-    <scoretable></scoretable>
+    <ul>
+      <li>
+        <router-link to="/">Hem</router-link>
+      </li>
+      <li>
+        <router-link to="/poker">Pokerspelet</router-link>
+      </li>
+      <li>
+        <router-link to="/test">Testet</router-link>
+      </li>
+    </ul>
+    <router-view></router-view>
+
+    <!-- <LandingPage></LandingPage>
     <VideoPoker></VideoPoker>
-    <PersonalityTest></PersonalityTest>
+    <PersonalityTest></PersonalityTest>-->
   </div>
 </template>
 
 <script>
 import "./assets/css/fonts.css";
 
+import LandingPage from "./components/LandingPage.vue";
 import VideoPoker from "./components/VideoPoker.vue";
-import Scoretable from "./components/Scoretable.vue";
 import PersonalityTest from "./components/PersonalityTest.vue";
 
 export default {
   name: "app",
   components: {
+    LandingPage,
     VideoPoker,
-    Scoretable,
     PersonalityTest
   },
   created() {
