@@ -22,7 +22,7 @@
     </div>
 
     <div id="infoBar">
-      <span>WIN {{ win }}</span>
+      <span v-bind:style="{visibility: win === 0 ? 'hidden' : 'visible'}">WIN {{ win }}</span>
       <span>CREDITS {{ credits }}</span>
     </div>
     <div id="betCoinBar">
@@ -129,7 +129,7 @@ export default {
 
 .classic {
   background-color: #0738b1;
-  transition: background-color 300ms linear;
+  transition: all 300ms linear;
 }
 
 #cards-display {
@@ -210,6 +210,7 @@ export default {
 
 .modern {
   background-color: #aaa;
+  transition: all 300ms linear;
 }
 
 .modern .card {

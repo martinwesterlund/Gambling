@@ -49,35 +49,40 @@ table {
 
 .classic table {
   background-color: #15294f;
+  transition: background-color 300ms linear;
 }
 
 .modern table {
   background-color: #777;
+  transition: background-color 300ms linear;
 }
 
 /* Slänger in lite bakgrundsfärg för att se vad jag håller på med */
 #body {
-  /* background-color: green; */
   padding: 0.5 rem;
   font-size: 0.8rem;
 }
 
 .classic {
   border: 4px solid yellow;
+  
 }
 
 .modern {
   border: 4px solid #ccc;
+  
 }
 
 .classic .selected {
   background-color: red;
   color: #fff;
+  transition: background-color 300ms linear;
 }
 
 .modern .selected {
   background-color: #66c3ff;
   color: #444;
+  transition: background-color 300ms linear;
 }
 
 .classic th {
@@ -87,7 +92,6 @@ table {
 }
 
 th {
-  /* background-color: brown; */
   width: 40vw;
   text-align: left;
 }
@@ -100,6 +104,7 @@ td {
   background-color: #15294f;
   font-family: PressStart2P;
   color: gold;
+  transition: background-color 300ms linear;
 }
 
 .classic td {
@@ -112,6 +117,7 @@ td {
   background-color: #bbb;
   color: #eee;
   font-size: 1rem;
+  transition: background-color 300ms linear;
 }
 
 .modern td {

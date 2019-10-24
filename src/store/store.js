@@ -4,7 +4,9 @@ import UUID from 'uuid/v4'
 
 
 Vue.use(Vuex)
-
+function playSound(sound) {
+    new Audio(require('../../public/sounds/' + sound)).play()
+}
 export const store = new Vuex.Store({
     state: {
         win: 0,
@@ -17,8 +19,7 @@ export const store = new Vuex.Store({
         bet: 1,
         credits: 10,
         dealtCards: [],
-        modern: false,
-
+        modern: true,
         startDisplay: true,
         quizDisplay: false,
         answers: [],
@@ -114,8 +115,7 @@ export const store = new Vuex.Store({
         // Creates five random cards that are displayed in the game
         getFiveRandomCards(state) {
             if (state.bet <= state.credits) {
-                // this.commit('playSound', 'button.mp3')
-                new Audio(require('../../public/sounds/button.mp3')).play()
+                playSound('button.mp3')
                 state.gameInfo = ''
                 state.win = 0
                 state.credits -= state.bet
@@ -128,9 +128,9 @@ export const store = new Vuex.Store({
                         this.commit('createDeck')
                     }
                 }
-                // this.commit('calculateValue')
                 state.combination = 'COMBINATION'
             } else {
+                playSound('error.mp3')
                 state.gameInfo = 'INSERT COIN'
             }
 
@@ -138,17 +138,21 @@ export const store = new Vuex.Store({
 
         // Increases the bet
         insertCoin(state) {
-            if (state.bet < 5 && state.bet <= state.credits) {
-                this.commit('playSound', 'button.mp3')
+            if (state.bet < 5 && state.bet < state.credits) {
+                playSound('button.mp3')
                 state.bet++
+            } else{
+                playSound('error.mp3')
             }
         },
 
         // Decreases the bet
         removeCoin(state) {
             if (state.bet > 1) {
-                this.commit('playSound', 'button.mp3')
+                playSound('button.mp3')
                 state.bet--
+            } else{
+                playSound('error.mp3')
             }
         },
 
@@ -156,7 +160,7 @@ export const store = new Vuex.Store({
         toggleLock(state, id) {
             for (let i = 0; i < state.fiveRandomCards.length; i++) {
                 if (state.fiveRandomCards[i].id == id) {
-                    this.commit('playSound', 'click.mp3')
+                    playSound('click.mp3')
                     state.fiveRandomCards[i].locked = !state.fiveRandomCards[i].locked
                 }
             }
@@ -210,7 +214,7 @@ export const store = new Vuex.Store({
 
         // Replaces the unlocked cards with new cards from the deck
         getMoreCards(state) {
-            this.commit('playSound', 'button.mp3')
+            playSound('button.mp3')
             state.round = 0
             state.combination = 'COMBINATION'
             for (let i = 0; i < 5; i++) {
@@ -341,6 +345,10 @@ export const store = new Vuex.Store({
                     (state.finalCards[3].value == state.finalCards[4].value && state.finalCards[3].value > 10)):
                     this.commit('updateResult', 8)
                     break
+
+                case (state.credits === 0):
+                    playSound('gameover.mp3')
+                
             }
 
 
@@ -349,18 +357,15 @@ export const store = new Vuex.Store({
         },
 
         updateResult(state, value) {
-            this.commit('playSound', 'win.mp3')
+            playSound('win.mp3')
             state.combination = state.combinations[value].type
             state.credits += state.combinations[value].value * state.bet
             state.win = state.combinations[value].value * state.bet
-
-
         },
 
-        playSound(state, sound) {
-            new Audio(require('../../public/sounds/' + sound)).play()
-        }
+        
     },
+
 
 
 })
