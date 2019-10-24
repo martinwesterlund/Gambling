@@ -22,7 +22,7 @@
     </div>
     
     <div id="infoBar">
-      <span>WIN {{ win }}</span>
+      <span v-bind:style="[win == 0 ? {visibility:'hidden'} : {visibility:'visible'}]">WIN {{ win }}</span>
       <span>CREDITS {{ credits }}</span>
     </div>
     <div id="betCoinBar">
