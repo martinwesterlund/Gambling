@@ -6,6 +6,7 @@
       v-bind:style="[getCombination == 'COMBINATION' ? {visibility:'hidden'} : {visibility:'visible'}]"
     >{{getCombination}}</div>
     <div id="cards-display">
+      <div id="game-info">{{gameInfo}}</div>
       <div
         class="card"
         v-for="card in randomCards"
@@ -19,7 +20,7 @@
         <div class="value2">{{card.value}}</div>
       </div>
     </div>
-    <div id="game-info">{{gameInfo}}</div>
+    
     <div id="infoBar">
       <span>WIN {{ win }}</span>
       <span>CREDITS {{ credits }}</span>
@@ -134,6 +135,7 @@ export default {
 }
 
 #cards-display {
+  position: relative;
   display: flex;
   justify-content: space-evenly;
   height: 30vh;
@@ -364,5 +366,16 @@ export default {
 #settings:active {
   border: solid gold 5px;
   background-color: yellow;
+}
+
+.classic #game-info {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+      0% { opacity: 1; }
+     49% { opacity: 1; }
+     50% { opacity: 0; }
+    100% { opacity: 0; }
 }
 </style>
