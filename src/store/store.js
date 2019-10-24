@@ -58,7 +58,7 @@ export const store = new Vuex.Store({
 
         // Creates five random cards that are displayed in the game
         getFiveRandomCards(state) {
-            if(state.bet <= state.credits){
+            if (state.bet <= state.credits) {
                 // this.commit('playSound', 'button.mp3')
                 new Audio(require('../../public/sounds/button.mp3')).play()
                 state.gameInfo = ''
@@ -75,17 +75,18 @@ export const store = new Vuex.Store({
                 }
                 // this.commit('calculateValue')
                 state.combination = 'COMBINATION'
-            }else{
+            } else {
                 state.gameInfo = 'INSERT COIN'
             }
-            
+
         },
 
         // Increases the bet
         insertCoin(state) {
-            if (state.bet < 5 && state.bet <= state.credits ) {
+            if (state.bet < 5 && state.bet <= state.credits) {
                 new Audio(require('../../public/sounds/button.mp3')).play()
-                state.bet++}
+                state.bet++
+            }
             // }else if(state.bet  = state.credits){
             //     state.gameInfo = 'INSERT COIN'
             // }
@@ -134,7 +135,7 @@ export const store = new Vuex.Store({
                 }
             }
             this.commit('calculateValue')
-            state.gameInfo= 'GAME OVER'
+            state.gameInfo = 'GAME OVER'
         },
 
         // Calculates the final value of the final cards array, to see if you won or not
@@ -170,104 +171,109 @@ export const store = new Vuex.Store({
                         0
             })
 
-            // Check if jacks or better
-            if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[0].value > 10) ||
-                (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[1].value > 10) ||
-                (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[2].value > 10) ||
-                (state.finalCards[3].value == state.finalCards[4].value && state.finalCards[3].value > 10)) {
-                    this.commit('updateResult', 8)
-            }
+            switch (true) {
 
-            // Check Two pair
-            if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[2].value == state.finalCards[3].value) ||
-                (state.finalCards[0].value == state.finalCards[1].value && state.finalCards[3].value == state.finalCards[4].value) ||
-                (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[3].value == state.finalCards[4].value)) {
-                    this.commit('updateResult', 7)
-            }
-
-            // Check Three of a kind
-            if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value) ||
-                (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
-                (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)) {
-                    this.commit('updateResult', 6)
-            }
-
-            // Check straight
-            if ((state.finalCards[0].value == state.finalCards[1].value - 1 &&
-                state.finalCards[1].value == state.finalCards[2].value - 1 &&
-                state.finalCards[2].value == state.finalCards[3].value - 1 &&
-                state.finalCards[3].value == state.finalCards[4].value - 1) ||
-                (state.finalCards[0].value == 2 &&
-                    state.finalCards[0].value == 3 &&
-                    state.finalCards[0].value == 4 &&
-                    state.finalCards[0].value == 5 &&
-                    state.finalCards[0].value == 14)) {
-                        this.commit('updateResult', 5)
-            }
-
-            // Check Flush
-            if (state.finalCards[0].suit == state.finalCards[1].suit &&
-                state.finalCards[1].suit == state.finalCards[2].suit &&
-                state.finalCards[2].suit == state.finalCards[3].suit &&
-                state.finalCards[3].suit == state.finalCards[4].suit) {
-                    this.commit('updateResult', 4)
-            }
-
-            // Check full house
-            if ((state.finalCards[0].value == state.finalCards[1].value &&
-                state.finalCards[1].value == state.finalCards[2].value &&
-                state.finalCards[3].value == state.finalCards[4].value) ||
-                (state.finalCards[0].value == state.finalCards[1].value &&
-                    state.finalCards[2].value == state.finalCards[3].value &&
-                    state.finalCards[3].value == state.finalCards[4].value)) {
-                        this.commit('updateResult', 3)
-            }
-
-            // Check four of a kind
-            if ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
-                (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)) {
-                    this.commit('updateResult', 2)
-            }
-
-            // Check Straight flush
-            if (state.finalCards[0].value == state.finalCards[1].value - 1 &&
-                state.finalCards[1].value == state.finalCards[2].value - 1 &&
-                state.finalCards[2].value == state.finalCards[3].value - 1 &&
-                state.finalCards[3].value == state.finalCards[4].value - 1 &&
-                state.finalCards[0].suit == state.finalCards[1].suit &&
-                state.finalCards[1].suit == state.finalCards[2].suit &&
-                state.finalCards[2].suit == state.finalCards[3].suit &&
-                state.finalCards[3].suit == state.finalCards[4].suit) {
-                    this.commit('updateResult', 1)
-            }
-
-            // Check Royal flush
-            if (state.finalCards[0].value == 10 &&
-                state.finalCards[1].value == 11 &&
-                state.finalCards[2].value == 12 &&
-                state.finalCards[3].value == 13 &&
-                state.finalCards[4].value == 14 &&
-                state.finalCards[0].suit == state.finalCards[1].suit &&
-                state.finalCards[1].suit == state.finalCards[2].suit &&
-                state.finalCards[2].suit == state.finalCards[3].suit &&
-                state.finalCards[3].suit == state.finalCards[4].suit) {
+                // Check Royal flush
+                case (state.finalCards[0].value == 10 &&
+                    state.finalCards[1].value == 11 &&
+                    state.finalCards[2].value == 12 &&
+                    state.finalCards[3].value == 13 &&
+                    state.finalCards[4].value == 14 &&
+                    state.finalCards[0].suit == state.finalCards[1].suit &&
+                    state.finalCards[1].suit == state.finalCards[2].suit &&
+                    state.finalCards[2].suit == state.finalCards[3].suit &&
+                    state.finalCards[3].suit == state.finalCards[4].suit):
                     this.commit('updateResult', 0)
+                    break
+
+                // Check Straight flush
+                case (state.finalCards[0].value == state.finalCards[1].value - 1 &&
+                    state.finalCards[1].value == state.finalCards[2].value - 1 &&
+                    state.finalCards[2].value == state.finalCards[3].value - 1 &&
+                    state.finalCards[3].value == state.finalCards[4].value - 1 &&
+                    state.finalCards[0].suit == state.finalCards[1].suit &&
+                    state.finalCards[1].suit == state.finalCards[2].suit &&
+                    state.finalCards[2].suit == state.finalCards[3].suit &&
+                    state.finalCards[3].suit == state.finalCards[4].suit):
+                    this.commit('updateResult', 1)
+                    break
+
+                // Check four of a kind
+                case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) || (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)):
+                    this.commit('updateResult', 2)
+                    break
+
+                // Check full house
+                case ((state.finalCards[0].value == state.finalCards[1].value &&
+                    state.finalCards[1].value == state.finalCards[2].value &&
+                    state.finalCards[3].value == state.finalCards[4].value) ||
+                    (state.finalCards[0].value == state.finalCards[1].value &&
+                        state.finalCards[2].value == state.finalCards[3].value &&
+                        state.finalCards[3].value == state.finalCards[4].value)):
+                    this.commit('updateResult', 3)
+                    break
+
+                // Check Flush
+                case (state.finalCards[0].suit == state.finalCards[1].suit &&
+                    state.finalCards[1].suit == state.finalCards[2].suit &&
+                    state.finalCards[2].suit == state.finalCards[3].suit &&
+                    state.finalCards[3].suit == state.finalCards[4].suit):
+                    this.commit('updateResult', 4)
+                    break
+
+                // Check straight
+                case ((state.finalCards[0].value == state.finalCards[1].value - 1 &&
+                    state.finalCards[1].value == state.finalCards[2].value - 1 &&
+                    state.finalCards[2].value == state.finalCards[3].value - 1 &&
+                    state.finalCards[3].value == state.finalCards[4].value - 1) ||
+                    (state.finalCards[0].value == 2 &&
+                        state.finalCards[0].value == 3 &&
+                        state.finalCards[0].value == 4 &&
+                        state.finalCards[0].value == 5 &&
+                        state.finalCards[0].value == 14)):
+                    this.commit('updateResult', 5)
+                    break
+
+                // Check Three of a kind
+                case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value) ||
+                    (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
+                    (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)):
+                    this.commit('updateResult', 6)
+                    break
+                // Check Two pair
+                case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[2].value == state.finalCards[3].value) ||
+                    (state.finalCards[0].value == state.finalCards[1].value && state.finalCards[3].value == state.finalCards[4].value) ||
+                    (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[3].value == state.finalCards[4].value)):
+                    this.commit('updateResult', 7)
+                    break
+
+
+                //JACKS OR BETTER
+                case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[0].value > 10) ||
+                    (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[1].value > 10) ||
+                    (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[2].value > 10) ||
+                    (state.finalCards[3].value == state.finalCards[4].value && state.finalCards[3].value > 10)):
+                    this.commit('updateResult', 8)
+                    break
             }
-  
+
+
+
+
         },
 
-        updateResult(state, value){
+        updateResult(state, value) {
             new Audio(require('../../public/sounds/win.mp3')).play()
             state.combination = state.combinations[value].type
             state.credits += state.combinations[value].value * state.bet
             state.win = state.combinations[value].value * state.bet
-            
-            
+
+
         },
 
-        playSound(sound){
-            new Audio(require('../../public/sounds/'+ sound)).play()
-        }
+        // playSound(sound){
+        //     new Audio(require('../../public/sounds/'+ sound)).play()
+        // }
     },
 
 
