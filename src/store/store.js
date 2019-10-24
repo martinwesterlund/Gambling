@@ -84,18 +84,15 @@ export const store = new Vuex.Store({
         // Increases the bet
         insertCoin(state) {
             if (state.bet < 5 && state.bet <= state.credits) {
-                new Audio(require('../../public/sounds/button.mp3')).play()
+                this.commit('playSound', 'button.mp3')
                 state.bet++
             }
-            // }else if(state.bet  = state.credits){
-            //     state.gameInfo = 'INSERT COIN'
-            // }
         },
 
         // Decreases the bet
         removeCoin(state) {
             if (state.bet > 1) {
-                new Audio(require('../../public/sounds/button.mp3')).play()
+                this.commit('playSound', 'button.mp3')
                 state.bet--
             }
         },
@@ -104,7 +101,7 @@ export const store = new Vuex.Store({
         toggleLock(state, id) {
             for (let i = 0; i < state.fiveRandomCards.length; i++) {
                 if (state.fiveRandomCards[i].id == id) {
-                    new Audio(require('../../public/sounds/click.mp3')).play()
+                    this.commit('playSound', 'click.mp3')
                     state.fiveRandomCards[i].locked = !state.fiveRandomCards[i].locked
                 }
             }
@@ -124,7 +121,7 @@ export const store = new Vuex.Store({
 
         // Replaces the unlocked cards with new cards from the deck
         getMoreCards(state) {
-            new Audio(require('../../public/sounds/button.mp3')).play()
+            this.commit('playSound', 'button.mp3')
             state.round = 0
             state.combination = 'COMBINATION'
             for (let i = 0; i < 5; i++) {
@@ -136,7 +133,7 @@ export const store = new Vuex.Store({
             }
             this.commit('calculateValue')
             state.gameInfo = 'GAME OVER'
-        },
+        },  
 
         // Calculates the final value of the final cards array, to see if you won or not
         calculateValue(state) {
@@ -263,7 +260,7 @@ export const store = new Vuex.Store({
         },
 
         updateResult(state, value) {
-            new Audio(require('../../public/sounds/win.mp3')).play()
+            this.commit('playSound', 'win.mp3')
             state.combination = state.combinations[value].type
             state.credits += state.combinations[value].value * state.bet
             state.win = state.combinations[value].value * state.bet
@@ -271,9 +268,9 @@ export const store = new Vuex.Store({
 
         },
 
-        // playSound(sound){
-        //     new Audio(require('../../public/sounds/'+ sound)).play()
-        // }
+        playSound(state, sound){
+            new Audio(require('../../public/sounds/'+ sound)).play()
+        }
     },
 
 
