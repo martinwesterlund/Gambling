@@ -130,6 +130,7 @@ export const store = new Vuex.Store({
                 }
                 state.combination = 'COMBINATION'
             } else {
+                playSound('error.mp3')
                 state.gameInfo = 'INSERT COIN'
             }
 
@@ -140,6 +141,8 @@ export const store = new Vuex.Store({
             if (state.bet < 5 && state.bet <= state.credits) {
                 playSound('button.mp3')
                 state.bet++
+            } else{
+                playSound('error.mp3')
             }
         },
 
@@ -148,6 +151,8 @@ export const store = new Vuex.Store({
             if (state.bet > 1) {
                 playSound('button.mp3')
                 state.bet--
+            } else{
+                playSound('error.mp3')
             }
         },
 
