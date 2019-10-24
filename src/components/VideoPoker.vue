@@ -160,7 +160,7 @@ export default {
   border-radius: 5px;
   margin: 10px;
   width: 20%;
-  height: 20vh;
+  min-height: 24vh;
   font-size: 24px;
   padding: 0.5rem 0.3rem;
   margin-bottom: 2rem;
