@@ -18,7 +18,12 @@ export const store = new Vuex.Store({
         credits: 10,
         dealtCards: [],
         modern: false,
-        gameInfo: 'JACKS OR BETTER',
+
+        startDisplay: true,
+        quizDisplay: false,
+        answers: [],
+        questionNumber: 0,
+        gameInfo: 'BET AND DEAL!',
 
         combinations: [
             { type: 'ROYAL STRAIGHT FLUSH', value: 800 },
@@ -30,8 +35,57 @@ export const store = new Vuex.Store({
             { type: 'THREE OF A KIND', value: 3 },
             { type: 'TWO PAIR', value: 2 },
             { type: 'JACKS OR BETTER', value: 1 }
-        ]
+        ],
 
+        personalities: [
+            { type: 'Scorpio', symbol: 'scorpio.png', description: 'You are a scorpio! You are a very human being! You are interested in things! You also have opinions!"' },
+            { type: 'Aries', symbol: 'aries.png', description: 'text here' },
+
+        ],
+
+        questions: [{
+                question: 'Vad tycker du om måndagar?',
+                alternatives: [{ answer: 'Kul', value: 'C' },
+                    { answer: 'Trist', value: 'A' },
+                    { answer: 'Illa', value: 'B' },
+                    { answer: 'Illa', value: 'D' }
+                ]
+            }, {
+
+                question: 'Har du någonsin varit i Skåne?',
+                alternatives: [
+                    { answer: 'Ja', value: 'A' },
+                    { answer: 'Nej', value: 'B' },
+                    { answer: 'Illa', value: 'D' },
+                    { answer: 'Illa', value: 'C' }
+                ]
+            }, {
+                question: 'Vem tycker du om i ABBA?',
+                alternatives: [
+                    { answer: 'Bengt', value: 'C' },
+                    { answer: 'Minns ej namnen', value: 'A' },
+                    { answer: 'Lotta?', value: 'B' },
+                    { answer: 'Illa', value: 'D' }
+                ]
+            }, {
+                question: 'Vill du gå på bio imorgon?',
+                alternatives: [
+                    { answer: 'Vem är du?', value: 'B' },
+                    { answer: 'Finns ingen bra film', value: 'C' },
+                    { answer: 'Joker (2019) var bra', value: 'A' },
+                    { answer: 'Illa', value: 'D' }
+                ]
+            }, {
+                question: 'Hur gammal är kungen?',
+                alternatives: [
+                    { answer: 'Gammal', value: 'A' },
+                    { answer: 'Ja', value: 'B' },
+                    { answer: 'Nej', value: 'C' },
+                    { answer: 'Illa', value: 'D' }
+                ]
+            },
+
+        ]
     },
 
     mutations: {
@@ -118,6 +172,40 @@ export const store = new Vuex.Store({
             state.highlight = !state.highlight
         },
 
+        submitAnswer(state, value) { //Returns the value associated with answer to each question
+            if ((this.state.questionNumber + 2) > state.questions.length) {
+                this.commit("resetQuiz")
+            } else {
+                console.log(this.state.questionNumber)
+                state.answers.push(value)
+            }
+            console.log(this.state.questions.length)
+
+
+        },
+
+        //Moves on to next question and answers
+        questionCounter(state) {
+            state.questionNumber++
+            // console.log(this.state.questionNumber)
+        },
+
+        hideStart(state) {
+            state.startDisplay = !state.startDisplay
+        },
+
+        showQuiz(state) {
+            state.quizDisplay = !state.quizDisplay
+        },
+
+        resetQuiz(state) {
+            state.questionNumber = 0;
+            state.answers = [];
+            state.quizDisplay = false;
+            state.startDisplay = true;
+        },
+
+
 
         // Replaces the unlocked cards with new cards from the deck
         getMoreCards(state) {
@@ -162,10 +250,10 @@ export const store = new Vuex.Store({
 
 
             //Sort final cards array
-            state.finalCards.sort(function (a, b) {
+            state.finalCards.sort(function(a, b) {
                 return b.value < a.value ? 1 :
                     b.value > a.value ? -1 :
-                        0
+                    0
             })
 
             switch (true) {
@@ -183,7 +271,7 @@ export const store = new Vuex.Store({
                     this.commit('updateResult', 0)
                     break
 
-                // Check Straight flush
+                    // Check Straight flush
                 case (state.finalCards[0].value == state.finalCards[1].value - 1 &&
                     state.finalCards[1].value == state.finalCards[2].value - 1 &&
                     state.finalCards[2].value == state.finalCards[3].value - 1 &&
@@ -195,22 +283,22 @@ export const store = new Vuex.Store({
                     this.commit('updateResult', 1)
                     break
 
-                // Check four of a kind
+                    // Check four of a kind
                 case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) || (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)):
                     this.commit('updateResult', 2)
                     break
 
-                // Check full house
+                    // Check full house
                 case ((state.finalCards[0].value == state.finalCards[1].value &&
-                    state.finalCards[1].value == state.finalCards[2].value &&
-                    state.finalCards[3].value == state.finalCards[4].value) ||
+                        state.finalCards[1].value == state.finalCards[2].value &&
+                        state.finalCards[3].value == state.finalCards[4].value) ||
                     (state.finalCards[0].value == state.finalCards[1].value &&
                         state.finalCards[2].value == state.finalCards[3].value &&
                         state.finalCards[3].value == state.finalCards[4].value)):
                     this.commit('updateResult', 3)
                     break
 
-                // Check Flush
+                    // Check Flush
                 case (state.finalCards[0].suit == state.finalCards[1].suit &&
                     state.finalCards[1].suit == state.finalCards[2].suit &&
                     state.finalCards[2].suit == state.finalCards[3].suit &&
@@ -218,11 +306,11 @@ export const store = new Vuex.Store({
                     this.commit('updateResult', 4)
                     break
 
-                // Check straight
+                    // Check straight
                 case ((state.finalCards[0].value == state.finalCards[1].value - 1 &&
-                    state.finalCards[1].value == state.finalCards[2].value - 1 &&
-                    state.finalCards[2].value == state.finalCards[3].value - 1 &&
-                    state.finalCards[3].value == state.finalCards[4].value - 1) ||
+                        state.finalCards[1].value == state.finalCards[2].value - 1 &&
+                        state.finalCards[2].value == state.finalCards[3].value - 1 &&
+                        state.finalCards[3].value == state.finalCards[4].value - 1) ||
                     (state.finalCards[0].value == 2 &&
                         state.finalCards[0].value == 3 &&
                         state.finalCards[0].value == 4 &&
@@ -231,13 +319,13 @@ export const store = new Vuex.Store({
                     this.commit('updateResult', 5)
                     break
 
-                // Check Three of a kind
+                    // Check Three of a kind
                 case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value) ||
                     (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
                     (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)):
                     this.commit('updateResult', 6)
                     break
-                // Check Two pair
+                    // Check Two pair
                 case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[2].value == state.finalCards[3].value) ||
                     (state.finalCards[0].value == state.finalCards[1].value && state.finalCards[3].value == state.finalCards[4].value) ||
                     (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[3].value == state.finalCards[4].value)):
@@ -245,7 +333,7 @@ export const store = new Vuex.Store({
                     break
 
 
-                //JACKS OR BETTER
+                    //JACKS OR BETTER
                 case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[0].value > 10) ||
                     (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[1].value > 10) ||
                     (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[2].value > 10) ||

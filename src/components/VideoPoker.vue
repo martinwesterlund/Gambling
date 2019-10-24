@@ -38,9 +38,6 @@
       >▼</span>
       <button class="draw-button" v-if="round < 1" @click="getCards()">DRAW</button>
       <button class="draw-button" v-if="round > 0" @click="getMoreCards()">DEAL</button>
-      
-      
-      
     </div>
   </div>
 </template>
@@ -49,6 +46,9 @@
 // <img :src="myImage">
 export default {
   computed: {
+    componentOn() {
+      return this.$store.state.pokerDisplay;
+    },
     getCombination() {
       return this.$store.state.combination;
     },
@@ -73,7 +73,7 @@ export default {
       return this.$store.state.round;
     },
 
-    win(){
+    win() {
       return this.$store.state.win;
     },
 
@@ -81,8 +81,8 @@ export default {
       return this.$store.state.modern;
     },
 
-    gameInfo(){
-      return this.$store.state.gameInfo
+    gameInfo() {
+      return this.$store.state.gameInfo;
     }
   },
 
@@ -118,14 +118,9 @@ export default {
 </script>
 
 <style scoped>
-* {
-  box-sizing: border-box;
-}
-
 #component-body {
   margin: 0 auto;
   display: block;
-  margin: 0 auto;
 }
 
 .classic {
@@ -165,20 +160,28 @@ export default {
   border-radius: 5px;
   margin: 10px;
   width: 20%;
-  min-height: 24vh;
+  height: 20vh;
   font-size: 24px;
   padding: 0.5rem 0.3rem;
   margin-bottom: 2rem;
 }
 
-#game-info{
+#game-info {
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-size: 4vw;
+}
+
+.classic #game-info {
   font-family: PressStart2P;
   color: #fa2a26;
   text-shadow: -4px 0 #ffff37, 0 4px #ffff37, 4px 0 #ffff37, 0 -4px #ffff37;
+}
+
+.modern #game-info {
+  font-family: Lovelo-Black;
   font-size: 4vw;
 }
 
@@ -236,11 +239,21 @@ export default {
 #infoBar {
   display: flex;
   justify-content: space-around;
+
+  padding: 10px;
+}
+
+.classic #infoBar {
   font-family: PressStart2P;
   font-size: 24px;
   color: #fa2a26;
   text-shadow: -2px 0 #ffff37, 0 2px #ffff37, 2px 0 #ffff37, 0 -2px #ffff37;
-  padding: 10px;
+}
+
+.modern #infoBar {
+  font-family: FjallaOne;
+  font-size: 24px;
+  color: cyan;
 }
 
 #betCoinBar {
@@ -251,7 +264,6 @@ export default {
   justify-content: center;
   cursor: pointer;
   font-size: 24px;
-  margin-bottom: 2rem;
   padding: 10px;
 }
 
@@ -282,9 +294,8 @@ export default {
   font-size: 50px;
 }
 
-
-
-.coin, .coin-arrow {
+.coin,
+.coin-arrow {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -315,7 +326,7 @@ export default {
   border-radius: 5px;
 }
 
-.classic .draw-button{
+.classic .draw-button {
   width: 200px;
 }
 
@@ -343,7 +354,9 @@ export default {
   color: greenyellow;
 }
 
-.classic .draw-button:active, .coin-arrow:active, #settings:active {
+.classic .draw-button:active,
+.coin-arrow:active,
+#settings:active {
   border: solid gold 5px;
   background-color: yellow;
 }

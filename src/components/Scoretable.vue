@@ -60,7 +60,14 @@ table {
   /* background-color: green; */
   padding: 0.5 rem;
   font-size: 0.8rem;
+}
+
+.classic {
   border: 4px solid yellow;
+}
+
+.modern {
+  border: 4px solid #ccc;
 }
 
 .classic .selected {
@@ -86,7 +93,6 @@ th {
 }
 
 td {
-  border-right: 4px solid yellow;
   width: 15vw;
 }
 
@@ -98,6 +104,7 @@ td {
 
 .classic td {
   font-family: PressStart2P;
+  border-right: 4px solid yellow;
 }
 
 .modern th {
