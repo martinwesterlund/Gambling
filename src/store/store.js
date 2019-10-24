@@ -129,6 +129,8 @@ export const store = new Vuex.Store({
                     }
                 }
                 state.combination = 'COMBINATION'
+            } else if(state.credits === 0){
+                playSound('nocredits.mp3')
             } else {
                 playSound('error.mp3')
                 state.gameInfo = 'INSERT COIN'
