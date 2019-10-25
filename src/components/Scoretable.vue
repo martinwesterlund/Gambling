@@ -10,11 +10,11 @@
           :key="combo.type + combo.value"
         >
           <th>{{combo.type}}</th>
-          <td :class="{selected: bet === 1}">{ { combo.value }} </td>
-          <td :class="{selected: bet === 2}">{ { combo.value * 2 }}</td>
-          <td :class="{selected: bet === 3}">{ { combo.value * 3 }}</td>
-          <td :class="{selected: bet === 4}">{ { combo.value * 4 }}</td>
-          <td :class="{selected: bet === 5}">{ { combo.value * 5 }}</td>
+          <td :class="{selected: bet === 1}">{{ combo.value }} </td>
+          <td :class="{selected: bet === 2}">{{ combo.value * 2 }}</td>
+          <td :class="{selected: bet === 3}">{{ combo.value * 3 }}</td>
+          <td :class="{selected: bet === 4}">{{ combo.value * 4 }}</td>
+          <td :class="{selected: bet === 5}">{{ combo.value * 5 }}</td>
           <!-- Format ovan verkar fungera bra för att visa tabellen  -->
         </tr>
       </thead>
