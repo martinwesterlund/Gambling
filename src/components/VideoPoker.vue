@@ -4,6 +4,7 @@
     :class="{modern: on, classic: !on}"
   >
     <Scoretable></Scoretable>
+    <Settings v-show='showSettings'></Settings>
     <div
       id="combination"
       :style="[getCombination == 'COMBINATION' ? {visibility:'hidden'} : {visibility:'visible'}]"
@@ -31,8 +32,8 @@
     <div id="betCoinBar">
       <span
         id="settings"
-        @click="toggleTheme"
-      >⚙</span>
+        @click="toggleSettings"
+      >SETTINGS</span>
       <span
         :style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
         class="coin-arrow"
@@ -62,9 +63,11 @@
 </template>
 <script>
   import Scoretable from "../components/Scoretable.vue";
+  import Settings from '../components/Settings.vue'
   export default {
     components: {
-      Scoretable
+      Scoretable,
+      Settings
     },
     computed: {
       componentOn() {
@@ -104,6 +107,10 @@
 
       gameInfo() {
         return this.$store.state.gameInfo;
+      },
+
+      showSettings(){
+        return this.$store.state.showSettings
       }
     },
 
@@ -133,92 +140,15 @@
 
       toggleTheme() {
         this.$store.commit("toggleTheme");
+      },
+
+      toggleSettings(){
+        this.$store.commit('toggleSettings')
       }
     }
   };
 </script>
 
-<style scoped>
-  #component-body {
-    margin: 0 auto;
-    display: block;
-  }
-
-  .classic {
-    background-color: #0738b1;
-  }
-
-  #cards-display {
-    position: relative;
-    display: flex;
-    justify-content: space-evenly;
-    height: 30vh;
-  }
-
-  .suit {
-    grid-area: suit;
-    min-height: 40%;
-    font-size: 40px;
-  }
-
-  .value {
-    grid-area: value;
-    min-height: 30%;
-    text-align: left;
-    margin-left: 5px;
-    margin-top: 2px;
-  }
-
-  .value2 {
-    grid-area: value2;
-    min-height: 30%;
-    text-align: right;
-    margin: 5px;
-  }
-
-  .card {
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 10px;
-    width: 20%;
-    min-height: 24vh;
-    font-size: 24px;
-    padding: 0.5rem 0.3rem;
-    margin-bottom: 2rem;
-  }
-
-  #game-info {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    font-size: 3rem;
-    transform: translate(-50%, -50%);
-  }
-
-  .classic #game-info {
-    font-family: PressStart2P;
-    color: #fa2a26;
-    text-shadow: -4px 0 #ffff37, 0 4px #ffff37, 4px 0 #ffff37, 0 -4px #ffff37;
-  }
-
-  .modern #game-info {
-    font-family: FjallaOne;
-    color: deepskyblue;
-    font-size: 4rem;
-    letter-spacing: 0.5rem;
-    -webkit-text-stroke: 2px white;
-    line-height: 4rem;
-  }
-
-  .classic .card {
-    background-color: #fff;
-    font-family: PressStart2P;
-    transition: background-color 0.3s;
-  }
-
-  .classic .card:not(.locked) {
-    border: 8px solid transparent;
-  }
 
 <style scoped>
 #component-body {
@@ -387,7 +317,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;
+  width: 250px;
   height: 100px;
   font-size: 50px;
 }
@@ -444,6 +374,12 @@
 
 .classic .draw-button {
   width: 200px;
+}
+
+.classic #settings {
+  width: 200px;
+  font-size: 20px;
+
 }
 
 .modern .coin,

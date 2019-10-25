@@ -6,7 +6,9 @@ import UUID from 'uuid/v4'
 
 Vue.use(Vuex)
 function playSound(sound) {
-  new Audio(require('../../public/sounds/' + sound)).play()
+  if(store.state.soundOn){
+    new Audio(require('../../public/sounds/' + sound)).play()
+  }
 }
 export const store = new Vuex.Store({
   state: {
@@ -21,6 +23,8 @@ export const store = new Vuex.Store({
     credits: 10,
     dealtCards: [],
     modern: true,
+    soundOn: true,
+    showSettings: false,
     startDisplay: true,
     quizDisplay: false,
     answers: [],
@@ -96,7 +100,7 @@ export const store = new Vuex.Store({
     // Creates deck automatically from start
     createDeck(state) {
       state.cards = []
-      const suits = ["♥", "♠", "♦", "♣"]
+      const suits = ['♥', '♠', '♦', '♣']
       const value = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
 
       for (let n = 0; n < suits.length; n++) {
@@ -171,7 +175,17 @@ export const store = new Vuex.Store({
 
     toggleTheme(state) {
       state.modern = !state.modern
+      playSound('button.mp3')
+    },
 
+    //Toggles sound on and off
+    toggleSound(state) {
+      state.soundOn = !state.soundOn
+      playSound('button.mp3')
+    },
+
+    toggleSettings(state){
+      state.showSettings = !state.showSettings
     },
 
     changeHighlight(state) {
@@ -180,7 +194,7 @@ export const store = new Vuex.Store({
 
     submitAnswer(state, value) { //Returns the value associated with answer to each question
       if ((this.state.questionNumber + 2) > state.questions.length) {
-        this.commit("resetQuiz")
+        this.commit('resetQuiz')
       } else {
         console.log(this.state.questionNumber)
         state.answers.push(value)
@@ -205,10 +219,10 @@ export const store = new Vuex.Store({
     },
 
     resetQuiz(state) {
-      state.questionNumber = 0;
-      state.answers = [];
-      state.quizDisplay = false;
-      state.startDisplay = true;
+      state.questionNumber = 0
+      state.answers = []
+      state.quizDisplay = false
+      state.startDisplay = true
     },
 
 
