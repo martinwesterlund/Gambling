@@ -65,12 +65,10 @@ table {
 
 .classic {
   border: 4px solid yellow;
-  
 }
 
 .modern {
   border: 4px solid #ccc;
-  
 }
 
 .classic .selected {
