@@ -259,6 +259,7 @@
   align-items: flex-end; 
   grid-area: value2;
   justify-content: flex-end;
+  margin: 0;
 }
 
 .card {
