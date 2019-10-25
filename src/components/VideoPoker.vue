@@ -140,27 +140,34 @@ export default {
 }
 
 .suit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   grid-area: suit;
-  min-height: 40%;
+  
   font-size: 40px;
 }
 
 .value {
+  display: flex;
+  justify-content: flex-start;
   grid-area: value;
-  min-height: 30%;
-  text-align: left;
-  margin-left: 5px;
-  margin-top: 2px;
+  
 }
 
 .value2 {
+  display: flex;
+  align-items: flex-end; 
   grid-area: value2;
-  min-height: 30%;
-  text-align: right;
-  margin: 5px;
+  justify-content: flex-end;
 }
 
 .card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "value" "suit" "value2";
+
   cursor: pointer;
   border-radius: 5px;
   margin: 10px;
