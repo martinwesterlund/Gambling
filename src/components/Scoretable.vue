@@ -80,7 +80,7 @@
   .classic .selected {
     background-color: red;
     color: #fff;
-    transition: background-color 300ms linear;
+    
   }
 
   .modern .selected {
@@ -108,7 +108,7 @@
     background-color: #15294f;
     font-family: PressStart2P;
     color: gold;
-    transition: background-color 300ms linear;
+    
   }
 
   .classic td {

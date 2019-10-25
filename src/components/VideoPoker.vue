@@ -146,7 +146,6 @@
 
   .classic {
     background-color: #0738b1;
-    transition: all 300ms linear;
   }
 
   #cards-display {
@@ -214,7 +213,7 @@
   .classic .card {
     background-color: #fff;
     font-family: PressStart2P;
-    transition: all 0.3s;
+    transition: background-color 0.3s;
   }
 
   .classic .card:not(.locked) {
@@ -303,7 +302,7 @@
 .classic .card {
   background-color: #fff;
   font-family: PressStart2P;
-  transition: all 0.3s;
+  /* transition: all 0.3s; */
 }
 
 .classic .card:not(.locked) {
@@ -312,6 +311,7 @@
 
 .modern .card:not(.locked) {
   border: 2px solid transparent;
+  transition: all 300ms linear;
 }
 
 .modern {
@@ -330,7 +330,8 @@
 }
 
 .modern .locked {
-  border: solid 4px #d3728c;
+  border: solid 2px #d3728c;
+  transition: all 300ms linear;
 }
 
 #combination {
