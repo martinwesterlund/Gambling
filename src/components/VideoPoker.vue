@@ -144,15 +144,14 @@ export default {
   justify-content: center;
   align-items: center;
   grid-area: suit;
-  
   font-size: 40px;
 }
 
 .value {
+  margin-left: 2px;
   display: flex;
   justify-content: flex-start;
   grid-area: value;
-  
 }
 
 .value2 {
@@ -167,7 +166,6 @@ export default {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas: "value" "suit" "value2";
-
   cursor: pointer;
   border-radius: 5px;
   margin: 10px;
