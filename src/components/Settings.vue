@@ -28,7 +28,10 @@
       },
       closeSettings() {
         this.$store.commit('toggleSettings')
-      }
+      },
+      on() {
+        return this.$store.state.modern
+      },
     },
 
     computed: {
