@@ -69,6 +69,7 @@
     top: 0;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 1;
+    
   }
 
 
@@ -84,11 +85,13 @@
   .classic .modal-content {
     background-color: #0738b1;
     color: yellow;
+    transition: background-color 300ms linear;
   }
 
   .modern .modal-content {
     background-color: #333;
     color: seashell;
+    transition: background-color 300ms linear;
   }
 
   .classic .selected {
