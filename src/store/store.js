@@ -372,6 +372,8 @@ export const store = new Vuex.Store({
     },
 
     updateResult(state, value) {
+      
+      playSound('win2.mp3')
       playSound('win.mp3')
       state.combination = state.combinations[value].type
       state.credits += state.combinations[value].value * state.bet

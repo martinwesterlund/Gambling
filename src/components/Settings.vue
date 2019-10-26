@@ -103,7 +103,8 @@
   }
 
   .modern #close {
-    color: cyan;
+    color: cyan !important;
+    /* For some reason this rule changes*/
   }
 
   .classic #close {
