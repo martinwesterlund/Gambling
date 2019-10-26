@@ -5,8 +5,9 @@ import UUID from 'uuid/v4'
 
 
 Vue.use(Vuex)
+
 function playSound(sound) {
-  if(store.state.soundOn){
+  if (store.state.soundOn) {
     new Audio(require('../../public/sounds/' + sound)).play()
   }
 }
@@ -51,46 +52,46 @@ export const store = new Vuex.Store({
     ],
 
     questions: [{
-      question: 'Vad tycker du om måndagar?',
-      alternatives: [{ answer: 'Kul', value: 'C' },
-        { answer: 'Trist', value: 'A' },
-        { answer: 'Illa', value: 'B' },
-        { answer: 'Bästa jag vet', value: 'D' }
-      ]
-    }, {
+        question: 'Jag spelar ofta längre än jag har förutsatt mig',
+        alternatives: [{ answer: 'Instämmer helt', value: 'A' },
+          { answer: 'Till viss del', value: 'B' },
+          { answer: 'Inte riktigt', value: 'C' },
+          { answer: 'Det har aldrig hänt', value: 'D' }
+        ]
+      }, {
 
-      question: 'Har du någonsin varit i Skåne?',
-      alternatives: [
-        { answer: 'Ja', value: 'A' },
-        { answer: 'Nej', value: 'B' },
-        { answer: 'Är där varje dag', value: 'D' },
-        { answer: 'Vart?', value: 'C' }
-      ]
-    }, {
-      question: 'Vem tycker du om i ABBA?',
-      alternatives: [
-        { answer: 'Bengt', value: 'C' },
-        { answer: 'Minns ej namnen', value: 'A' },
-        { answer: 'Lotta?', value: 'B' },
-        { answer: 'A-teens är bättre', value: 'D' }
-      ]
-    }, {
-      question: 'Vill du gå på bio imorgon?',
-      alternatives: [
-        { answer: 'Vem är du?', value: 'B' },
-        { answer: 'Finns ingen bra film', value: 'C' },
-        { answer: 'Joker (2019) var bra', value: 'A' },
-        { answer: 'Jag väntar på CSN', value: 'D' }
-      ]
-    }, {
-      question: 'Hur gammal är kungen?',
-      alternatives: [
-        { answer: 'Gammal', value: 'A' },
-        { answer: 'Ja', value: 'B' },
-        { answer: 'Nej', value: 'C' },
-        { answer: 'Kanske', value: 'D' }
-      ]
-    },
+        question: 'Jag känner att jag måste vinna tillbaka allt när jag har förlorat',
+        alternatives: [
+          { answer: 'Förekommer ofta', value: 'A' },
+          { answer: 'Förekommer då och då', value: 'B' },
+          { answer: 'Det har hänt', value: 'C' },
+          { answer: 'Har inte känt så', value: 'D' }
+        ]
+      }, {
+        question: 'Jag har spelat för att fly undan oro, problem och/eller ensamhet',
+        alternatives: [
+          { answer: 'Jag känner ofta så', value: 'A' },
+          { answer: 'Jag känner till viss del så', value: 'B' },
+          { answer: 'Jag känner inte riktigt på detta sätt', value: 'C' },
+          { answer: 'Jag kan inte alls relatera', value: 'D' }
+        ]
+      }, {
+        question: 'Spelandet har gjort mitt liv tråkigt',
+        alternatives: [
+          { answer: 'Instämmer', value: 'A' },
+          { answer: 'Instämmer till viss del', value: 'B' },
+          { answer: 'Inte säker', value: 'C' },
+          { answer: 'Håller inte alls med', value: 'D' }
+        ]
+      }, {
+        question: 'Jag känner ånger eller skuld över mitt spelande',
+        alternatives: [
+          { answer: 'Ja', value: 'A' },
+          { answer: 'Till viss del', value: 'B' },
+          { answer: 'Lite grann', value: 'C' },
+          { answer: 'Inte alls', value: 'D' }
+        ]
+      },
 
     ]
   },
@@ -184,7 +185,7 @@ export const store = new Vuex.Store({
       playSound('button.mp3')
     },
 
-    toggleSettings(state){
+    toggleSettings(state) {
       state.showSettings = !state.showSettings
     },
 
@@ -201,6 +202,12 @@ export const store = new Vuex.Store({
       }
       console.log(this.state.questions.length)
 
+
+    },
+
+    previousQuestion(state) {
+      this.state.questionNumber--
+      state.answers.splice(-1, 1)
 
     },
 
@@ -249,20 +256,20 @@ export const store = new Vuex.Store({
 
       for (let i = 0; i < 5; i++) {
         switch (state.fiveRandomCards[i].value) {
-        case 'A':
-          state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 14, locked: false })
-          break
-        case 'J':
-          state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 11, locked: false })
-          break
-        case 'Q':
-          state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 12, locked: false })
-          break
-        case 'K':
-          state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 13, locked: false })
-          break
-        default:
-          state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: Number(state.fiveRandomCards[i].value), locked: false })
+          case 'A':
+            state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 14, locked: false })
+            break
+          case 'J':
+            state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 11, locked: false })
+            break
+          case 'Q':
+            state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 12, locked: false })
+            break
+          case 'K':
+            state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: 13, locked: false })
+            break
+          default:
+            state.finalCards.push({ suit: state.fiveRandomCards[i].suit, value: Number(state.fiveRandomCards[i].value), locked: false })
         }
 
       }
@@ -270,99 +277,99 @@ export const store = new Vuex.Store({
 
 
       //Sort final cards array
-      state.finalCards.sort(function (a, b) {
+      state.finalCards.sort(function(a, b) {
         return b.value < a.value ? 1 :
           b.value > a.value ? -1 :
-            0
+          0
       })
 
       switch (true) {
 
-      // Check Royal flush
-      case (state.finalCards[0].value == 10 &&
-                    state.finalCards[1].value == 11 &&
-                    state.finalCards[2].value == 12 &&
-                    state.finalCards[3].value == 13 &&
-                    state.finalCards[4].value == 14 &&
-                    state.finalCards[0].suit == state.finalCards[1].suit &&
-                    state.finalCards[1].suit == state.finalCards[2].suit &&
-                    state.finalCards[2].suit == state.finalCards[3].suit &&
-                    state.finalCards[3].suit == state.finalCards[4].suit):
-        this.commit('updateResult', 0)
-        break
+        // Check Royal flush
+        case (state.finalCards[0].value == 10 &&
+          state.finalCards[1].value == 11 &&
+          state.finalCards[2].value == 12 &&
+          state.finalCards[3].value == 13 &&
+          state.finalCards[4].value == 14 &&
+          state.finalCards[0].suit == state.finalCards[1].suit &&
+          state.finalCards[1].suit == state.finalCards[2].suit &&
+          state.finalCards[2].suit == state.finalCards[3].suit &&
+          state.finalCards[3].suit == state.finalCards[4].suit):
+          this.commit('updateResult', 0)
+          break
 
-        // Check Straight flush
-      case (state.finalCards[0].value == state.finalCards[1].value - 1 &&
-                    state.finalCards[1].value == state.finalCards[2].value - 1 &&
-                    state.finalCards[2].value == state.finalCards[3].value - 1 &&
-                    state.finalCards[3].value == state.finalCards[4].value - 1 &&
-                    state.finalCards[0].suit == state.finalCards[1].suit &&
-                    state.finalCards[1].suit == state.finalCards[2].suit &&
-                    state.finalCards[2].suit == state.finalCards[3].suit &&
-                    state.finalCards[3].suit == state.finalCards[4].suit):
-        this.commit('updateResult', 1)
-        break
+          // Check Straight flush
+        case (state.finalCards[0].value == state.finalCards[1].value - 1 &&
+          state.finalCards[1].value == state.finalCards[2].value - 1 &&
+          state.finalCards[2].value == state.finalCards[3].value - 1 &&
+          state.finalCards[3].value == state.finalCards[4].value - 1 &&
+          state.finalCards[0].suit == state.finalCards[1].suit &&
+          state.finalCards[1].suit == state.finalCards[2].suit &&
+          state.finalCards[2].suit == state.finalCards[3].suit &&
+          state.finalCards[3].suit == state.finalCards[4].suit):
+          this.commit('updateResult', 1)
+          break
 
-        // Check four of a kind
-      case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) || (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)):
-        this.commit('updateResult', 2)
-        break
+          // Check four of a kind
+        case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) || (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)):
+          this.commit('updateResult', 2)
+          break
 
-        // Check full house
-      case ((state.finalCards[0].value == state.finalCards[1].value &&
-                    state.finalCards[1].value == state.finalCards[2].value &&
-                    state.finalCards[3].value == state.finalCards[4].value) ||
-                    (state.finalCards[0].value == state.finalCards[1].value &&
-                        state.finalCards[2].value == state.finalCards[3].value &&
-                        state.finalCards[3].value == state.finalCards[4].value)):
-        this.commit('updateResult', 3)
-        break
+          // Check full house
+        case ((state.finalCards[0].value == state.finalCards[1].value &&
+            state.finalCards[1].value == state.finalCards[2].value &&
+            state.finalCards[3].value == state.finalCards[4].value) ||
+          (state.finalCards[0].value == state.finalCards[1].value &&
+            state.finalCards[2].value == state.finalCards[3].value &&
+            state.finalCards[3].value == state.finalCards[4].value)):
+          this.commit('updateResult', 3)
+          break
 
-        // Check Flush
-      case (state.finalCards[0].suit == state.finalCards[1].suit &&
-                    state.finalCards[1].suit == state.finalCards[2].suit &&
-                    state.finalCards[2].suit == state.finalCards[3].suit &&
-                    state.finalCards[3].suit == state.finalCards[4].suit):
-        this.commit('updateResult', 4)
-        break
+          // Check Flush
+        case (state.finalCards[0].suit == state.finalCards[1].suit &&
+          state.finalCards[1].suit == state.finalCards[2].suit &&
+          state.finalCards[2].suit == state.finalCards[3].suit &&
+          state.finalCards[3].suit == state.finalCards[4].suit):
+          this.commit('updateResult', 4)
+          break
 
-        // Check straight
-      case ((state.finalCards[0].value == state.finalCards[1].value - 1 &&
-                    state.finalCards[1].value == state.finalCards[2].value - 1 &&
-                    state.finalCards[2].value == state.finalCards[3].value - 1 &&
-                    state.finalCards[3].value == state.finalCards[4].value - 1) ||
-                    (state.finalCards[0].value == 2 &&
-                        state.finalCards[0].value == 3 &&
-                        state.finalCards[0].value == 4 &&
-                        state.finalCards[0].value == 5 &&
-                        state.finalCards[0].value == 14)):
-        this.commit('updateResult', 5)
-        break
+          // Check straight
+        case ((state.finalCards[0].value == state.finalCards[1].value - 1 &&
+            state.finalCards[1].value == state.finalCards[2].value - 1 &&
+            state.finalCards[2].value == state.finalCards[3].value - 1 &&
+            state.finalCards[3].value == state.finalCards[4].value - 1) ||
+          (state.finalCards[0].value == 2 &&
+            state.finalCards[0].value == 3 &&
+            state.finalCards[0].value == 4 &&
+            state.finalCards[0].value == 5 &&
+            state.finalCards[0].value == 14)):
+          this.commit('updateResult', 5)
+          break
 
-        // Check Three of a kind
-      case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value) ||
-                    (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
-                    (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)):
-        this.commit('updateResult', 6)
-        break
-        // Check Two pair
-      case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[2].value == state.finalCards[3].value) ||
-                    (state.finalCards[0].value == state.finalCards[1].value && state.finalCards[3].value == state.finalCards[4].value) ||
-                    (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[3].value == state.finalCards[4].value)):
-        this.commit('updateResult', 7)
-        break
+          // Check Three of a kind
+        case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[1].value == state.finalCards[2].value) ||
+          (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[2].value == state.finalCards[3].value) ||
+          (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[3].value == state.finalCards[4].value)):
+          this.commit('updateResult', 6)
+          break
+          // Check Two pair
+        case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[2].value == state.finalCards[3].value) ||
+          (state.finalCards[0].value == state.finalCards[1].value && state.finalCards[3].value == state.finalCards[4].value) ||
+          (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[3].value == state.finalCards[4].value)):
+          this.commit('updateResult', 7)
+          break
 
 
-        //JACKS OR BETTER
-      case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[0].value > 10) ||
-                    (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[1].value > 10) ||
-                    (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[2].value > 10) ||
-                    (state.finalCards[3].value == state.finalCards[4].value && state.finalCards[3].value > 10)):
-        this.commit('updateResult', 8)
-        break
+          //JACKS OR BETTER
+        case ((state.finalCards[0].value == state.finalCards[1].value && state.finalCards[0].value > 10) ||
+          (state.finalCards[1].value == state.finalCards[2].value && state.finalCards[1].value > 10) ||
+          (state.finalCards[2].value == state.finalCards[3].value && state.finalCards[2].value > 10) ||
+          (state.finalCards[3].value == state.finalCards[4].value && state.finalCards[3].value > 10)):
+          this.commit('updateResult', 8)
+          break
 
-      case (state.credits === 0):
-        playSound('gameover.mp3')
+        case (state.credits === 0):
+          playSound('gameover.mp3')
 
       }
 
@@ -372,7 +379,7 @@ export const store = new Vuex.Store({
     },
 
     updateResult(state, value) {
-      
+
       playSound('win2.mp3')
       playSound('win.mp3')
       state.combination = state.combinations[value].type

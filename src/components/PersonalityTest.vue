@@ -5,14 +5,17 @@
       id="startPage"
     >
       <div class="headline">
-        Välkommen till ett test om spelmissbruk!
+        Här kan du ta ett test om spelmissbruk
       </div>
-      <button
-        class="button"
-        @click="hideStart(); showQuiz();"
-      >
-        Starta testet
-      </button>
+
+      <div>
+        <button
+          class="button"
+          @click="hideStart(); showQuiz();"
+        >
+          Starta testet
+        </button>
+      </div>
     </div>
     <!-- startpage -->
 
@@ -29,7 +32,15 @@
       >
         {{ a.answer }}
       </div>
-      <div>
+      <div class="button-row">
+
+        <button
+          v-show="questionNumber >= 1"
+          class="button"
+          @click="prevQuestion"
+        >
+          FÖREGÅENDE FRÅGA
+        </button>
         <button
           class="button"
           @click="reset"
@@ -81,6 +92,9 @@
       },
       reset() {
         this.$store.commit("resetQuiz")
+      },
+      prevQuestion() {
+        this.$store.commit("previousQuestion")
       }
     }
   }
@@ -91,6 +105,12 @@
     padding: 3rem;
     background-color: #333;
     height: 70vh;
+  }
+
+  .button-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 1.5rem 4vw 2rem;
   }
 
   .headline {
@@ -105,7 +125,6 @@
     padding: 1rem 2rem;
     color: #ddd;
     font-family: NotoSans-Bold;
-    margin-top: 1.5rem;
   }
 
   .button:hover {
