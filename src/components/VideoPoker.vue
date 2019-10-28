@@ -436,4 +436,82 @@
       opacity: 0;
     }
   }
+
+
+  /*MEDIA QUERIES - MOBILE*/
+@media only screen and (max-width: 480px) {
+  
+  #betCoinBar{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    min-height: 20vh;
+    margin-bottom: 5px;
+    padding: 5px;
+    
+  }
+
+  .classic #settings, .classic .draw-button{
+    width: 28%;
+    font-size: 10px;
+    height: 75px;
+    margin: 3px;
+  }
+
+  .classic .coin-arrow, #bet{
+    width: 15%;
+    height: 75px;
+    font-size: 20px;
+    margin: 3px;
+  }
+
+  .classic #infoBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    min-height: 12vh;
+  }
+
+  #cards-display {
+    
+    height: 18vh;
+  }
+
+  .classic .card {
+    font-size: 16px;
+    min-height: 17vh;
+    padding: 0;
+    margin: 5px;
+  }
+
+  .classic .card:not(.locked) {
+    border: 4px solid transparent;
+  }
+
+  .classic .locked {
+    border: solid 4px #fa2a26;
+  }
+
+  .suit{
+    font-size: 25px;
+  }
+
+  .classic #combination{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    min-height: 15vh;
+  }
+
+  #game-info{
+    font-size: 20px;
+  }
+
+
+}
+  
+
 </style>
