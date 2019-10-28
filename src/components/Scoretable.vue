@@ -74,13 +74,14 @@
   }
 
   .modern {
-    border: 4px solid #ccc;
+    border-top: 3px solid #ccc;
+    border-bottom: 4px solid #ccc;
   }
 
   .classic .selected {
     background-color: red;
     color: #fff;
-    
+
   }
 
   .modern .selected {
@@ -108,7 +109,7 @@
     background-color: #15294f;
     font-family: PressStart2P;
     color: gold;
-    
+
   }
 
   .classic td {

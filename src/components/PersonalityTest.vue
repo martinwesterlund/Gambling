@@ -28,7 +28,7 @@
         v-for="a in alternatives"
         id="alternatives"
         :key="a.answer + a.value"
-        @click="submit(a.value); qCounter();"
+        @click="submit(a.value) "
       >
         {{ a.answer }}
       </div>
@@ -50,6 +50,23 @@
       </div>
     </div>
     <!-- quiz -->
+
+    <div
+      v-show="resultOn"
+      id="result"
+    >
+      <div class="buttonRow">
+        <div class="headline"> {{ results }}</div>
+
+        <button
+          class="button"
+          @click="reset"
+        >
+          Ta mig tillbaka till start!
+        </button>
+      </div>
+    </div>
+
   </div>
   <!-- body -->
 </template>
@@ -71,6 +88,12 @@
       },
       quizOn() {
         return this.$store.state.quizDisplay
+      },
+      resultOn() {
+        return this.$store.state.resultDisplay
+      },
+      results() {
+        return this.$store.state.yourType
       },
       startOn() {
         return this.$store.state.startDisplay
@@ -95,7 +118,7 @@
       },
       prevQuestion() {
         this.$store.commit("previousQuestion")
-      }
+      },
     }
   }
 </script>
@@ -116,7 +139,7 @@
   .headline {
     font-family: FjallaOne;
     font-size: 2.3rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .button {
@@ -135,7 +158,7 @@
     display: inline-block;
     padding: 0.5rem 2rem;
     font-family: NotoSans-Bold;
-    font-size: 1.3rem;
+    font-size: 1rem;
     margin: 1rem 2rem;
     color: seashell;
     border: 3px dotted white;

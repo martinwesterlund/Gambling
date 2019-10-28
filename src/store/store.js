@@ -27,9 +27,11 @@ export const store = new Vuex.Store({
     soundOn: true,
     showSettings: false,
     startDisplay: true,
+    resultDisplay: false,
     quizDisplay: false,
     answers: [],
     questionNumber: 0,
+    yourType: '',
     gameInfo: 'WELCOME TO JACKS OR BETTER!',
 
 
@@ -45,9 +47,30 @@ export const store = new Vuex.Store({
       { type: 'JACKS OR BETTER', value: 1 }
     ],
 
-    personalities: [
-      { type: 'Scorpio', symbol: 'scorpio.png', description: 'You are a scorpio! You are a very human being! You are interested in things! You also have opinions!"' },
-      { type: 'Aries', symbol: 'aries.png', description: 'text here' },
+    quizResults: [{
+        type: 'Du är spelberoende',
+        symbol: 'typeA.png',
+        description: 'Dina svar tyder på ett seriöst spelberoende. Det visas tydliga tecken på att din koppling till spel har påverkat din omdömesförmåga, och dina livsval. Vi rekommenderar att tag kontakt med en terapeut som vidare kan erbjuda dig lämplig hjälp. "'
+      },
+
+      {
+        type: 'Du visar måttliga symptom på ett spelberoende',
+        symbol: 'typeB.png',
+        description: 'Dina spelvanor tyder inte på något allvarligt spelberoende, men svaren pekar på en etablerad bindelse till spel i allmänhet. Det kan vara en bra tid till att tänka över en extra gång över hur mycket du ägnar dig åt spel, och om du inte möjligtvist behöver trappa ner på spelandet.'
+      },
+
+      {
+        type: 'Du är inte spelberoende, men du är allt spelvan.',
+        symbol: 'typeC.png',
+        description: 'Ingenting pekar på att du är beroende av det du spelar. Dina svar pekar på att du har etablerade spelvanor, men de har ännu inte påverkat ditt omdöme till den mån att du hamnar i någon slags farozon. Det kan fortfarande vara en bra sak för dig att tänka över dina vanor i framtiden, då detta alltid kan förändras.'
+      },
+
+      {
+        type: 'Du mår bra',
+        symbol: 'typeD.png',
+        description: 'Du mår helt okej! Spelar inte för mycket. Tack för att du tog vårt test.'
+      },
+
 
     ],
 
@@ -194,13 +217,16 @@ export const store = new Vuex.Store({
     },
 
     submitAnswer(state, value) { //Returns the value associated with answer to each question
-      if ((this.state.questionNumber + 2) > state.questions.length) {
-        this.commit('resetQuiz')
+      if ((this.state.questionNumber + 1) == state.questions.length) {
+        this.commit('calculateType')
+        this.commit('displayResult')
       } else {
-        console.log(this.state.questionNumber)
+
         state.answers.push(value)
+        this.state.questionNumber++
+        console.log(this.state.answers)
+        console.log(this.state.questionNumber)
       }
-      console.log(this.state.questions.length)
 
 
     },
@@ -208,14 +234,54 @@ export const store = new Vuex.Store({
     previousQuestion(state) {
       this.state.questionNumber--
       state.answers.splice(-1, 1)
+      console.log(this.state.answers)
+    },
+
+    //Calculates corresponding type by answers
+    calculateType(state) {
+      const quantities = {}
+      let max = { key: '', value: 0 }
+      let a = this.state.answers
+      state.answers.forEach(char => {
+        quantities[char] = a.filter(value => value === char).length
+      })
+      let newList = Object.entries(quantities)
+
+
+      newList.sort(function(a, b) {
+        return a[1] < b[1] ? 1 :
+          b[1] > b[1] ? -1 :
+          0
+      })
+
+      console.log(newList)
+      console.log(newList[0])
+
+      switch (newList[0][0]) {
+        case 'A':
+          state.yourType = state.quizResults[0].type
+          break
+        case 'B':
+          state.yourType = state.quizResults[1].type
+          break
+        case 'C':
+          state.yourType = state.quizResults[2].type
+          break
+        case 'D':
+          state.yourType = state.quizResults[3].type
+          break
+      }
+
 
     },
+
 
     //Moves on to next question and answers
-    questionCounter(state) {
-      state.questionNumber++
-      // console.log(this.state.questionNumber)
-    },
+    // questionCounter(state) {
+    //   state.questionNumber++
+    //   console.log(this.state.questionNumber)
+
+    // },
 
     hideStart(state) {
       state.startDisplay = !state.startDisplay
@@ -225,10 +291,16 @@ export const store = new Vuex.Store({
       state.quizDisplay = !state.quizDisplay
     },
 
+    displayResult(state) {
+      state.quizDisplay = !state.quizDisplay
+      state.resultDisplay = !state.resultDisplay
+    },
+
     resetQuiz(state) {
       state.questionNumber = 0
       state.answers = []
       state.quizDisplay = false
+      state.resultDisplay = false
       state.startDisplay = true
     },
 
