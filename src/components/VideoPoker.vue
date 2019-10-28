@@ -475,8 +475,9 @@
   }
 
   #cards-display {
-    
     height: 18vh;
+    display:flex;
+    justify-content: space-around;
   }
 
   .classic .card {
