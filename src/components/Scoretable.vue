@@ -139,4 +139,11 @@
   .classic col {
     border: 2px solid #fffc3b;
   }
+
+
+    /*MEDIA QUERIES - MOBILE*/
+@media only screen and (max-width: 480px) {
+  
+
+}
 </style>

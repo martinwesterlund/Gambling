@@ -391,156 +391,6 @@
     font-family: FjallaOne;
   }
 
-  /* .classic .draw-button {
-  .modern .card:not(.locked) {
-    border: 2px solid transparent;
-  }
-
-  .modern {
-    background-color: #aaa;
-    transition: all 300ms linear;
-  }
-
-  .modern .card {
-    background-color: #eee;
-    border: 4px solid transparent;
-    font-family: Lovelo-Black;
-  }
-
-  .classic .locked {
-    border: solid 8px #fa2a26;
-  }
-
-  .modern .locked {
-    border: solid 4px #d3728c;
-  }
-
-  #combination {
-    padding-top: 20px;
-    margin-bottom: 0.3rem;
-    line-height: 2rem;
-  }
-
-  .classic #combination {
-    font-size: 28px;
-    font-family: PressStart2P;
-    color: #fa2a26;
-    text-shadow: -2px 0 #ffff37, 0 2px #ffff37, 2px 0 #ffff37, 0 -2px #ffff37;
-  }
-
-  .modern #combination {
-    font-family: FjallaOne;
-    font-size: 38px;
-    color: #dce1e9;
-  }
-
-  #infoBar {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-  }
-
-  .classic #infoBar {
-    font-family: PressStart2P;
-    font-size: 24px;
-    color: #fa2a26;
-    text-shadow: -2px 0 #ffff37, 0 2px #ffff37, 2px 0 #ffff37, 0 -2px #ffff37;
-  }
-
-  .modern #infoBar {
-    font-family: FjallaOne;
-    font-size: 24px;
-    color: #53d8fb;
-  }
-
-  #betCoinBar {
-    cursor: pointer;
-    color: #000;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 24px;
-    padding: 10px;
-  }
-
-  #settings {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100px;
-    height: 100px;
-    font-size: 50px;
-  }
-
-  #credits {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 200px;
-    height: 100px;
-  }
-
-  .draw-button {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 250px;
-    height: 100px;
-    font-size: 50px;
-  }
-
-  .coin,
-  .coin-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100px;
-    height: 100px;
-    font-size: 50px;
-  }
-
-  .classic .coin,
-  .classic .coin-arrow,
-  .classic .draw-button,
-  .classic #credits,
-  .classic #settings,
-  .classic #resultText {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-    font-family: PressStart2P;
-    font-size: 40px;
-    background: none;
-    border: none;
-    color: #000;
-    border: solid yellow 5px;
-    background-color: gold;
-    border-radius: 5px;
-  }
-
-  .classic .draw-button {
-    width: 200px;
-  }
-
-  .modern .coin,
-  .modern .coin-arrow,
-  .modern .draw-button,
-  .modern #credits,
-  .modern #settings {
-    font-family: FjallaOne;
-  }
-
-  /* .classic .draw-button {
-  border: solid yellow 5px;
-  background-color: gold;
-  color: seashell;
-} */
-
   .modern .draw-button {
     background-color: #666;
     color: seashell;
@@ -585,4 +435,82 @@
       opacity: 0;
     }
   }
+
+
+  /*MEDIA QUERIES - MOBILE*/
+@media only screen and (max-width: 480px) {
+  
+  #betCoinBar{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    min-height: 20vh;
+    margin-bottom: 5px;
+    padding: 5px;
+    
+  }
+
+  .classic #settings, .classic .draw-button{
+    width: 28%;
+    font-size: 10px;
+    height: 75px;
+    margin: 3px;
+  }
+
+  .classic .coin-arrow, #bet{
+    width: 15%;
+    height: 75px;
+    font-size: 20px;
+    margin: 3px;
+  }
+
+  .classic #infoBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    min-height: 12vh;
+  }
+
+  #cards-display {
+    
+    height: 18vh;
+  }
+
+  .classic .card {
+    font-size: 16px;
+    min-height: 17vh;
+    padding: 0;
+    margin: 5px;
+  }
+
+  .classic .card:not(.locked) {
+    border: 4px solid transparent;
+  }
+
+  .classic .locked {
+    border: solid 4px #fa2a26;
+  }
+
+  .suit{
+    font-size: 25px;
+  }
+
+  .classic #combination{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    min-height: 15vh;
+  }
+
+  #game-info{
+    font-size: 20px;
+  }
+
+
+}
+  
+
 </style>
