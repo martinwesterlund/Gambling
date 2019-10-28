@@ -155,6 +155,7 @@
   #component-body {
     margin: 0 auto;
     display: block;
+    flex: 1
   }
 
   .classic {

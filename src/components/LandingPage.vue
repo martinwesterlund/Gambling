@@ -6,21 +6,21 @@
 </template>
 
 <script>
-export default {};
+  export default {};
 </script>
 
 <style scoped>
-#body {
-  background-color: #555;
-  height: 70vh;
-}
+  #body {
+    background-color: #555;
+    flex: 1;
+  }
 
-h1 {
-  font-family: FjallaOne;
-  font-size: 3rem;
-}
+  h1 {
+    font-family: FjallaOne;
+    font-size: 3rem;
+  }
 
-p {
-  font-family: NotoSans;
-}
+  p {
+    font-family: NotoSans;
+  }
 </style>
