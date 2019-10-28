@@ -78,7 +78,10 @@
   }
 
   #app {
+    display: flex;
+    flex-direction: column;
     max-width: 900px;
+    height: 100vh;
     margin: 0 auto;
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
