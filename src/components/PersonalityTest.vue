@@ -56,8 +56,10 @@
       id="result"
     >
       <div class="buttonRow">
-        <div class="headline"> {{ results }}</div>
-
+        <div class="headline"> {{ results.type }}</div>
+        <div class="symbol">
+        </div>
+        <div class="description"> {{ results.description }} </div>
         <button
           class="button"
           @click="reset"
@@ -93,7 +95,7 @@
         return this.$store.state.resultDisplay
       },
       results() {
-        return this.$store.state.yourType
+        return this.$store.state.yourResult
       },
       startOn() {
         return this.$store.state.startDisplay

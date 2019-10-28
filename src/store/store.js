@@ -31,8 +31,12 @@ export const store = new Vuex.Store({
     quizDisplay: false,
     answers: [],
     questionNumber: 0,
-    yourType: '',
     gameInfo: 'WELCOME TO JACKS OR BETTER!',
+    yourResult: {
+      type: '',
+      symbol: '',
+      description: '',
+    },
 
 
     combinations: [
@@ -49,25 +53,25 @@ export const store = new Vuex.Store({
 
     quizResults: [{
         type: 'Du är spelberoende',
-        symbol: 'typeA.png',
-        description: 'Dina svar tyder på ett seriöst spelberoende. Det visas tydliga tecken på att din koppling till spel har påverkat din omdömesförmåga, och dina livsval. Vi rekommenderar att tag kontakt med en terapeut som vidare kan erbjuda dig lämplig hjälp. "'
+        symbol: '../assets/svg/typeA.svg',
+        description: 'Dina svar tyder på ett seriöst spelberoende. Det visas tydliga tecken på att din koppling till spel har påverkat din omdömesförmåga, och dina livsval. Vi rekommenderar att tag kontakt med en terapeut som vidare kan erbjuda dig lämplig hjälp.'
       },
 
       {
         type: 'Du visar måttliga symptom på ett spelberoende',
-        symbol: 'typeB.png',
+        symbol: '../assets/svg/typeB.svg',
         description: 'Dina spelvanor tyder inte på något allvarligt spelberoende, men svaren pekar på en etablerad bindelse till spel i allmänhet. Det kan vara en bra tid till att tänka över en extra gång över hur mycket du ägnar dig åt spel, och om du inte möjligtvist behöver trappa ner på spelandet.'
       },
 
       {
         type: 'Du är inte spelberoende, men du är allt spelvan.',
-        symbol: 'typeC.png',
+        symbol: '../assets/svg/typeC.svg',
         description: 'Ingenting pekar på att du är beroende av det du spelar. Dina svar pekar på att du har etablerade spelvanor, men de har ännu inte påverkat ditt omdöme till den mån att du hamnar i någon slags farozon. Det kan fortfarande vara en bra sak för dig att tänka över dina vanor i framtiden, då detta alltid kan förändras.'
       },
 
       {
         type: 'Du mår bra',
-        symbol: 'typeD.png',
+        symbol: '../assets/svg/typeD.svg',
         description: 'Du mår helt okej! Spelar inte för mycket. Tack för att du tog vårt test.'
       },
 
@@ -259,16 +263,24 @@ export const store = new Vuex.Store({
 
       switch (newList[0][0]) {
         case 'A':
-          state.yourType = state.quizResults[0].type
+          state.yourResult.type = state.quizResults[0].type
+          state.yourResult.symbol = state.quizResults[0].symbol
+          state.yourResult.description = state.quizResults[0].description
           break
         case 'B':
-          state.yourType = state.quizResults[1].type
+          state.yourResult.type = state.quizResults[1].type
+          state.yourResult.symbol = state.quizResults[1].symbol
+          state.yourResult.description = state.quizResults[1].description
           break
         case 'C':
-          state.yourType = state.quizResults[2].type
+          state.yourResult.type = state.quizResults[2].type
+          state.yourResult.symbol = state.quizResults[2].symbol
+          state.yourResult.description = state.quizResults[2].description
           break
         case 'D':
-          state.yourType = state.quizResults[3].type
+          state.yourResult.type = state.quizResults[3].type
+          state.yourResult.symbol = state.quizResults[3].symbol
+          state.yourResult.description = state.quizResults[3].description
           break
       }
 

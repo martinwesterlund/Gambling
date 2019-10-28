@@ -72,6 +72,7 @@
     text-decoration: none;
     list-style-type: none;
     background-color: gray;
+    padding: 0;
   }
 
   li {
