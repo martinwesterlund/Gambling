@@ -53,6 +53,18 @@
     margin: 0;
   }
 
+  #app {
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
+    height: 100vh;
+    margin: 0 auto;
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #c0cedd;
+  }
 
   ul {
     display: flex;
@@ -76,15 +88,6 @@
     font-family: FjallaOne;
   }
 
-  #app {
-    max-width: 900px;
-    margin: 0 auto;
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #c0cedd;
-  }
 
   .classic {
     background-color: blue;

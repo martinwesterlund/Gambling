@@ -127,7 +127,7 @@
   #body {
     padding: 3rem;
     background-color: #333;
-    height: 70vh;
+    flex: 1;
   }
 
   .button-row {
