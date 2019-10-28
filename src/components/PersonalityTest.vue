@@ -55,11 +55,16 @@
       v-show="resultOn"
       id="result"
     >
-      <div class="buttonRow">
-        <div class="headline"> {{ results.type }}</div>
-        <div class="symbol">
-        </div>
-        <div class="description"> {{ results.description }} </div>
+
+      <div class="headline"> {{ results.type }}</div>
+      <div class="symbol">
+        <img
+          :src="results.symbol"
+          alt="Bild på symbol"
+        >
+      </div>
+      <div class="description"> {{ results.description }} </div>
+      <div class="button-row">
         <button
           class="button"
           @click="reset"
@@ -156,6 +161,11 @@
     background: #000;
   }
 
+  img {
+    height: 20vh;
+    margin-top: 1.5rem;
+  }
+
   #alternatives {
     display: inline-block;
     padding: 0.5rem 2rem;
@@ -169,5 +179,11 @@
   #alternatives:hover {
     background-color: #666;
     color: #fff
+  }
+
+
+
+  .description {
+    margin-top: 2.5rem;
   }
 </style>

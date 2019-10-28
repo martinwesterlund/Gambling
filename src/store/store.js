@@ -11,6 +11,9 @@ function playSound(sound) {
     new Audio(require('../../public/sounds/' + sound)).play()
   }
 }
+
+
+
 export const store = new Vuex.Store({
   state: {
     win: 0,
@@ -32,11 +35,7 @@ export const store = new Vuex.Store({
     answers: [],
     questionNumber: 0,
     gameInfo: 'WELCOME TO JACKS OR BETTER!',
-    yourResult: {
-      type: '',
-      symbol: '',
-      description: '',
-    },
+    yourResult: {},
 
 
     combinations: [
@@ -53,26 +52,26 @@ export const store = new Vuex.Store({
 
     quizResults: [{
         type: 'Du är spelberoende',
-        symbol: '../assets/svg/typeA.svg',
-        description: 'Dina svar tyder på ett seriöst spelberoende. Det visas tydliga tecken på att din koppling till spel har påverkat din omdömesförmåga, och dina livsval. Vi rekommenderar att tag kontakt med en terapeut som vidare kan erbjuda dig lämplig hjälp.'
+        symbol: require("../assets/2x/typeA.png"),
+        description: 'Dina svar tyder på ett allvarligt spelberoende. Det visas tydliga tecken på att din koppling till spel har påverkat din omdömesförmåga samt dina livsval. Vi rekommenderar att du tar kontakt med en terapeut som vidare kan erbjuda dig lämplig hjälp.'
       },
 
       {
         type: 'Du visar måttliga symptom på ett spelberoende',
-        symbol: '../assets/svg/typeB.svg',
-        description: 'Dina spelvanor tyder inte på något allvarligt spelberoende, men svaren pekar på en etablerad bindelse till spel i allmänhet. Det kan vara en bra tid till att tänka över en extra gång över hur mycket du ägnar dig åt spel, och om du inte möjligtvist behöver trappa ner på spelandet.'
+        symbol: require("../assets/2x/typeB.png"),
+        description: 'Dina spelvanor tyder inte på något allvarligt spelberoende, men dina svar pekar på en etablerad förbindelse till spel i allmänhet. Det kan vara en bra idé att tänka till lite över hur mycket du ägnar dig åt spel, och om du inte möjligtvist behöver trappa ner på spelandet.'
       },
 
       {
         type: 'Du är inte spelberoende, men du är allt spelvan.',
-        symbol: '../assets/svg/typeC.svg',
+        symbol: require("../assets/2x/typeC.png"),
         description: 'Ingenting pekar på att du är beroende av det du spelar. Dina svar pekar på att du har etablerade spelvanor, men de har ännu inte påverkat ditt omdöme till den mån att du hamnar i någon slags farozon. Det kan fortfarande vara en bra sak för dig att tänka över dina vanor i framtiden, då detta alltid kan förändras.'
       },
 
       {
         type: 'Du mår bra',
-        symbol: '../assets/svg/typeD.svg',
-        description: 'Du mår helt okej! Spelar inte för mycket. Tack för att du tog vårt test.'
+        symbol: require("../assets/2x/typeD.png"),
+        description: 'Du mår helt okej! Du spelar verkligen inte för mycket från så långt som vi kan läs av dina svar. Ha en trevlig fortsättning och tack för att du tog vårt test.'
       },
 
 
@@ -244,7 +243,6 @@ export const store = new Vuex.Store({
     //Calculates corresponding type by answers
     calculateType(state) {
       const quantities = {}
-      let max = { key: '', value: 0 }
       let a = this.state.answers
       state.answers.forEach(char => {
         quantities[char] = a.filter(value => value === char).length
@@ -258,30 +256,25 @@ export const store = new Vuex.Store({
           0
       })
 
-      console.log(newList)
-      console.log(newList[0])
-
       switch (newList[0][0]) {
         case 'A':
+<<<<<<< HEAD
           state.yourResult = state.quizresults[0]
           // state.yourResult.type = state.quizResults[0].type
           // state.yourResult.symbol = state.quizResults[0].symbol
           // state.yourResult.description = state.quizResults[0].description
+=======
+          state.yourResult = state.quizResults[0]
+>>>>>>> 7c72d6c379c0fa09b56b709d6fc66e012401c8c8
           break
         case 'B':
-          state.yourResult.type = state.quizResults[1].type
-          state.yourResult.symbol = state.quizResults[1].symbol
-          state.yourResult.description = state.quizResults[1].description
+          state.yourResult = state.quizResults[1]
           break
         case 'C':
-          state.yourResult.type = state.quizResults[2].type
-          state.yourResult.symbol = state.quizResults[2].symbol
-          state.yourResult.description = state.quizResults[2].description
+          state.yourResult = state.quizResults[2]
           break
         case 'D':
-          state.yourResult.type = state.quizResults[3].type
-          state.yourResult.symbol = state.quizResults[3].symbol
-          state.yourResult.description = state.quizResults[3].description
+          state.yourResult = state.quizResults[3]
           break
       }
 
