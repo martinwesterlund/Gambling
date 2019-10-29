@@ -252,7 +252,7 @@ export const store = new Vuex.Store({
 
       newList.sort(function(a, b) {
         return a[1] < b[1] ? 1 :
-          b[1] > b[1] ? -1 :
+          b[1] > a[1] ? -1 :
           0
       })
 
