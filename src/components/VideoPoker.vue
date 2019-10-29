@@ -91,7 +91,10 @@ export default {
     gameInfo() {
       return this.$store.state.gameInfo;
     },
-
+    showSettings() {
+        return this.$store.state.showSettings;
+      }
+  },
     methods: {
       getCards() {
         if (this.gameInfo === "INSERT COIN") {
@@ -134,45 +137,10 @@ export default {
 
       toggleSettings() {
         this.$store.commit("toggleSettings");
-      },
-      showSettings() {
-        return this.$store.state.showSettings;
       }
+      
     },
-
-    methods: {
-      getCards() {
-        this.$store.commit("getFiveRandomCards");
-        // this.$store.commit("calculateValue");
-      },
-      getMoreCards() {
-        this.$store.commit("getMoreCards");
-      },
-
-      calcValue() {
-        this.$store.commit("calculateValue");
-      },
-      lockCard(id) {
-        this.$store.commit("toggleLock", id);
-      },
-
-      insertCoin() {
-        this.$store.commit("insertCoin");
-      },
-
-      removeCoin() {
-        this.$store.commit("removeCoin");
-      },
-
-      toggleTheme() {
-        this.$store.commit("toggleTheme");
-      },
-
-      toggleSettings() {
-        this.$store.commit("toggleSettings");
-      }
-    }
-  }
+  
 };
 </script>
 
