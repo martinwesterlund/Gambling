@@ -51,7 +51,9 @@
   * {
     box-sizing: border-box;
     margin: 0;
+    
   }
+  
 
 
   ul {
@@ -88,6 +90,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #c0cedd;
+    
   }
 
   .classic {

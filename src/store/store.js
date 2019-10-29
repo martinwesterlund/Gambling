@@ -258,7 +258,14 @@ export const store = new Vuex.Store({
 
       switch (newList[0][0]) {
         case 'A':
+<<<<<<< HEAD
+          state.yourResult = state.quizresults[0]
+          // state.yourResult.type = state.quizResults[0].type
+          // state.yourResult.symbol = state.quizResults[0].symbol
+          // state.yourResult.description = state.quizResults[0].description
+=======
           state.yourResult = state.quizResults[0]
+>>>>>>> 7c72d6c379c0fa09b56b709d6fc66e012401c8c8
           break
         case 'B':
           state.yourResult = state.quizResults[1]

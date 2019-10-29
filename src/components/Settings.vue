@@ -63,10 +63,11 @@
 
 
   .modal-container {
-    width: 900px;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     position: fixed;
     top: 0;
+    left: 0;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 1;
 
@@ -132,4 +133,28 @@
   .selected {
     border: 4px solid white;
   }
+
+      /*MEDIA QUERIES - MOBILE*/
+@media only screen and (max-width: 480px) {
+  .classic .modal-container {
+    font-size: 16px;
+    
+  }
+
+  .modal-content {
+    width: 90vw;
+    line-height: 300%;
+    
+  }
+
+   #close {
+    font-size: 30px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    line-height: normal;
+    padding: 20px 20px 0 0;
+  }
+
+}
 </style>
