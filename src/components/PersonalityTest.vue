@@ -7,8 +7,8 @@
       <div class="headline">
         Här kan du ta ett test om spelmissbruk
       </div>
-
-      <div>
+<div class="description"> Testet tar bara ett par minuter. Tänk gärna till en kort stund och tugga lite på frågan innan du väljer att svara. Detta för att resultatet ska bli så korrekt som möjligt. </div>
+      <div class="button-row">
         <button
           class="button"
           @click="hideStart(); showQuiz();"
@@ -110,9 +110,6 @@
     methods: {
       submit(value) {
         this.$store.commit("submitAnswer", value)
-      },
-      qCounter() {
-        this.$store.commit("questionCounter")
       },
       hideStart() {
         this.$store.commit("hideStart")

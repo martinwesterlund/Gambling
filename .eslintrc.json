@@ -6,7 +6,7 @@
   "parserOptions": { "ecmaVersion": 6, "sourceType": "module" },
   "plugins": ["html"],
   "rules": {
-    "indent": ["error", 2],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "semi": [2, "never"],
     "sort-keys": ["error", "asc"],

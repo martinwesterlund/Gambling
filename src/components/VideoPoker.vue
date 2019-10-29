@@ -117,9 +117,22 @@
 
     methods: {
       getCards() {
+        if( this.gameInfo === 'INSERT COIN'){
+
+          alert('STOPP OCH BELÄGG! ÄR DU INTE SPELBEROENDE?')
+          let answer = prompt('OM DU VILL SPELA MER SÅ BEKRÄFTA ATT DU INTE HAR PROBLEM! SKRIV "JAG ÄR INTE SPELBEROENDE"')
+
+          if (answer === 'JAG ÄR INTE SPELBEROENDE') {
+            this.$store.commit("addCredits")
+            // this.$store.commit("getFiveRandomCards")
+            }
+
+        }
+        
         this.$store.commit("getFiveRandomCards")
-        // this.$store.commit("calculateValue");
+        
       },
+
       getMoreCards() {
         this.$store.commit("getMoreCards")
       },
@@ -242,7 +255,7 @@
   }
 
   .modern .card:not(.locked) {
-    border: 2px solid transparent;
+
     transition: all 300ms linear;
   }
 
@@ -262,7 +275,7 @@
   }
 
   .modern .locked {
-    border: solid 2px #d3728c;
+    background-color: #53d8fb;
     transition: all 300ms linear;
   }
 
