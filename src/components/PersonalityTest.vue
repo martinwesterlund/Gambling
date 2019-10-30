@@ -7,7 +7,7 @@
       <div class="headline">
         Här kan du ta ett test om spelmissbruk
       </div>
-<div class="description"> Testet tar bara ett par minuter. <br> Tänk gärna till en kort stund och tugga lite på frågan innan du väljer att svara. Detta för att resultatet ska bli så korrekt som möjligt. </div>
+      <div class="description"> Testet tar bara ett par minuter. <br> Tänk gärna till en kort stund och tugga lite på frågan innan du väljer att svara. Detta för att resultatet ska bli så korrekt som möjligt. </div>
       <div class="button-row">
         <button
           class="button"
@@ -25,14 +25,14 @@
     >
       <div class="headline">{{ questions[questionNumber].question }}</div>
       <div id="choices">
-      <div
-        v-for="a in alternatives"
-        id="alternatives"
-        :key="a.answer + a.value"
-        @click="submit(a.value) "
-      >
-        {{ a.answer }}
-      </div>
+        <div
+          v-for="a in alternatives"
+          id="alternatives"
+          :key="a.answer + a.value"
+          @click="submit(a.value) "
+        >
+          {{ a.answer }}
+        </div>
       </div>
       <div class="button-row">
 
@@ -125,7 +125,7 @@
       submit(value) {
         this.$store.commit('submitAnswer', value)
       },
-     
+
     }
   }
 </script>
@@ -173,7 +173,7 @@
 
   }
 
-  #choices{
+  #choices {
     margin-top: 1rem;
   }
 
@@ -182,7 +182,7 @@
     padding: 0.5rem 1rem;
     font-family: NotoSans-Bold;
     font-size: 0.8rem;
- margin: 0.5rem 2rem;
+    margin: 0.5rem 2rem;
     color: #ccc;
     border: 3px dotted #ddd;
     width: 40vw;
@@ -193,49 +193,51 @@
     color: #fff
   }
 
-  #alternatives:nth-child(1){
+  #alternatives:nth-child(1) {
     color: rgb(248, 108, 93);
   }
 
-    #alternatives:nth-child(2){
+  #alternatives:nth-child(2) {
     color: rgb(240, 228, 96);
   }
 
-   #alternatives:nth-child(3){
+  #alternatives:nth-child(3) {
     color: rgb(182, 247, 84);
   }
 
-    #alternatives:nth-child(4){
+  #alternatives:nth-child(4) {
     color: #53d8fb;
   }
 
 
 
-#startPage, #quiz, #result{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  #startPage,
+  #quiz,
+  #result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 
-}
+  }
 
-#quiz .headline {
-  font-size: 1.3rem;
-}
+  #quiz .headline {
+    font-size: 1.3rem;
+  }
 
-#result .headline{
-  font-size: 1.7rem;
-}
+  #result .headline {
+    font-size: 1.7rem;
+  }
 
-#result .description {
-  font-size: 0.9rem;
-}
+  #result .description {
+    font-size: 0.9rem;
+  }
 
-#quiz .button {
-  margin-top: 1rem;
-  font-size: 0.7rem;
-  padding: 0.8rem 1rem;
-}
+  #quiz .button {
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    padding: 0.8rem 1rem;
+  }
 
   .description {
     margin-top: 0.5rem;
@@ -245,71 +247,71 @@
 
   @media only screen and (min-width: 481px) {
 
-#quiz .headline {
-  font-size: 1.5rem;
-}
+    #quiz .headline {
+      font-size: 1.5rem;
+    }
 
-#alternatives {
-  font-size: 1rem;
-}
+    #alternatives {
+      font-size: 1rem;
+    }
 
-#result .headline{
-  font-size: 1.7rem;
-}
+    #result .headline {
+      font-size: 1.7rem;
+    }
 
-img {
-  height: 17.5vh;
-}
+    img {
+      height: 17.5vh;
+    }
 
-#result .description {
-  font-size: 0.9rem;
-}
+    #result .description {
+      font-size: 0.9rem;
+    }
 
-#quiz .button {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  padding: 0.8rem 1rem;
-}
+    #quiz .button {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      padding: 0.8rem 1rem;
+    }
 
-  .description {
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
-  }
+    .description {
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
 
 
   }
 
   @media only screen and (min-width: 769px) {
 
-#quiz .headline {
-  font-size: 1.9rem;
-}
+    #quiz .headline {
+      font-size: 1.9rem;
+    }
 
-#alternatives {
-  padding: 1rem 1.5rem;
-}
+    #alternatives {
+      padding: 1rem 1.5rem;
+    }
 
-img {
-  height: 20vh;
-}
+    img {
+      height: 20vh;
+    }
 
-#result .headline{
-  font-size: 1.9rem;
-}
+    #result .headline {
+      font-size: 1.9rem;
+    }
 
-#result .description {
-  font-size: 1rem;
-}
+    #result .description {
+      font-size: 1rem;
+    }
 
-#quiz .button {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  padding: 1rem 2rem;
-}
+    #quiz .button {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      padding: 1rem 2rem;
+    }
 
-  .description {
-    margin: 0.5rem 10vw 1.5rem;
-  }
+    .description {
+      margin: 0.5rem 10vw 1.5rem;
+    }
 
   }
 </style>

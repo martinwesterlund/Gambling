@@ -164,6 +164,9 @@
 
 
 <style scoped>
+
+
+
   #combination {
     text-align: center;
     margin-top: 3vh;
@@ -255,6 +258,7 @@
 
      .modern #settings{
       font-size: 1rem;
+        color: #222;
     }
 
   #credits {
@@ -290,10 +294,10 @@
 
   .modern #game-info {
     color: deepskyblue;
-    font-size: 4rem;
-    letter-spacing: 0.9rem;
+    font-size: 3.6rem;
+    letter-spacing: 0.7rem;
     -webkit-text-stroke: 2px white;
-    line-height: 4.2rem;
+    line-height: 4rem;
   }
 
   .modern .card {
