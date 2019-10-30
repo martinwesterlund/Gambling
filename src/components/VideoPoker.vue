@@ -44,7 +44,7 @@
         class="coin"
       >{{ bet }}</span>
       <span
-        style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
+        :style="[round > 0 ? {pointerEvents: 'none'} : {pointerEvents: 'auto'}]"
         class="coin-arrow"
         @click="removeCoin()"
       >▼</span>
