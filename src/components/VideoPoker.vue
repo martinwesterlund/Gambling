@@ -114,7 +114,7 @@
     },
     methods: {
       getCards() {
-        if (this.gameInfo === "INSERT COIN") {
+        if (this.credits === 0) {
           alert("STOPP OCH BELÄGG! ÄR DU INTE SPELBEROENDE?");
           let answer = prompt(
             'OM DU VILL SPELA MER SÅ BEKRÄFTA ATT DU INTE HAR PROBLEM! SKRIV "JAG ÄR INTE SPELBEROENDE"'
