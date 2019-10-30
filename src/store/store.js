@@ -225,8 +225,11 @@ export const store = new Vuex.Store({
 
     submitAnswer(state, value) { //Returns the value associated with answer to each question
       if ((this.state.questionNumber + 1) == state.questions.length) {
+        state.answers.push(value)
         this.commit('calculateType')
         this.commit('displayResult')
+        console.log(this.state.answers)
+        
       } else {
 
         state.answers.push(value)
