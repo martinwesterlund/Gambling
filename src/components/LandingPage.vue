@@ -1,10 +1,10 @@
 <template>
   <div id="body">
     <h1 class="headline">Välkommen till vårt projekt</h1>
-    <p class="message">Vi har ett spel samt ett test för dig att prova på. Du kan navigera till dessa genom navigationsmenyn nedanför/ovanför.</p>
+    <p class="message">Vi har ett spel samt ett test för dig att prova på.<br>Du kan tag dig till dessa genom navigationsmenyn ovanför.</p>
 
     <footer>
-      <p>Denna sida har skapats av Martin Westerlund och Atlan Talebi.</p>
+      <p>Denna webbplats har skapats av Martin Westerlund och Atlan Talebi.</p>
     </footer>
   </div>
 </template>
@@ -19,11 +19,14 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    color: #ddd;
+    text-align: center;
   }
 
   h1 {
     font-family: FjallaOne;
     font-size: 2.5rem;
+    color: #ddd;
   }
 
   p {
@@ -31,11 +34,12 @@
   }
 
   .headline {
-    margin: 2rem auto 0
+    margin: 2rem auto 0;
   }
 
   .message {
     display: flex;
+    justify-content: center;
     align-items: center;
     flex-grow: 1;
     margin: 0 10vw;

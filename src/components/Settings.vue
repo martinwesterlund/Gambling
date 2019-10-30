@@ -139,14 +139,14 @@ div span {
 @media only screen and (min-width: 481px) {
   .classic .modal-content {
   
-  font-size: 1.6rem;
+  font-size: 1.2rem;
 }
 }
 
 @media only screen and (min-width: 769px) {
   .classic .modal-content {
   
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 }
 .modal-content {
   display: grid;

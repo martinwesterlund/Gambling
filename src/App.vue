@@ -95,8 +95,14 @@ export default {
   
 }
 
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 body{
-  background-color: #333;
+  background-color: #222;
 }
 
 #navbar {
