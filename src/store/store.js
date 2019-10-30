@@ -252,8 +252,9 @@ export const store = new Vuex.Store({
         quantities[char] = a.filter(value => value === char).length
       })
       let newList = Object.entries(quantities)
-      newList.sort((a, b) => a[1] < b[1] ? 1 : b[1] > a[1] ? -1 : 0)
-
+     
+      newList.sort((a, b) => a[1] < b[1] ? 1 : b[1] < a[1] ? -1 : 0)
+  
       switch (newList[0][0]) {
         case 'A':
           state.yourResult = state.quizResults[0]
