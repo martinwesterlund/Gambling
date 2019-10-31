@@ -294,6 +294,7 @@ export const store = new Vuex.Store({
     resetQuiz(state) {
       state.questionNumber = 0
       state.answers = []
+      state.yourResult = {}
       state.quizDisplay = false
       state.resultDisplay = false
       state.startDisplay = true
