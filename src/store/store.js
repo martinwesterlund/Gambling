@@ -224,33 +224,29 @@ export const store = new Vuex.Store({
     },
 
     submitAnswer(state, value) { //Returns the value associated with answer to each question
-      if ((this.state.questionNumber + 1) == state.questions.length) {
+      if ((state.questionNumber + 1) == state.questions.length) {
         state.answers.push(value)
         this.commit('calculateType')
         this.commit('displayResult')
-        console.log(this.state.answers)
         
       } else {
 
         state.answers.push(value)
-        this.state.questionNumber++
-        console.log(this.state.answers)
-        console.log(this.state.questionNumber)
+        state.questionNumber++
       }
 
 
     },
 
     previousQuestion(state) {
-      this.state.questionNumber--
+      state.questionNumber--
       state.answers.splice(-1, 1)
-      console.log(this.state.answers)
     },
 
     //Calculates corresponding type by answers
     calculateType(state) {
       const quantities = {}
-      let a = this.state.answers //e.g. ['A', 'B', 'A', 'C', 'D']
+      let a = state.answers //e.g. ['A', 'B', 'A', 'C', 'D']
       a.forEach(char => {
         quantities[char] = a.filter(value => value === char).length
       })
