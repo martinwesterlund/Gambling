@@ -189,6 +189,7 @@
     font-size: 3rem;
     transform: translate(-50%, -50%);
     width: 80vw;
+    max-width: 900px;
   }
 
   .card {
