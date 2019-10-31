@@ -402,10 +402,10 @@ export const store = new Vuex.Store({
             state.finalCards[2].value == state.finalCards[3].value - 1 &&
             state.finalCards[3].value == state.finalCards[4].value - 1) ||
           (state.finalCards[0].value == 2 &&
-            state.finalCards[0].value == 3 &&
-            state.finalCards[0].value == 4 &&
-            state.finalCards[0].value == 5 &&
-            state.finalCards[0].value == 14)):
+            state.finalCards[1].value == 3 &&
+            state.finalCards[2].value == 4 &&
+            state.finalCards[3].value == 5 &&
+            state.finalCards[4].value == 14)):
           this.commit('updateResult', 5)
           break
 
