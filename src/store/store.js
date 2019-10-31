@@ -219,10 +219,6 @@ export const store = new Vuex.Store({
       state.showSettings = !state.showSettings
     },
 
-    changeHighlight(state) {
-      state.highlight = !state.highlight
-    },
-
     submitAnswer(state, value) { //Returns the value associated with answer to each question
       if ((state.questionNumber + 1) == state.questions.length) {
         state.answers.push(value)
