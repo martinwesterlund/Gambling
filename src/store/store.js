@@ -146,7 +146,7 @@ export const store = new Vuex.Store({
 
     // Creates five random cards that are displayed in the game
     getFiveRandomCards(state) {
-      if (state.bet <= state.credits) {
+      if (state.bet <= state.credits) { //IF WE CAN AFFORD TO PLAY; RUN THIS
         playSound('button.mp3')
         state.gameInfo = ''
         state.win = 0
